@@ -1,5 +1,6 @@
 """Check the PR handoff validator against completed and blank descriptions."""
 
+import json
 import os
 import shutil
 import subprocess
@@ -59,7 +60,31 @@ class TestPRDescription(unittest.TestCase):
                     self.assertEqual(result.returncode, 1)
                     self.assertNotIn("Traceback", result.stderr)
 
-    def test_missing_base_checker_only_passes_for_pr_three_bootstrap(self):
+    def test_workflow_fails_if_the_base_checker_is_missing(self):
+        with tempfile.TemporaryDirectory() as directory:
+            result = self._run_workflow_step(Path(directory), {})
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("The trusted base is missing the PR checker.", result.stdout)
+
+    def test_workflow_validates_the_event_description(self):
+        complete = completed_description()
+        incomplete = complete.split("## Performance and limitations", 1)[0]
+        cases = (("", 1, "Purpose"), (incomplete, 1, "Performance and limitations"),
+                 (complete, 0, "Required PR description sections are present"))
+        with tempfile.TemporaryDirectory() as directory:
+            checkout = Path(directory)
+            (checkout / "scripts").mkdir()
+            shutil.copyfile(ROOT / "scripts" / "check_pr_description.py",
+                            checkout / "scripts" / "check_pr_description.py")
+            event = checkout / "event.json"
+            for body, status, message in cases:
+                with self.subTest(status=status, message=message):
+                    event.write_text(json.dumps({"pull_request": {"body": body}}), encoding="utf-8")
+                    result = self._run_workflow_step(checkout, {"GITHUB_EVENT_PATH": "event.json"})
+                    self.assertEqual(result.returncode, status, result.stderr)
+                    self.assertIn(message, result.stdout)
+
+    def _run_workflow_step(self, checkout: Path, variables: dict[str, str]) -> subprocess.CompletedProcess:
         git = shutil.which("git")
         bash = Path(git).resolve().parents[1] / "bin" / "bash.exe" if os.name == "nt" and git else None
         bash = str(bash) if bash and bash.is_file() else shutil.which("bash")
@@ -67,15 +92,10 @@ class TestPRDescription(unittest.TestCase):
             self.skipTest("Bash is required to exercise the workflow step")
         workflow = (ROOT / ".github" / "workflows" / "pr-handoff.yml").read_text(encoding="utf-8")
         run_script = "\n".join(line[10:] for line in workflow.split("        run: |\n", 1)[1].splitlines())
-        bootstrap = "6236f5d27d2fbc70a7a850b0a85486c8173164fc"
-        cases = (("3", bootstrap, 0), ("4", bootstrap, 1), ("3", "f" * 40, 1))
-        with tempfile.TemporaryDirectory() as directory:
-            for number, base, status in cases:
-                env = {**os.environ, "GITHUB_REPOSITORY": "Cadams98/verunai-research",
-                       "PR_NUMBER": number, "BASE_SHA": base}
-                with self.subTest(pr=number, base=base):
-                    result = subprocess.run(
-                        [bash, "-c", run_script], cwd=directory, env=env,
-                        capture_output=True, text=True, timeout=10,
-                    )
-                    self.assertEqual(result.returncode, status, result.stderr)
+        # Use the suite's interpreter when Windows does not expose a python3 command.
+        script = 'python3() { "$VERUNAI_TEST_PYTHON" -B "$@"; }\n' + run_script
+        return subprocess.run(
+            [bash, "-c", script], cwd=checkout,
+            env={**os.environ, "VERUNAI_TEST_PYTHON": sys.executable, **variables},
+            capture_output=True, text=True, timeout=10,
+        )

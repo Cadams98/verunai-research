@@ -6,6 +6,7 @@
 - Propose bounded, opt-in Claude Code PR reviews with paid execution disabled by default.
 - Clarify implementation ownership and document authentication, costs, and human merge authority.
 - Address the automation audit with a fail-closed handoff check, explicit safety fields, pinned CI actions, and revision-bound Claude reports.
+- Remove the PR #3 bootstrap exception and test failing and passing descriptions through the handoff job.
 
 ## Unreleased — canonical neural-v3 benchmark
 
