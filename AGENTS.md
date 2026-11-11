@@ -36,6 +36,14 @@ Read `README.md`, `docs/NEURAL_V3_LEDGER.md`, `docs/SECURITY_FINDINGS_V06.md`, `
 ## Definition of done for every agent task
 A focused, readable diff; passing relevant tests (or disclosed failures); reproducible commands; docs updated in the same PR; architecture/ADR changes if applicable; measured resource/scaling implications; security implications; and an explicit handoff for review. Run `python scripts/check_repository_layout.py`, `python scripts/check_project_standards.py`, and `python -m unittest discover -s tests -v` after installing dependencies.
 
+## Documentation and review handoff
+
+For every development task, write a clear Git commit message explaining what changed and why. Prepare a professional PR title and a complete description covering purpose, implementation, actual test results, security and safety considerations, performance impact, and known limitations. Provide the ready-to-use title and description when a PR cannot be opened.
+
+Document new or materially changed public Python classes and functions with meaningful docstrings. Explain parameters and return values where applicable. Use comments for reasoning that is difficult to infer, especially consensus, cryptography, AI training, and security decisions.
+
+Update the README, changelog, and relevant technical documentation alongside the implementation where applicable. Record significant architectural decisions and their rationale. Explain the completed work in beginner-friendly language while keeping measurements and security claims tied to evidence. Follow the detailed handoff requirements in `docs/ENGINEERING_STANDARDS.md`.
+
 ## Humanity-first decision priority
 
 If speed, token incentives, public access, or model performance conflicts with foreseeable harm, privacy, accountability, or human rights, **escalate** instead of silently optimizing for speed. Require the independent `safety-reviewer` for data/model releases, training updates, and autonomous agent capabilities. The reviewer advises; a human approves any high-impact deployment. Document tradeoffs, dissent, and limitations. Code and document checks are not proof of AI safety.

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased — canonical neural-v3 benchmark
+
+- Added a local benchmark for model computation, candidate generation, SHA-256, block verification, and replay, with timing variability and peak traced Python allocations.
+- Added regression checks for the deterministic fixture and canonical validation. Protocol rules and serialization are unchanged.
+
 ## v0.6.4 — founder identity and Windows onboarding (2026-11-10)
 - Credited **Christian Adams** as Verunai founder (2026) in public-facing project docs, metadata and agent instructions.
 - Added project stewardship statement and ADR-0004 distinguishing founder recognition from permanent control.
