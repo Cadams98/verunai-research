@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased - UW-1 audit corrections
+
+- Check exact framing and the packet commitment before integer decoding, while retaining full signed bounds and mathematical checks.
+- Split training and evaluation by unique encoded content and version the research task binding.
+- Add independent scalar checks, an interleaved CPU and memory benchmark, and portable correctness manifests.
+
 ## Unreleased - UW-1 research
 
 - Add a standalone commit-then-challenge matrix verification experiment, exact CPU provers, transcript replay and local attempt limits.

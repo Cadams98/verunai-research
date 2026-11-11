@@ -5,11 +5,12 @@ import unittest
 from unittest.mock import patch
 
 from verunai.useful_work.challenge import Parameters, check, sample
-from verunai.useful_work.commitment import encode, parse
+from verunai.useful_work.commitment import DIGEST_SIZE, HEADER_SIZE, UPDATE_BOUND, encode, parse
 from verunai.useful_work.evaluation import evaluate_steps
 from verunai.useful_work.experiments import _toy_grinding, perturb, with_gradient
 from verunai.useful_work.prover import canonical_prover, optimized_prover, updated
-from verunai.useful_work.task import RESIDUAL_BOUND, make_task
+from verunai.useful_work.task import (DIMENSIONS, GRADIENT_BOUND, RESIDUAL_BOUND,
+                                     WEIGHT_BOUND, held_out, make_task, training_pool)
 from verunai.useful_work.transcript import Transcript, replay
 from verunai.useful_work.verifier import Verifier
 
@@ -76,6 +77,68 @@ class UsefulWorkTests(unittest.TestCase):
                     Verifier(self.task).submit(packet)
             draw.assert_not_called()
 
+    def test_framing_and_digest_fail_before_integer_decode(self):
+        bad_digest = self.packet[:-1] + bytes([self.packet[-1] ^ 1])
+        with patch("verunai.useful_work.commitment._sections") as sections:
+            for packet, error in ((self.packet + b"x", "length"), (self.packet[:-1], "length"),
+                                  (bytearray(self.packet), "type"), (b"x" + self.packet[1:], "domain"),
+                                  (bad_digest, "commitment")):
+                with self.subTest(error=error), self.assertRaisesRegex(ValueError, error):
+                    parse(self.task, packet)
+            sections.assert_not_called()
+
+    def test_signed_section_boundaries_with_valid_digest(self):
+        d = self.task.dimension
+        residual_cells = len(self.task.x) * d
+        body = self.packet[:-DIGEST_SIZE]
+        for cell, bound in ((0, RESIDUAL_BOUND), (residual_cells, GRADIENT_BOUND),
+                            (residual_cells + d*d, UPDATE_BOUND)):
+            for sign in (-1, 1):
+                for excess in (0, 1):
+                    offset = HEADER_SIZE + 4 * cell
+                    encoded = (sign * (bound + excess)).to_bytes(4, "big", signed=True)
+                    modified = body[:offset] + encoded + body[offset + 4:]
+                    packet = modified + sha256(modified).digest()
+                    with self.subTest(cell=cell, sign=sign, excess=excess):
+                        if excess:
+                            with self.assertRaisesRegex(ValueError, "bounds"):
+                                parse(self.task, packet)
+                        else:
+                            self.assertEqual(parse(self.task, packet).digest, packet[-DIGEST_SIZE:])
+
+    def test_evaluation_content_is_disjoint_at_all_dimensions(self):
+        for d in DIMENSIONS:
+            with self.subTest(dimension=d):
+                train = training_pool(d)
+                test = tuple(zip(*held_out(d)))
+                self.assertTrue(train and test)
+                self.assertEqual(len(set(train)), len(train))
+                self.assertEqual(len(set(test)), len(test))
+                self.assertTrue(set(train).isdisjoint(test))
+                self.assertTrue({x for x, _ in train}.isdisjoint(x for x, _ in test))
+                task = make_task(d, "scope", "alice", "0" * 64, 42)
+                self.assertLessEqual(set(zip(task.x, task.y)), set(train))
+
+    def test_provers_against_independent_scalar_reference(self):
+        for d in DIMENSIONS:
+            weights = tuple(tuple(WEIGHT_BOUND if (i + 3*j) % 5 else -WEIGHT_BOUND
+                                  for j in range(d)) for i in range(d))
+            task = make_task(d, "oracle", "alice", "0" * 64, 456, weights)
+            n = len(task.x)
+            residual = tuple(tuple(sum(task.x[i][a] * weights[a][j] for a in range(d))
+                                   - task.y[i][j] for j in range(d)) for i in range(n))
+            gradient = tuple(tuple(sum(task.x[a][i] * residual[a][j] for a in range(n))
+                                   for j in range(d)) for i in range(d))
+            expected = tuple(tuple(weights[i][j] - (-1 if gradient[i][j] < 0 else 1)
+                                   * (abs(gradient[i][j]) // task.divisor)
+                                   for j in range(d)) for i in range(d))
+            for prove in (canonical_prover, optimized_prover):
+                with self.subTest(dimension=d, prover=prove.__name__):
+                    result = prove(task)
+                    self.assertEqual((result.residual, result.gradient, result.weights),
+                                     (residual, gradient, expected))
+                    self.assertTrue(Verifier(task).submit(encode(task, result)).accepted)
+
     def test_a8_exact_weight_update(self):
         self.rejected(replace(self.honest, weights=perturb(self.honest.weights, {(0, 0): 1})))
 
@@ -125,6 +188,15 @@ class UsefulWorkTests(unittest.TestCase):
             first, second = sample(16, Parameters())
         self.assertNotEqual(first, second)
         self.assertTrue(all(first) and all(second))
+
+    def test_b4_sampler_exhaustion_fails_closed_after_commitment(self):
+        verifier = Verifier(self.task, self.params, limit=1)
+        with patch("verunai.useful_work.challenge.secrets.token_bytes", return_value=bytes(16)) as rng:
+            with self.assertRaisesRegex(RuntimeError, "fresh challenges"):
+                verifier.submit(self.packet)
+            self.assertEqual(rng.call_count, 128)
+        with self.assertRaisesRegex(ValueError, "exhausted"):
+            verifier.submit(self.packet)
 
     def test_b5_tampered_transcript_and_replacement_digest(self):
         t = Verifier(self.task, self.params).submit(self.packet)

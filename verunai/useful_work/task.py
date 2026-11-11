@@ -1,12 +1,16 @@
-"""Deterministic corpus tasks and disjoint held-out rows for UW-1."""
+"""Deterministic corpus tasks and disjoint held-out content for UW-1."""
 from dataclasses import dataclass
 from hashlib import sha256, shake_256
+from functools import lru_cache
 import json
 import re
 
 from ..core import TRAINING_TEXT
 
-Matrix = tuple[tuple[int, ...], ...]
+Vector = tuple[int, ...]
+Matrix = tuple[Vector, ...]
+Example = tuple[Vector, Vector]
+Pool = tuple[Example, ...]
 DIMENSIONS = (16, 64, 128, 256)
 TARGET = 24
 WEIGHT_BOUND = 10_000
@@ -35,21 +39,39 @@ class Task:
         return len(self.w)
 
 
-def _rows(d: int, indices: tuple[int, ...]) -> tuple[Matrix, Matrix]:
-    xs, ys = [], []
-    for i in indices:
-        previous, current, target = map(ord, TRAINING_TEXT[i:i + 3])
-        digest = shake_256(canonical(["UW1/features/v1", d, previous, current])).digest(d // 8)
-        xs.append(tuple(1 if byte & (1 << bit) else -1 for byte in digest for bit in range(8)))
-        ys.append(tuple(TARGET if j == target % d else 0 for j in range(d)))
-    return tuple(xs), tuple(ys)
+@lru_cache(maxsize=4)
+def _pools(d: int) -> tuple[Pool, Pool]:
+    training, evaluation = [], []
+    seen = set()
+    for previous, current, target in sorted({TRAINING_TEXT[i:i + 3]
+                                             for i in range(len(TRAINING_TEXT) - 2)}):
+        digest = shake_256(canonical(["UW1/features/v1", d, ord(previous), ord(current)])).digest(d // 8)
+        features = tuple(1 if byte & (1 << bit) else -1 for byte in digest for bit in range(8))
+        bucket = ord(target) % d
+        example = features, bucket
+        if example in seen:
+            continue
+        seen.add(example)
+        targets = tuple(TARGET if j == bucket else 0 for j in range(d))
+        # Split by encoded input, so even context collisions cannot cross pools.
+        split = sha256(b"UW1/split/v2\0" + digest).digest()[0]
+        (evaluation if split < 51 else training).append((features, targets))
+    return tuple(training), tuple(evaluation)
+
+
+def training_pool(d: int) -> Pool:
+    """Return the unique encoded examples eligible for training."""
+    if type(d) is not int or d not in DIMENSIONS:
+        raise ValueError("unsupported dimension")
+    return _pools(d)[0]
 
 
 def held_out(d: int) -> tuple[Matrix, Matrix]:
-    """Return corpus examples from the final contiguous split (two-row gap)."""
-    if d not in DIMENSIONS:
+    """Return unique examples whose encoded inputs are absent from training."""
+    if type(d) is not int or d not in DIMENSIONS:
         raise ValueError("unsupported dimension")
-    return _rows(d, tuple(range(len(TRAINING_TEXT) * 4 // 5 + 2, len(TRAINING_TEXT) - 2)))
+    x, y = zip(*_pools(d)[1])
+    return x, y
 
 
 def make_task(d: int, task_id: str, assignee: str, head: str, seed: int,
@@ -65,7 +87,7 @@ def make_task(d: int, task_id: str, assignee: str, head: str, seed: int,
         raise ValueError("invalid task identifiers")
     n = max(64, d)
     divisor = n * max(1, d // 8)
-    scope = ["UW1/task/v1", task_id, assignee, head, seed, d, n, divisor]
+    scope = ["UW1/task/v2", task_id, assignee, head, seed, d, n, divisor]
     if weights is None:
         raw = shake_256(canonical(["UW1/model/v1", scope])).digest(d * d)
         weights = tuple(tuple(v % 9 - 4 for v in raw[i:i + d]) for i in range(0, len(raw), d))
@@ -78,8 +100,8 @@ def make_task(d: int, task_id: str, assignee: str, head: str, seed: int,
                          sha256(TRAINING_TEXT.encode()).hexdigest(), TARGET])
     binding = sha256(context).digest()
     raw = shake_256(b"UW1/row-selection/v1\0" + binding).digest(n * 4)
-    split = len(TRAINING_TEXT) * 4 // 5
-    indices = tuple(int.from_bytes(raw[i:i + 4], "big") % (split - 2)
-                    for i in range(0, len(raw), 4))
-    x, y = _rows(d, indices)
+    pool = training_pool(d)
+    indices = (int.from_bytes(raw[i:i + 4], "big") % len(pool)
+               for i in range(0, len(raw), 4))
+    x, y = zip(*(pool[i] for i in indices))
     return Task(context, binding, x, weights, y, divisor)

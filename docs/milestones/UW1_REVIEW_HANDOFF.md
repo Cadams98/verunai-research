@@ -17,17 +17,16 @@ accepted result for an issued scope.
 
 ## Testing
 
-Ran the repository layout and project standards checks, and the full
-unittest suite using Python 3.14.5. All 86 cases completed: 83 passed and
-three optional PyTorch cases skipped. The initial sandboxed run could not
-run local sockets or Windows Git Bash subprocess tests; the repeat with
-local test permissions passed, including v1, v2, and signed v3 compatibility.
-No external service was needed.
+The repository layout and engineering standards checks passed. On Windows
+with CPython 3.14.5, `python -m unittest discover -s tests -v` ran 91 cases,
+with 88 passed and three optional PyTorch skips. The suite includes v1, v2,
+and signed-v3 compatibility, the UW-1 adversarial regressions, exact signed
+bounds, content-disjoint splitting and an independent scalar oracle.
 
-Ran the 10-repeat benchmark across four dimensions, 1,000 trials per listed
-adversarial case and challenge setting, and 1,000 honest tasks each at d=16
-and d=64 with both provers. The d=128 and d=256 benchmark fixtures passed;
-their large correctness sweeps and cross-environment reproduction are open.
+The corrected Windows campaign accepted 1,000/1,000 tasks per prover at
+each of d=16, 64, 128 and 256, with byte parity and no failures. Python 3.10
+and 3.12 Linux reproduction remains open. The research report links the
+manifests, commands and updated adversarial evidence.
 
 ## Documentation
 
@@ -53,7 +52,8 @@ Transcript digests provide neither confidentiality nor public authenticity.
 ### Data and model poisoning
 
 The corpus is fixed and the experiment checks mathematical consistency.
-A correct update can worsen held-out loss; this does not test or solve
+The corrected split holds out distinct encoded inputs. Half of the 50 correct
+steps worsened the previous held-out loss, and final loss exceeded baseline; this does not test or solve
 poisoning, data provenance for outside contributions or model release safety.
 
 ### Misinformation
@@ -90,12 +90,14 @@ eligibility, or a fixed acceptance-gate failure also stop advancement.
 
 ## Performance and limitations
 
-At d=256, verification took 46.01 ms (3.70% of canonical proving and
-6.74% of optimized proving). The slowest measured malformed case took
-6.65 ms, 0.974% of optimized proving against a 1% threshold. The packet
-is 786,510 bytes. The report records raw timing samples and traced memory.
-The decision is INCOMPLETE / NO-GO PENDING EVIDENCE. The held-out run contains 50 accepted steps; 21 worsened loss
-relative to the previous step. Only CPython exact CPU arithmetic was
-measured. Attempts are local and volatile, and a separately trusted
-transcript digest is required for integrity checking. A new verifier
-instance has no shared attempt state.
+At d=256 full verification took 39.21 ms, and the slowest malformed
+fixture took 4.00 ms (0.52% of optimized proving against
+the 1% limit). A well-formed dishonest result took 39.32 ms
+to reject. The packet is 786,510 bytes. The report links the wall time,
+CPU and traced allocation samples. The prototype holds attempts in memory.
+A separate trusted issuer must own task provenance, current head and model
+state, authenticated assignment, the cross-instance budget, replay state and
+one-time eligibility decisions. Transcript integrity needs a separately
+trusted digest. The decision remains INCOMPLETE / NO-GO PENDING EVIDENCE
+until the cross-environment correctness evidence is available and all
+fixed gates pass.

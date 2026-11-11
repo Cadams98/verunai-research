@@ -1,7 +1,9 @@
 """Local statistical experiments using small synthetic matrix errors."""
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import replace
 from hashlib import sha256
 from math import expm1, log1p
+from time import perf_counter
 
 from .challenge import PARAMETERS, Parameters, check, sample
 from .commitment import encode
@@ -22,20 +24,44 @@ def with_gradient(task: Task, result: Result, gradient: Matrix) -> Result:
     return replace(result, gradient=gradient, weights=updated(task.w, gradient, task.divisor))
 
 
-def honest_trials(trials: int, dimensions: tuple[int, ...] = DIMENSIONS) -> dict:
-    """Check byte parity and acceptance for both backends on distinct tasks."""
-    result = {}
-    for d in dimensions:
-        manifest = sha256()
-        for seed in range(trials):
-            task = make_task(d, f"honest-{seed}", "local", "0" * 64, seed)
-            packets = [encode(task, prover(task)) for prover in (canonical_prover, optimized_prover)]
-            if packets[0] != packets[1] or not all(Verifier(task).submit(p).accepted for p in packets):
-                raise RuntimeError(f"honest mismatch at dimension {d}, seed {seed}")
-            manifest.update(sha256(packets[0]).digest())
-        result[d] = dict(tasks=trials, accepted_per_backend=trials, manifest_sha256=manifest.hexdigest())
-        print(f"d={d}: {trials} honest tasks passed", flush=True)
-    return result
+def _honest_task(case: tuple[int, int]) -> tuple[bytes | None, str | None]:
+    d, seed = case
+    task = make_task(d, f"honest-{seed}", "local", "0" * 64, seed)
+    packets = [encode(task, prover(task)) for prover in (canonical_prover, optimized_prover)]
+    if packets[0] != packets[1]:
+        return None, "packet mismatch"
+    for backend, packet in zip(("canonical", "optimized"), packets):
+        if not Verifier(task).submit(packet).accepted:
+            return None, f"{backend} rejected"
+    return sha256(packets[0]).digest(), None
+
+
+def _honest_dimension(d: int, trials: int, pool: ProcessPoolExecutor | None) -> dict:
+    start = perf_counter()
+    cases = ((d, seed) for seed in range(trials))
+    results = pool.map(_honest_task, cases, chunksize=4) if pool else map(_honest_task, cases)
+    manifest = sha256()
+    failures = []
+    for seed, (digest, error) in enumerate(results):
+        if digest is None:
+            failures.append(dict(seed=seed, error=error))
+        else:
+            manifest.update(digest)
+        if (seed + 1) % 100 == 0:
+            print(f"d={d}: {seed + 1}/{trials} tested, {len(failures)} failed", flush=True)
+    return dict(tasks=trials, accepted_per_backend=trials - len(failures), failures=failures,
+                elapsed_seconds=perf_counter() - start, manifest_sha256=manifest.hexdigest())
+
+
+def honest_trials(trials: int, dimensions: tuple[int, ...] = DIMENSIONS, workers: int = 1) -> dict:
+    """Check ordered byte parity and acceptance for each task, optionally in parallel."""
+    if workers == 1:
+        return {d: _honest_dimension(d, trials, None) for d in dimensions}
+    pool = ProcessPoolExecutor(max_workers=workers)
+    try:
+        return {d: _honest_dimension(d, trials, pool) for d in dimensions}
+    finally:
+        pool.shutdown(cancel_futures=True)
 
 
 def _frequency(indices: list[int], total: int) -> dict:
