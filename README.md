@@ -219,3 +219,14 @@ Do not publish a publicly tradable token or ask anyone to dedicate significant p
 ## Ethics and safety: our highest priority
 
 **Verunai is intended to serve all humanity.** Human rights, user safety, privacy, truthful knowledge, accessibility, community accountability, and responsible energy use take priority over token value or speed. Read `docs/SAFETY_AND_ETHICS.md`, `docs/SAFETY_TEST_PLAN.md`, and [ADR 0003](docs/decisions/0003-humanity-first-safety.md). These are binding development policies, **not** evidence that this experimental prototype has passed an AI safety evaluation. A new `safety-reviewer` Claude subagent can independently review changes, but human accountability remains essential.
+
+## UW-1 research experiment
+
+Run the local commit-then-challenge benchmark with:
+
+```powershell
+python -m verunai.useful_work.benchmark --output evidence/uw1_benchmark.json
+```
+
+See the [UW-1 report](docs/USEFUL_WORK_UW1.md) for the measured results,
+open acceptance gates and opt-in correctness and adversarial commands.

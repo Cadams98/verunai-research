@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased - UW-1 research
+
+- Add a standalone commit-then-challenge matrix verification experiment, exact CPU provers, transcript replay and local attempt limits.
+- Record cost, adversarial and held-out evidence; the full correctness gate remains open. Ledger consensus and rewards are unchanged.
+
 ## Unreleased — v0.8 P0 three-node testnet harness
 
 - Add `python -m verunai.testnet_harness`. It starts three to five unmodified nodes as separate local processes, waits for convergence, and re-audits every saved ledger in process and with the existing `audit` command.

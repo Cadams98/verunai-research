@@ -1,0 +1,21 @@
+{
+  "mode": "honest",
+  "python": "3.14.5",
+  "os": "Windows-11-10.0.26300-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "logical_cpus": 28,
+  "backend": "CPython exact integers",
+  "gpu": "not measured; no GPU backend selected",
+  "result": {
+    "16": {
+      "tasks": 1000,
+      "accepted_per_backend": 1000,
+      "manifest_sha256": "fa6b348283edb46df1a84b177ef171226fd408c19fe31769285f280d9d01fd2e"
+    },
+    "64": {
+      "tasks": 1000,
+      "accepted_per_backend": 1000,
+      "manifest_sha256": "5ef79f361fa373df12de97aa308dbf5d76d4d741e886ae78446e32a53bf9a13a"
+    }
+  }
+}

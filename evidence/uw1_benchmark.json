@@ -1,0 +1,1128 @@
+{
+  "mode": "benchmark",
+  "python": "3.14.5",
+  "os": "Windows-11-10.0.26300-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "logical_cpus": 28,
+  "backend": "CPython exact integers",
+  "gpu": "not measured; no GPU backend selected",
+  "result": {
+    "repeats": 10,
+    "warmups_per_workload": 1,
+    "parameters": [
+      32,
+      2
+    ],
+    "dimensions": {
+      "16": {
+        "metrics": {
+          "canonical": {
+            "samples_ns": [
+              1713000,
+              1685500,
+              1741400,
+              1700200,
+              1755300,
+              1664700,
+              1698000,
+              1663000,
+              1656200,
+              1783500
+            ],
+            "median_ns": 1699100.0,
+            "min_ns": 1656200,
+            "max_ns": 1783500,
+            "mad_ns": 35250.0,
+            "peak_traced_bytes": 29184
+          },
+          "optimized": {
+            "samples_ns": [
+              853800,
+              793900,
+              815600,
+              811700,
+              776200,
+              777700,
+              778400,
+              773300,
+              799700,
+              783200
+            ],
+            "median_ns": 788550.0,
+            "min_ns": 773300,
+            "max_ns": 853800,
+            "mad_ns": 11750.0,
+            "peak_traced_bytes": 28960
+          },
+          "submission_encoding": {
+            "samples_ns": [
+              156900,
+              59200,
+              54400,
+              52900,
+              49100,
+              49500,
+              48600,
+              47200,
+              47900,
+              48100
+            ],
+            "median_ns": 49300.0,
+            "min_ns": 47200,
+            "max_ns": 156900,
+            "mad_ns": 1750.0,
+            "peak_traced_bytes": 25319
+          },
+          "verifier": {
+            "samples_ns": [
+              662100,
+              588700,
+              571200,
+              578200,
+              633300,
+              610900,
+              568500,
+              634800,
+              609000,
+              573700
+            ],
+            "median_ns": 598850.0,
+            "min_ns": 568500,
+            "max_ns": 662100,
+            "mad_ns": 26400.0,
+            "peak_traced_bytes": 43189
+          },
+          "malformed_short": {
+            "samples_ns": [
+              2400,
+              1200,
+              900,
+              800,
+              800,
+              700,
+              800,
+              900,
+              700,
+              700
+            ],
+            "median_ns": 800.0,
+            "min_ns": 700,
+            "max_ns": 2400,
+            "mad_ns": 100.0,
+            "peak_traced_bytes": 1112
+          },
+          "malformed_digest": {
+            "samples_ns": [
+              74900,
+              133000,
+              104900,
+              100900,
+              55000,
+              50800,
+              48700,
+              48200,
+              48000,
+              49700
+            ],
+            "median_ns": 52900.0,
+            "min_ns": 48000,
+            "max_ns": 133000,
+            "mad_ns": 4800.0,
+            "peak_traced_bytes": 35192
+          },
+          "malformed_dense_digest": {
+            "samples_ns": [
+              51200,
+              45900,
+              43700,
+              43800,
+              44400,
+              43500,
+              43100,
+              69300,
+              47600,
+              43900
+            ],
+            "median_ns": 44150.0,
+            "min_ns": 43100,
+            "max_ns": 69300,
+            "mad_ns": 850.0,
+            "peak_traced_bytes": 68152
+          },
+          "malformed_dense_bounds": {
+            "samples_ns": [
+              39000,
+              37400,
+              36800,
+              36600,
+              36500,
+              51100,
+              36600,
+              36200,
+              37200,
+              37300
+            ],
+            "median_ns": 37000.0,
+            "min_ns": 36200,
+            "max_ns": 51100,
+            "mad_ns": 400.0,
+            "peak_traced_bytes": 68152
+          }
+        },
+        "submission_bytes": 6222,
+        "packet_sha256": "630400a19066f9ccf88cf0cc0bfbb12bab531e98769a32dd2dffd23e6127d554",
+        "precomputation_ns": 0,
+        "verifier_over_canonical": 0.3524512977458655,
+        "verifier_over_optimized": 0.7594318686196183,
+        "malformed_over_canonical": 0.031134129833441233,
+        "malformed_over_optimized": 0.06708515629953712
+      },
+      "64": {
+        "metrics": {
+          "canonical": {
+            "samples_ns": [
+              20135700,
+              20334600,
+              20034700,
+              30162200,
+              22957200,
+              19698800,
+              19670500,
+              19704600,
+              19722600,
+              20495300
+            ],
+            "median_ns": 20085200.0,
+            "min_ns": 19670500,
+            "max_ns": 30162200,
+            "mad_ns": 383500.0,
+            "peak_traced_bytes": 321296
+          },
+          "optimized": {
+            "samples_ns": [
+              10931500,
+              11052000,
+              10826500,
+              11021400,
+              11068700,
+              10966300,
+              10718300,
+              10866200,
+              10593700,
+              11042600
+            ],
+            "median_ns": 10948900.0,
+            "min_ns": 10593700,
+            "max_ns": 11068700,
+            "mad_ns": 98400.0,
+            "peak_traced_bytes": 321464
+          },
+          "submission_encoding": {
+            "samples_ns": [
+              415700,
+              619700,
+              422500,
+              355000,
+              348700,
+              350500,
+              382100,
+              386400,
+              359200,
+              345700
+            ],
+            "median_ns": 370650.0,
+            "min_ns": 345700,
+            "max_ns": 619700,
+            "mad_ns": 21050.0,
+            "peak_traced_bytes": 206503
+          },
+          "verifier": {
+            "samples_ns": [
+              3097400,
+              2876200,
+              2892000,
+              2854000,
+              2987100,
+              2824100,
+              2929400,
+              2892800,
+              3049500,
+              2850100
+            ],
+            "median_ns": 2892400.0,
+            "min_ns": 2824100,
+            "max_ns": 3097400,
+            "mad_ns": 40350.0,
+            "peak_traced_bytes": 379096
+          },
+          "malformed_short": {
+            "samples_ns": [
+              1600,
+              1100,
+              800,
+              800,
+              800,
+              700,
+              800,
+              700,
+              800,
+              700
+            ],
+            "median_ns": 800.0,
+            "min_ns": 700,
+            "max_ns": 1600,
+            "mad_ns": 50.0,
+            "peak_traced_bytes": 1112
+          },
+          "malformed_digest": {
+            "samples_ns": [
+              417500,
+              417500,
+              397300,
+              400600,
+              394000,
+              421600,
+              411900,
+              402300,
+              408200,
+              436100
+            ],
+            "median_ns": 410050.0,
+            "min_ns": 394000,
+            "max_ns": 436100,
+            "mad_ns": 8600.0,
+            "peak_traced_bytes": 379096
+          },
+          "malformed_dense_digest": {
+            "samples_ns": [
+              321100,
+              296500,
+              295900,
+              297700,
+              292900,
+              412800,
+              307400,
+              286400,
+              290200,
+              285400
+            ],
+            "median_ns": 296200.0,
+            "min_ns": 285400,
+            "max_ns": 412800,
+            "mad_ns": 7900.0,
+            "peak_traced_bytes": 631480
+          },
+          "malformed_dense_bounds": {
+            "samples_ns": [
+              232200,
+              240800,
+              233100,
+              232500,
+              230900,
+              237200,
+              237100,
+              242300,
+              238500,
+              242100
+            ],
+            "median_ns": 237150.0,
+            "min_ns": 230900,
+            "max_ns": 242300,
+            "mad_ns": 4350.0,
+            "peak_traced_bytes": 595360
+          }
+        },
+        "submission_bytes": 49230,
+        "packet_sha256": "03d33a56109eaf58433861b104c3f77a9f7678b09745378d546e1b7100657ec3",
+        "precomputation_ns": 0,
+        "verifier_over_canonical": 0.14400653217294326,
+        "verifier_over_optimized": 0.26417265661390643,
+        "malformed_over_canonical": 0.020415529842869377,
+        "malformed_over_optimized": 0.03745125081058371
+      },
+      "128": {
+        "metrics": {
+          "canonical": {
+            "samples_ns": [
+              178847500,
+              179194300,
+              175769800,
+              166600100,
+              165115800,
+              158354100,
+              156962500,
+              155362600,
+              155974500,
+              165684600
+            ],
+            "median_ns": 165400200.0,
+            "min_ns": 155362600,
+            "max_ns": 179194300,
+            "mad_ns": 8931700.0,
+            "peak_traced_bytes": 1349616
+          },
+          "optimized": {
+            "samples_ns": [
+              96399800,
+              98827400,
+              99098600,
+              98128500,
+              99498200,
+              96837700,
+              99477300,
+              96555500,
+              98564700,
+              96851900
+            ],
+            "median_ns": 98346600.0,
+            "min_ns": 96399800,
+            "max_ns": 99498200,
+            "mad_ns": 1141150.0,
+            "peak_traced_bytes": 1349784
+          },
+          "submission_encoding": {
+            "samples_ns": [
+              2307100,
+              2272600,
+              2449300,
+              2222600,
+              2239900,
+              2304100,
+              2121700,
+              3414000,
+              3017000,
+              2092800
+            ],
+            "median_ns": 2288350.0,
+            "min_ns": 2092800,
+            "max_ns": 3414000,
+            "mad_ns": 113350.0,
+            "peak_traced_bytes": 788487
+          },
+          "verifier": {
+            "samples_ns": [
+              13778300,
+              13206600,
+              12768700,
+              12599200,
+              12908200,
+              13324300,
+              13633500,
+              13546200,
+              13333100,
+              13723900
+            ],
+            "median_ns": 13328700.0,
+            "min_ns": 12599200,
+            "max_ns": 13778300,
+            "mad_ns": 350000.0,
+            "peak_traced_bytes": 1596856
+          },
+          "malformed_short": {
+            "samples_ns": [
+              3800,
+              3200,
+              2500,
+              2200,
+              2000,
+              2100,
+              2000,
+              2000,
+              1900,
+              1900
+            ],
+            "median_ns": 2050.0,
+            "min_ns": 1900,
+            "max_ns": 3800,
+            "mad_ns": 150.0,
+            "peak_traced_bytes": 1112
+          },
+          "malformed_digest": {
+            "samples_ns": [
+              1983900,
+              1903300,
+              1836500,
+              1825400,
+              1888700,
+              1782200,
+              1803500,
+              1837600,
+              1860500,
+              1879800
+            ],
+            "median_ns": 1849050.0,
+            "min_ns": 1782200,
+            "max_ns": 1983900,
+            "mad_ns": 35200.0,
+            "peak_traced_bytes": 1596856
+          },
+          "malformed_dense_digest": {
+            "samples_ns": [
+              1387300,
+              1348100,
+              1404200,
+              1370600,
+              1523000,
+              1422700,
+              1382800,
+              1459400,
+              1414500,
+              1411500
+            ],
+            "median_ns": 1407850.0,
+            "min_ns": 1348100,
+            "max_ns": 1523000,
+            "mad_ns": 22800.0,
+            "peak_traced_bytes": 2510520
+          },
+          "malformed_dense_bounds": {
+            "samples_ns": [
+              1127800,
+              1224000,
+              1095800,
+              1160100,
+              1181600,
+              1121500,
+              1130900,
+              1089900,
+              1188300,
+              1133700
+            ],
+            "median_ns": 1132300.0,
+            "min_ns": 1089900,
+            "max_ns": 1224000,
+            "mad_ns": 32150.0,
+            "peak_traced_bytes": 2372200
+          }
+        },
+        "submission_bytes": 196686,
+        "packet_sha256": "97871a6f4be12a1dd7bdf2ed65d4e968f368685b7863e506f498c72c4e4385ea",
+        "precomputation_ns": 0,
+        "verifier_over_canonical": 0.08058454584698205,
+        "verifier_over_optimized": 0.1355278169250386,
+        "malformed_over_canonical": 0.011179248876361698,
+        "malformed_over_optimized": 0.018801361714589016
+      },
+      "256": {
+        "metrics": {
+          "canonical": {
+            "samples_ns": [
+              1290207500,
+              1314685500,
+              1272236100,
+              1225378100,
+              1217844600,
+              1238987300,
+              1242944100,
+              1236685200,
+              1273234100,
+              1244368700
+            ],
+            "median_ns": 1243656400.0,
+            "min_ns": 1217844600,
+            "max_ns": 1314685500,
+            "mad_ns": 22045050.0,
+            "peak_traced_bytes": 5593648
+          },
+          "optimized": {
+            "samples_ns": [
+              637740900,
+              682639500,
+              683125800,
+              684925600,
+              659442200,
+              681207900,
+              689210800,
+              687599100,
+              691541500,
+              671864100
+            ],
+            "median_ns": 682882650.0,
+            "min_ns": 637740900,
+            "max_ns": 691541500,
+            "mad_ns": 5522300.0,
+            "peak_traced_bytes": 5593816
+          },
+          "submission_encoding": {
+            "samples_ns": [
+              7807500,
+              7947100,
+              7780300,
+              7851300,
+              8090200,
+              7916600,
+              7876100,
+              8024900,
+              7811600,
+              7830100
+            ],
+            "median_ns": 7863700.0,
+            "min_ns": 7780300,
+            "max_ns": 8090200,
+            "mad_ns": 54550.0,
+            "peak_traced_bytes": 3197223
+          },
+          "verifier": {
+            "samples_ns": [
+              47436500,
+              49657400,
+              47855200,
+              46380400,
+              45576600,
+              45643500,
+              44874000,
+              44893300,
+              45554300,
+              46517500
+            ],
+            "median_ns": 46011950.0,
+            "min_ns": 44874000,
+            "max_ns": 49657400,
+            "mad_ns": 812100.0,
+            "peak_traced_bytes": 6612920
+          },
+          "malformed_short": {
+            "samples_ns": [
+              2200,
+              2200,
+              1200,
+              1000,
+              1000,
+              1100,
+              1000,
+              1000,
+              900,
+              1000
+            ],
+            "median_ns": 1000.0,
+            "min_ns": 900,
+            "max_ns": 2200,
+            "mad_ns": 50.0,
+            "peak_traced_bytes": 1112
+          },
+          "malformed_digest": {
+            "samples_ns": [
+              6931100,
+              6670800,
+              6359900,
+              6896300,
+              6635700,
+              6511800,
+              6905100,
+              6437400,
+              6295600,
+              6838200
+            ],
+            "median_ns": 6653250.0,
+            "min_ns": 6295600,
+            "max_ns": 6931100,
+            "mad_ns": 229450.0,
+            "peak_traced_bytes": 6612920
+          },
+          "malformed_dense_digest": {
+            "samples_ns": [
+              6095100,
+              5909900,
+              6411100,
+              5647200,
+              5628300,
+              5810900,
+              5791600,
+              5637400,
+              5938800,
+              5806000
+            ],
+            "median_ns": 5808450.0,
+            "min_ns": 5628300,
+            "max_ns": 6411100,
+            "mad_ns": 145800.0,
+            "peak_traced_bytes": 10004248
+          },
+          "malformed_dense_bounds": {
+            "samples_ns": [
+              4886900,
+              4941600,
+              5068700,
+              4815600,
+              4806900,
+              5297900,
+              4799400,
+              4735800,
+              4907800,
+              4743300
+            ],
+            "median_ns": 4851250.0,
+            "min_ns": 4735800,
+            "max_ns": 5297900,
+            "mad_ns": 73450.0,
+            "peak_traced_bytes": 9465544
+          }
+        },
+        "submission_bytes": 786510,
+        "packet_sha256": "749b8e3632bf8efca02c1d6cb6dac2514c477846c8129e0b6a00b44f25732671",
+        "precomputation_ns": 0,
+        "verifier_over_canonical": 0.03699731694381181,
+        "verifier_over_optimized": 0.06737899989112331,
+        "malformed_over_canonical": 0.005349749335909822,
+        "malformed_over_optimized": 0.009742889206513007
+      }
+    },
+    "usefulness": {
+      "dimension": 16,
+      "held_out_rows": 474,
+      "baseline": 273024,
+      "steps": [
+        {
+          "step": 1,
+          "correct": true,
+          "before": 273024,
+          "loss": 266092,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 2,
+          "correct": true,
+          "before": 266092,
+          "loss": 264840,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 3,
+          "correct": true,
+          "before": 264840,
+          "loss": 258266,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 4,
+          "correct": true,
+          "before": 258266,
+          "loss": 258364,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 5,
+          "correct": true,
+          "before": 258364,
+          "loss": 259958,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 6,
+          "correct": true,
+          "before": 259958,
+          "loss": 257482,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 7,
+          "correct": true,
+          "before": 257482,
+          "loss": 260514,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 8,
+          "correct": true,
+          "before": 260514,
+          "loss": 260674,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 9,
+          "correct": true,
+          "before": 260674,
+          "loss": 260674,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": false
+        },
+        {
+          "step": 10,
+          "correct": true,
+          "before": 260674,
+          "loss": 258916,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 11,
+          "correct": true,
+          "before": 258916,
+          "loss": 259842,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 12,
+          "correct": true,
+          "before": 259842,
+          "loss": 259666,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 13,
+          "correct": true,
+          "before": 259666,
+          "loss": 259950,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 14,
+          "correct": true,
+          "before": 259950,
+          "loss": 260256,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 15,
+          "correct": true,
+          "before": 260256,
+          "loss": 257956,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 16,
+          "correct": true,
+          "before": 257956,
+          "loss": 257112,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 17,
+          "correct": true,
+          "before": 257112,
+          "loss": 258976,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 18,
+          "correct": true,
+          "before": 258976,
+          "loss": 256864,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 19,
+          "correct": true,
+          "before": 256864,
+          "loss": 257084,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 20,
+          "correct": true,
+          "before": 257084,
+          "loss": 258218,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 21,
+          "correct": true,
+          "before": 258218,
+          "loss": 257832,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 22,
+          "correct": true,
+          "before": 257832,
+          "loss": 255980,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 23,
+          "correct": true,
+          "before": 255980,
+          "loss": 255950,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 24,
+          "correct": true,
+          "before": 255950,
+          "loss": 254584,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 25,
+          "correct": true,
+          "before": 254584,
+          "loss": 254028,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 26,
+          "correct": true,
+          "before": 254028,
+          "loss": 255176,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 27,
+          "correct": true,
+          "before": 255176,
+          "loss": 254770,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 28,
+          "correct": true,
+          "before": 254770,
+          "loss": 254112,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 29,
+          "correct": true,
+          "before": 254112,
+          "loss": 254028,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 30,
+          "correct": true,
+          "before": 254028,
+          "loss": 254802,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 31,
+          "correct": true,
+          "before": 254802,
+          "loss": 255362,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 32,
+          "correct": true,
+          "before": 255362,
+          "loss": 255476,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 33,
+          "correct": true,
+          "before": 255476,
+          "loss": 255148,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 34,
+          "correct": true,
+          "before": 255148,
+          "loss": 254664,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 35,
+          "correct": true,
+          "before": 254664,
+          "loss": 253800,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 36,
+          "correct": true,
+          "before": 253800,
+          "loss": 254490,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 37,
+          "correct": true,
+          "before": 254490,
+          "loss": 255176,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 38,
+          "correct": true,
+          "before": 255176,
+          "loss": 253682,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 39,
+          "correct": true,
+          "before": 253682,
+          "loss": 253196,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 40,
+          "correct": true,
+          "before": 253196,
+          "loss": 254732,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 41,
+          "correct": true,
+          "before": 254732,
+          "loss": 254276,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 42,
+          "correct": true,
+          "before": 254276,
+          "loss": 253358,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 43,
+          "correct": true,
+          "before": 253358,
+          "loss": 252398,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 44,
+          "correct": true,
+          "before": 252398,
+          "loss": 252958,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 45,
+          "correct": true,
+          "before": 252958,
+          "loss": 254070,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 46,
+          "correct": true,
+          "before": 254070,
+          "loss": 256534,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 47,
+          "correct": true,
+          "before": 256534,
+          "loss": 252944,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 48,
+          "correct": true,
+          "before": 252944,
+          "loss": 254424,
+          "baseline": 273024,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 49,
+          "correct": true,
+          "before": 254424,
+          "loss": 254008,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 50,
+          "correct": true,
+          "before": 254008,
+          "loss": 251828,
+          "baseline": 273024,
+          "label": "improved",
+          "worsened": false
+        }
+      ]
+    }
+  }
+}
