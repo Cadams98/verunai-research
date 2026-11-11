@@ -49,6 +49,8 @@ For every functional change, update the relevant documents **in the same PR**:
 
 ## Required PR handoff
 
+Write a Git commit message with a concise summary and enough context to explain why the change was needed. Prepare a specific PR title and a review-ready description for every development task. If a PR cannot be opened, include its exact title and body in the handoff.
+
 Every coding agent must provide:
 1. **Problem and boundaries:** what is being changed and what is explicitly out of scope.
 2. **Design overview:** relevant modules and why this approach is simpler or more correct than alternatives.
@@ -57,6 +59,12 @@ Every coding agent must provide:
 5. **Documentation:** links to the docs updated **in the same change**, or a justified `documentation-only/no behavior change` exception.
 6. **Scalability and security:** resource impact, validation work, attack surfaces, unresolved risks.
 7. **Review:** independent adversarial review for consensus/security-sensitive changes before merge.
+
+State what was measured and identify performance or security claims that remain unverified. Include known limitations and a plain-language explanation of how the change works and why it matters.
+
+Add meaningful docstrings to new or materially changed public Python classes and functions. Describe their purpose, parameters, and return values as applicable. Comment on the rationale for non-obvious decisions, especially in consensus, cryptography, AI training, and security. Keep comments focused on information the code alone does not convey.
+
+Update the README, changelog, and relevant technical documents alongside implementation when applicable. For a significant architectural decision, record its context, alternatives, chosen approach, rationale, and consequences in an ADR.
 
 ## Preferred development loop (for people learning as they build)
 

@@ -39,6 +39,14 @@ On Windows: double-click `RUN_V3_LEDGER_DEMO_WINDOWS.bat`. See [v0.6 milestone r
 
 **Limitations:** This is not secure permissionless consensus, public AI, mainnet, or a production wallet. SHA-256 still chooses winners; validators re-execute the small AI computation, enabling possible disproportionate verification costs. The computation is not proven essential or efficient. Model-training usefulness remains an open research problem.
 
+## Measure canonical neural-v3 mining
+
+```powershell
+python -m verunai.ledger_benchmark --attempts 150 --repeats 5 --blocks 8
+```
+
+The local CPU benchmark reports model computation, full candidate throughput, SHA-256 throughput, accepted-block validation, and replay at two chain heights. See the [v3 work-factor report](docs/NEURAL_V3_BENCHMARK.md) for measurements, memory accounting, and protocol limitations.
+
 ## Previous milestone: integer-exact neural training across two nodes (v0.5)
 
 **New experiment:** A separate versioned `neural-v2` blockchain now binds block candidates to a real, deterministic single-layer neural-network training step (two dense matrix multiplications, a gradient calculation, and an integer weight update). Independent peers redo the winning training step, check its gradient commitment and model-state commitment, reject altered data, and reconstruct matching model states on replay. Version 1 remains available and unchanged for compatibility.
