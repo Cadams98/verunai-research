@@ -19,4 +19,10 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           persist-credentials: false
-      - run: python3 scripts/check_pr_description.py --event "$GITHUB_EVENT_PATH"
+      - name: Validate description
+        run: |
+          if [ ! -f scripts/check_pr_description.py ]; then
+            echo "::notice::PR checker is not installed on the base commit yet. Review the description manually."
+            exit 0
+          fi
+          python3 scripts/check_pr_description.py --event "$GITHUB_EVENT_PATH"

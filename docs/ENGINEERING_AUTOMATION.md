@@ -88,7 +88,9 @@ control aggregate exposure. GitHub Actions runner usage is separate.
 The `PR description` job checks the PR body against the template on open,
 edit, reopen, synchronize, and ready-for-review events. It runs the checker
 from the base commit with a read-only token. It checks section presence and
-obvious placeholders. Human review verifies accuracy. After a test PR proves
+obvious placeholders. If the base predates the checker, the job reports
+that validation was skipped and the description needs manual review.
+Human review verifies accuracy. After a test PR proves
 the check appears and updates as expected, the owner can require it alongside
 Python 3.10 and 3.12. Review changes to the check itself as infrastructure
 changes.
