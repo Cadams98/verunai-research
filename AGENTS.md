@@ -22,6 +22,9 @@ Read `README.md`, `docs/NEURAL_V3_LEDGER.md`, `docs/SECURITY_FINDINGS_V06.md`, `
 - When changes affect consensus, demand independent adversarial review and negative tests.
 
 ## Team roles & branch ownership
+This file is authoritative for agent workflow and ownership. Older task
+prompts and branch assignments do not override the policy here.
+
 - The owner assigns one implementation lead per task. Codex defaults to implementation on `codex/<issue-or-task>`. Claude defaults to independent review and uses `claude/<issue-or-task>` only for owner-assigned implementation.
 - An agent that implements a change cannot count as its independent reviewer. Hosted Claude review is advisory and has no implementation authority.
 - The owner authorizes scope and publication. Codex may commit, push its task branch, and open a draft PR with explicit task authorization. Only the human owner approves and merges into protected branches.

@@ -5,6 +5,7 @@
 - Add PR description validation and an owner-authorized Codex draft publisher.
 - Propose bounded, opt-in Claude Code PR reviews with paid execution disabled by default.
 - Clarify implementation ownership and document authentication, costs, and human merge authority.
+- Address the automation audit with a fail-closed handoff check, explicit safety fields, pinned CI actions, and revision-bound Claude reports.
 
 ## Unreleased — canonical neural-v3 benchmark
 

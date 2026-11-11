@@ -10,6 +10,38 @@ REQUIRED_SECTIONS = (
     "Purpose", "Implementation", "Testing", "Documentation",
     "Security and safety", "Performance and limitations",
 )
+SAFETY_FIELDS = (
+    "Affected people", "Privacy and consent", "Data and model poisoning",
+    "Misinformation", "Accessibility and fairness", "Energy",
+    "Independent safety review", "Stop-ship conditions",
+)
+PLACEHOLDER = re.compile(
+    r"(?:tbd|todo|n\W*a|none|placeholder|fill (?:this )?in)(?:[.!?]*|\s*[:—-].*)",
+    re.IGNORECASE,
+)
+
+
+def _empty_section(text: str) -> bool:
+    for line in text.splitlines():
+        content = re.sub(r"^\s*[-*+]\s*(?:\[[ xX]\]\s*)?", "", line).strip()
+        if not content.startswith(("#", "```", "~~~")) and re.search(r"\w", content) and not (
+            PLACEHOLDER.fullmatch(content) or re.fullmatch(r"<[^<>]+>", content)
+        ):
+            return False
+    return True
+
+
+def _read_event(path: Path) -> str:
+    event = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(event, dict) or not isinstance(event.get("pull_request"), dict):
+        raise ValueError("Expected a pull request event object")
+    pull_request = event["pull_request"]
+    body = pull_request["body"]
+    if body is None:
+        return ""
+    if not isinstance(body, str):
+        raise ValueError("Expected a string or null pull request body")
+    return body
 
 
 def missing_sections(body: str) -> list[str]:
@@ -30,8 +62,14 @@ def missing_sections(body: str) -> list[str]:
         if len(matches) != 1:
             missing.append(name)
             continue
-        words = re.findall(r"\w+", matches[0].casefold())
-        if not words or " ".join(words) in {"tbd", "todo", "n a", "none", "placeholder"}:
+        if name == "Security and safety":
+            fields = re.split(r"^###[ \t]+([^\r\n]+)\r?$", matches[0], flags=re.MULTILINE)
+            subsections = list(zip(fields[1::2], fields[2::2]))
+            for field in SAFETY_FIELDS:
+                values = [content for heading, content in subsections if heading.strip() == field]
+                if len(values) != 1 or _empty_section(values[0]):
+                    missing.append(f"{name} / {field}")
+        elif _empty_section(matches[0]):
             missing.append(name)
     return missing
 
@@ -43,11 +81,11 @@ def main() -> int:
     source.add_argument("--event", type=Path, help="GitHub pull request event JSON")
     source.add_argument("--body-file", type=Path, help="Local Markdown draft")
     args = parser.parse_args()
-    if args.event:
-        event = json.loads(args.event.read_text(encoding="utf-8"))
-        body = event["pull_request"]["body"] or ""
-    else:
-        body = args.body_file.read_text(encoding="utf-8-sig")
+    try:
+        body = _read_event(args.event) if args.event else args.body_file.read_text(encoding="utf-8-sig")
+    except (KeyError, OSError, ValueError):
+        print("Cannot read a valid PR description from the specified input.")
+        return 1
     missing = missing_sections(body)
     if missing:
         print("Complete these PR sections exactly once: " + ", ".join(missing))

@@ -34,14 +34,34 @@ comparison link. Check for an existing draft before retrying. The helper only
 publishes commits and requires a clean checkout. It never accepts a force-push
 or merge operation.
 
-Use an implementation identity with repository write access and no admin or
-ruleset bypass privileges. Required checks and PRs alone do not make merges
-owner-only. Before unattended credentials are introduced, verify server-side
-restrictions using a separate owner-only update rule or equivalent GitHub
-control supported by the plan. Keep PR and CI rules in force for the owner.
-Keep workflow identities off bypass lists and review any changes to workflows,
-permissions, and repository rules. The local helper is a scope guard, and the
-GitHub rules are the authorization boundary.
+The current local Codex session and founder share a GitHub identity. GitHub
+cannot distinguish those actions, and the publisher's branch check does not
+enforce founder-only merging. Use attended publication with explicit owner
+authorization until the following design is implemented and tested.
+
+- A dedicated publisher GitHub App is installed only on VERUNAI. Grant it
+  Contents write and Pull requests write (Metadata read is implicit).
+  Grant no Administration, Actions, Workflows, or rule bypass permissions.
+  Keep the signing key in a protected credential store outside the model
+  process. Installation tokens are short-lived and scoped to the repository
+  and granted permissions. The owner-controlled publisher and GitHub rules
+  enforce the reviewed branch and draft operation. Do not place
+  owner credentials or App keys in prompts, files, logs, or artifacts.
+- Contents and PR write can also permit merge operations. Enforce a
+  separate `main` ruleset with restricted updates and only the owner
+  authorized for PR-based updates. Keep required PRs, independent approvals,
+  CI, and the force-push prohibition in a separate ruleset with no agent
+  bypass. Where supported, require owner or CODEOWNER approval on agent PRs
+  and dismiss stale approvals. For owner-authored maintenance, use another
+  qualified human reviewer because authors cannot approve their own PRs.
+  If CODEOWNER approval is required, that reviewer must be an eligible code owner.
+  The owner merges after the same checks. If the plan cannot enforce these
+  controls, keep publication attended and do not provision the App.
+- Test with the separate identity before use. It should be able to push
+  its task branch and open a draft, and be denied direct writes and merges
+  to protected branches. Confirm the owner can still merge a normally
+  reviewed PR with passing checks. No App or unattended credentials exist
+  as part of this proposal.
 [GitHub rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)
 
 Local Codex sign-in uses the applicable ChatGPT plan limits. GitHub publishing
@@ -68,17 +88,30 @@ After approval and independent safety review of the agent capability:
    findings. Remove and reapply the label to request another review after
    changes. Delete or unset the variable to disable future review jobs.
 
-The job checks out only the trusted base and passes the PR diff as data. It
-uses GitHub's job token with repository contents read and PR comments write.
-No GitHub App installation token, personal GitHub token, OIDC permission, or
-checkout credentials are passed to the reviewer. Model tools are limited to
-reading and posting findings. PR metadata and diffs can contain misleading
-instructions, private information, or secrets. Review only changes suitable
-for the provider and treat output as untrusted until checked by a human.
+The job checks out the trusted base and fetches a diff by immutable base and
+head SHA. It checks the current revision before inference and again before
+publication. The workflow token has Contents read and Pull requests read.
+The official action receives a step-scoped model key, and the workflow
+renders only its bounded structured findings as escaped text in the Actions
+summary with the full reviewed SHA. It disables the built-in full report
+and tool logs. Verify the SHA before relying on findings because a PR can
+change after the final check.
+
+Screen proposed diffs for secrets, personal information, and third-party
+content before labeling. Confirm provider consent and retention requirements
+and whether the report can be public. Store the Anthropic key only in the
+protected `claude-review` environment. Keep it out of repository-wide secrets,
+local files, PRs, logs, and artifacts. Escaping prevents active markup but
+cannot make every quotation or allegation safe. Humans verify and correct
+findings. Offer manual review for excluded PRs. Pause the workflow on
+unexpected disclosure, misleading output that cannot be contained, or
+authority misuse. Revoke exposed keys and report incidents privately.
 [Claude Code Action security](https://github.com/anthropics/claude-code-action/blob/main/docs/security.md)
 
 One review runs at a time, with a 10-minute job timeout, a 100 KB diff limit,
-six turns, and a USD 1 estimated per-run cap. The CLI estimate can differ from
+12 turns, and a USD 1 estimated per-run cap. The turn setting and report
+boundary were checked offline. The paid path has not been exercised.
+The CLI estimate can differ from
 the bill or overshoot. Workspace billing limits and explicit label requests
 control aggregate exposure. GitHub Actions runner usage is separate.
 [Claude CLI limits](https://code.claude.com/docs/en/cli-reference)
@@ -88,14 +121,30 @@ control aggregate exposure. GitHub Actions runner usage is separate.
 The `PR description` job checks the PR body against the template on open,
 edit, reopen, synchronize, and ready-for-review events. It runs the checker
 from the base commit with a read-only token. It checks section presence and
-obvious placeholders. If the base predates the checker, the job reports
-that validation was skipped and the description needs manual review.
-Human review verifies accuracy. After a test PR proves
-the check appears and updates as expected, the owner can require it alongside
-Python 3.10 and 3.12. Review changes to the check itself as infrastructure
-changes.
+obvious placeholders, including the required safety fields. A missing
+checker fails except for PR #3 on base `6236f5d27d2fbc70a7a850b0a85486c8173164fc`
+in VERUNAI. That one bootstrap run needs manual description review.
+After merge, use a test PR to confirm that an empty description fails and
+editing it to a complete one passes. Then require **PR description** from
+GitHub Actions alongside Python 3.10 and 3.12 in the `main` ruleset. A PR
+can propose changes to the workflow wrapper, so require owner review of
+workflow and checker changes or a trusted required workflow where supported.
+Human reviewers still verify the accuracy of claims.
+
+## Actions supply chain
+
+After this PR merges and CI passes, in **Settings → Actions → General**
+choose selected actions and require full-length commit SHAs. Allow the
+pinned `actions/checkout`, `actions/setup-python`, and
+`anthropics/claude-code-action` revisions from the workflows. The pinned
+Claude action also calls pinned `oven-sh/setup-bun`. Review the upstream
+dependency tree and allow verified nested actions only as needed. Check
+the job token defaults remain read-only, and leave GitHub Actions PR
+approval disabled. Review future pin updates before allowing them.
+[GitHub Actions settings](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository)
 
 Run the local checker on a completed draft and the empty template to exercise
 success and failure. Run the publisher without `--publish` to verify its
 guards without credentials. The paid review path must remain unexercised
 until separately approved. [Design decision](decisions/0005-supervised-engineering-automation.md)
+· [Independent safety assessment](AUTOMATION_SAFETY_REVIEW.md)

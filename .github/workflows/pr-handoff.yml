@@ -20,9 +20,18 @@ jobs:
           ref: ${{ github.event.pull_request.base.sha }}
           persist-credentials: false
       - name: Validate description
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           if [ ! -f scripts/check_pr_description.py ]; then
-            echo "::notice::PR checker is not installed on the base commit yet. Review the description manually."
-            exit 0
+            if [ "$GITHUB_REPOSITORY" = Cadams98/verunai-research ] &&
+               [ "$PR_NUMBER" = 3 ] &&
+               [ "$BASE_SHA" = 6236f5d27d2fbc70a7a850b0a85486c8173164fc ]; then
+              echo "::notice::PR #3 bootstrap only. Review the description manually."
+              exit 0
+            fi
+            echo "::error::The trusted base is missing the PR checker."
+            exit 1
           fi
           python3 scripts/check_pr_description.py --event "$GITHUB_EVENT_PATH"

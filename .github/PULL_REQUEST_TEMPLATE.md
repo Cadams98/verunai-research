@@ -16,9 +16,40 @@
 
 ## Security and safety
 
-<!-- Assess trust boundaries, affected people, privacy, misuse, fairness, and residual risks.
-     Follow docs/SAFETY_AND_ETHICS.md and docs/SAFETY_TEST_PLAN.md.
-     State whether independent security or safety review applies. The owner approves merges. -->
+<!-- Follow docs/SAFETY_AND_ETHICS.md and docs/SAFETY_TEST_PLAN.md.
+     Explain why a field does not apply when appropriate. -->
+
+### Affected people
+
+<!-- Include users, contributors, and affected non-users. -->
+
+### Privacy and consent
+
+<!-- Consider disclosure, provider access, retention, and deletion. -->
+
+### Data and model poisoning
+
+<!-- Explain exposure to untrusted inputs and potential model or data changes. -->
+
+### Misinformation
+
+<!-- Describe how claims, generated findings, and evidence will be checked. -->
+
+### Accessibility and fairness
+
+<!-- Include barriers to participation or unequal impacts. -->
+
+### Energy
+
+<!-- State measured resource impact or what remains unknown. -->
+
+### Independent safety review
+
+<!-- Link the findings and scope or explain why separate review is unnecessary. -->
+
+### Stop-ship conditions
+
+<!-- Describe what would block merge or activation. The owner approves merges. -->
 
 ## Performance and limitations
 

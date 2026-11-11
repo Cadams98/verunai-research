@@ -41,7 +41,7 @@ For Codex Cloud: first publish the repo to GitHub and connect it in Codex, then 
 
 First Codex task:
 
-> Read AGENTS.md and docs/AGENT_BRIEF_V07.md. Work on a new codex/shortcut-benchmark branch. Implement a reproducible baseline-versus-attacker-optimized valid block-candidate benchmark for the existing neural-v3 test protocol; do not rewrite protocol rules. Add tests demonstrating that independent validators accept both candidate strategies. Report performance, correctness, and the limits of current proof-of-useful-work security. Do not modify mainnet or token economics.
+> Read AGENTS.md and docs/ENGINEERING_AUTOMATION.md. Use the task and branch assigned by the owner. Implement the approved scope, run the required checks, and prepare a draft handoff. Publish only with the owner's authorization.
 
 ## 4. Protect changes with Git and separate branches
 
@@ -62,7 +62,7 @@ Give Codex and Claude *different branches* and preferably separate worktrees (or
 For owner-authorized Codex publishing, hosted Claude review, and the PR
 description check, use the [engineering automation runbook](ENGINEERING_AUTOMATION.md).
 
-- First run: Codex implements shortcut benchmark, Claude audits, project owner reviews both results.
+- The assigned implementer prepares the handoff. A separate reviewer checks the evidence, then the owner decides whether to merge.
 - Copy Claude's findings into a GitHub issue; link Codex's branch or pull request.
 - Run all tests again before accepting changes.
 - Record run commands, operating system, hardware, pass/fail, and known limitations.
