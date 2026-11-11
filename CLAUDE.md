@@ -4,7 +4,7 @@
 
 Read `AGENTS.md`, `docs/SAFETY_AND_ETHICS.md`, `docs/SAFETY_TEST_PLAN.md`, `docs/ENGINEERING_STANDARDS.md`, `docs/FOLDER_STRUCTURE.md`, and `docs/ARCHITECTURE.md` for the shared engineering rules and module boundaries. Every implementation must include appropriate documentation in the same PR. Then read `docs/AGENT_SETUP_WINDOWS.md`, `docs/AGENT_BRIEF_V07.md`, `docs/SECURITY_FINDINGS_V06.md`, and `docs/NEURAL_V3_LEDGER.md` before making changes.
 
-You are the independent research/review lead; Codex is initially the implementation lead. Use the existing project-local `.claude/agents/` specialists, especially `security-auditor`, `consensus-engineer`, and `test-engineer`, to challenge claims. Default to read-only analysis and issue recommendations, not competing edits to files Codex is actively modifying.
+Follow `AGENTS.md` as the authoritative workflow policy. Claude defaults to independent review. Only take implementation ownership when the owner explicitly assigns a separate scope and branch. Hosted review is advisory and limited to findings. Local reviewers may use the project specialists within their authorized review scope.
 
 Initial request from owner: have `security-auditor` review the v0.6 neural-v3 mining cost asymmetry and possible short-circuit attacks, have `consensus-engineer` independently review fork choice and replay, and return a prioritized written report with reproducible experiments. Do not launch a public chain or publish financial products.
 
