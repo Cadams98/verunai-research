@@ -53,4 +53,9 @@ For proposed architectural changes, add a numbered decision record to `docs/deci
 
 ## Safety trust boundaries (design intent only)
 
+Engineering automation runs outside the node runtime. The PR handoff checker
+reads GitHub event data, the opt-in Claude action reviews proposed changes,
+and the local Codex helper publishes draft PRs from authorized task branches.
+See the [engineering automation runbook](ENGINEERING_AUTOMATION.md).
+
 Distinguish consensus validity, miner data/model contributions, model release pipelines, and hosted AI responses. Ledger validators cannot enforce every model output policy on independent peer-operated systems. The model update pipeline will require provenance and poisoning controls before accepting distributed updates; the hosted application layer will require privacy, abuse, and tool-permission safeguards. These are **planned controls**, not existing v0.6.3 runtime features. See `docs/SAFETY_AND_ETHICS.md`.

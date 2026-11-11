@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — engineering automation proposal
+
+- Add PR description validation and an owner-authorized Codex draft publisher.
+- Propose bounded, opt-in Claude Code PR reviews with paid execution disabled by default.
+- Clarify implementation ownership and document authentication, costs, and human merge authority.
+
 ## Unreleased — canonical neural-v3 benchmark
 
 - Added a local benchmark for canonical model computation, candidate generation, block validation, and replay, with timing variability and peak traced Python allocations.

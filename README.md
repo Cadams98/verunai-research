@@ -39,6 +39,9 @@ On Windows: double-click `RUN_V3_LEDGER_DEMO_WINDOWS.bat`. See [v0.6 milestone r
 
 **Limitations:** This is not secure permissionless consensus, public AI, mainnet, or a production wallet. SHA-256 still chooses winners; validators re-execute the small AI computation, enabling possible disproportionate verification costs. The computation is not proven essential or efficient. Model-training usefulness remains an open research problem.
 
+For the proposed Claude review, Codex draft publishing, and PR handoff checks,
+see the [engineering automation runbook](docs/ENGINEERING_AUTOMATION.md).
+
 ## Measure canonical neural-v3 mining
 
 ```powershell

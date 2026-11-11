@@ -51,6 +51,9 @@ For every functional change, update the relevant documents **in the same PR**:
 
 Write a Git commit message with a concise summary and enough context to explain why the change was needed. Prepare a specific PR title and a review-ready description for every development task. If a PR cannot be opened, include its exact title and body in the handoff.
 
+Use the headings in the PR template. The PR handoff check verifies section
+presence. Reviewers verify the accuracy of the claims and evidence.
+
 Every coding agent must provide:
 1. **Problem and boundaries:** what is being changed and what is explicitly out of scope.
 2. **Design overview:** relevant modules and why this approach is simpler or more correct than alternatives.

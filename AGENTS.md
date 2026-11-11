@@ -22,9 +22,9 @@ Read `README.md`, `docs/NEURAL_V3_LEDGER.md`, `docs/SECURITY_FINDINGS_V06.md`, `
 - When changes affect consensus, demand independent adversarial review and negative tests.
 
 ## Team roles & branch ownership
-- Codex: primary implementation and experiments on `codex/<issue-or-task>` branches.
-- Claude Code: independent audit and bounded research on `claude/<issue-or-task>` branches. Its `.claude/agents/` specialists are reviews unless explicitly given a narrow implementation task.
-- Human project owner: approves scope, publishes code, and merges reviewed pull requests (PRs).
+- The owner assigns one implementation lead per task. Codex defaults to implementation on `codex/<issue-or-task>`. Claude defaults to independent review and uses `claude/<issue-or-task>` only for owner-assigned implementation.
+- An agent that implements a change cannot count as its independent reviewer. Hosted Claude review is advisory and has no implementation authority.
+- The owner authorizes scope and publication. Codex may commit, push its task branch, and open a draft PR with explicit task authorization. Only the human owner approves and merges into protected branches.
 - Avoid concurrent edits to identical files; use separate Git branches/worktrees or separate sessions.
 
 ## Immediate v0.7 research goals

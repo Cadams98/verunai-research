@@ -59,6 +59,9 @@ Give Codex and Claude *different branches* and preferably separate worktrees (or
 
 ## 5. Review and handoff
 
+For owner-authorized Codex publishing, hosted Claude review, and the PR
+description check, use the [engineering automation runbook](ENGINEERING_AUTOMATION.md).
+
 - First run: Codex implements shortcut benchmark, Claude audits, project owner reviews both results.
 - Copy Claude's findings into a GitHub issue; link Codex's branch or pull request.
 - Run all tests again before accepting changes.

@@ -1,0 +1,22 @@
+name: PR handoff
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, edited, reopened, synchronize, ready_for_review]
+permissions:
+  contents: read
+concurrency:
+  group: pr-handoff-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  description:
+    name: PR description
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      # Run the trusted base checker even when a PR proposes changes to it.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+      - run: python3 scripts/check_pr_description.py --event "$GITHUB_EVENT_PATH"
