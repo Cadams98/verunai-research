@@ -2,7 +2,9 @@
 
 ## Unreleased — canonical neural-v3 benchmark
 
-- Added a local benchmark for model computation, candidate generation, SHA-256, block verification, and replay, with timing variability and peak traced Python allocations.
+- Added a local benchmark for canonical model computation, candidate generation, block validation, and replay, with timing variability and peak traced Python allocations.
+- Measure early format rejection and late neural rejection using deterministic local fixtures. Remove the standalone SHA-256 microbenchmark to avoid comparing a repeated hash with a complete mining attempt.
+- Reuse the computed model digest during candidate construction. A historical block regression verifies the candidate hash and fields.
 - Added regression checks for the deterministic fixture and canonical validation. Protocol rules and serialization are unchanged.
 
 ## v0.6.4 — founder identity and Windows onboarding (2026-11-10)

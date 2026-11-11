@@ -34,7 +34,7 @@ Legacy experiments: `verunai/core.py` is v1; `verunai/neural_consensus.py` also 
 | `verunai/network.py` | Local HTTP peer networking, mining loops, sync, mempool | Extract bounded transport, sync protocol, mempool, and mining scheduler |
 | `verunai/__main__.py` | Command-line entry points for experiments | Thin CLI delegating to tested application services |
 | `verunai/gpu_research.py` | Optional CPU/GPU benchmark experiments | Research-only backend, never implicit consensus authority |
-| `verunai/ledger_benchmark.py` | Research-only `benchmark_ledger()` and module CLI for canonical v3 work and allocations | Calls existing mining and validation APIs |
+| `verunai/ledger_benchmark.py` | Research-only `benchmark_ledger()` and module CLI for canonical v3 work, validation costs, and allocations | Uses the existing validator with local fixtures for accepted blocks and both early and late rejection |
 | `tests/` | Unit/integration and adversarial regression checks | Add deterministic vectors and multi-host stress tests |
 
 ## Protocol invariants to protect

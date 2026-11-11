@@ -45,7 +45,7 @@ On Windows: double-click `RUN_V3_LEDGER_DEMO_WINDOWS.bat`. See [v0.6 milestone r
 python -m verunai.ledger_benchmark --attempts 150 --repeats 5 --blocks 8
 ```
 
-The local CPU benchmark reports model computation, full candidate throughput, SHA-256 throughput, accepted-block validation, and replay at two chain heights. See the [v3 work-factor report](docs/NEURAL_V3_BENCHMARK.md) for measurements, memory accounting, and protocol limitations.
+The local CPU benchmark reports reference model computation, candidate throughput, accepted and rejected block validation, and replay at two chain heights. It measures the canonical implementation. The protocol provides no minimum work guarantee. See the [v3 benchmark report](docs/NEURAL_V3_BENCHMARK.md) for measurements, memory accounting, and protocol limitations.
 
 ## Previous milestone: integer-exact neural training across two nodes (v0.5)
 

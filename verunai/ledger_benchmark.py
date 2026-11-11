@@ -3,18 +3,18 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 import platform
 import statistics
 import tracemalloc
 from collections.abc import Callable
+from dataclasses import replace
 from time import perf_counter_ns
 
 from .core import canonical_bytes
 from .neural_consensus import compute_step
-from .neural_v3 import LedgerChain, ledger_candidate, mine_ledger
+from .neural_v3 import LedgerBlock, LedgerChain, ledger_candidate, mine_ledger
 from .wallet import address_from_public_hex
 
 
@@ -46,11 +46,41 @@ def _measure(operation: Callable[[], object], repeats: int, count: int = 1) -> d
     }
 
 
+def _reject_block(chain: LedgerChain, block: LedgerBlock, reason: str) -> None:
+    try:
+        chain.accept(block)
+    except ValueError as error:
+        if str(error) == reason:
+            return
+        raise
+    raise AssertionError(f"Expected validator rejection: {reason}")
+
+
+def _measure_validation(winner: LedgerBlock, repeats: int) -> dict:
+    malformed = replace(winner, gradient_digest="malformed")
+
+    def reject_malformed() -> None:
+        _reject_block(LedgerChain(1), malformed, "Invalid digest format")
+
+    def reject_neural_mismatch() -> None:
+        # Simulate a local model-state disagreement using an intact mined block.
+        # Its hash and target still pass, so the real validator recomputes the step.
+        chain = LedgerChain(1)
+        chain.weights[0][0] = 1
+        _reject_block(chain, winner, "Invalid neural training work")
+
+    return {
+        "accept_canonical_block": _measure(lambda: LedgerChain(1).accept(winner), repeats),
+        "reject_malformed_gradient_digest": _measure(reject_malformed, repeats),
+        "reject_neural_mismatch_with_local_state": _measure(reject_neural_mismatch, repeats),
+    }
+
+
 def benchmark_ledger(attempts: int = 150, repeats: int = 5, blocks: int = 8) -> dict:
     """Measure canonical neural-v3 work using a deterministic empty-block fixture.
 
     Args:
-        attempts: Number of operations per training, candidate, and hash sample.
+        attempts: Number of operations per training and candidate sample.
         repeats: Number of wall-clock samples per workload.
         blocks: Number of blocks to mine for the replay fixture.
 
@@ -73,9 +103,6 @@ def benchmark_ledger(attempts: int = 150, repeats: int = 5, blocks: int = 8) -> 
         mine_ledger(fixture, miner)
     exported = fixture.export()
     winner = fixture.blocks[0]
-    reference = LedgerChain(1)
-    # The winning candidate is checked by a fresh canonical validator.
-    reference.accept(winner)
     if LedgerChain.import_and_verify(exported).export() != exported:
         raise AssertionError("Fixture failed independent canonical replay")
 
@@ -86,16 +113,6 @@ def benchmark_ledger(attempts: int = 150, repeats: int = 5, blocks: int = 8) -> 
     def candidates() -> None:
         for nonce in range(attempts):
             ledger_candidate(blocks + 1, fixture.head, miner, nonce, 1, fixture.weights)
-
-    # Isolate SHA-256 from serialization and model work using canonical payload bytes.
-    payload = canonical_bytes(winner.payload())
-
-    def hashing() -> None:
-        for _ in range(attempts):
-            hashlib.sha256(payload).digest()
-
-    def verify_block() -> None:
-        LedgerChain(1).accept(winner)
 
     replay = {}
     for height in (blocks // 2, blocks):
@@ -116,10 +133,10 @@ def benchmark_ledger(attempts: int = 150, repeats: int = 5, blocks: int = 8) -> 
         },
         "fixture": {"difficulty": 1, "blocks": blocks, "transfers": 0, "head": fixture.head},
         "repeats": repeats,
+        "measurement_scope": "Canonical implementation performance, with no minimum work guarantee",
         "training_including_batch_and_gradient_digest": _measure(training, repeats, attempts),
         "canonical_candidate": _measure(candidates, repeats, attempts),
-        "sha256_preencoded_payload": _measure(hashing, repeats, attempts),
-        "verify_genesis_block_including_chain_init": _measure(verify_block, repeats),
+        "validation_including_chain_init": _measure_validation(winner, repeats),
         "replay_by_height": replay,
     }
 

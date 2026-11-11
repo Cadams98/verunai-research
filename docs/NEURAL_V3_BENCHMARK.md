@@ -1,4 +1,4 @@
-# Canonical neural-v3 work-factor benchmark
+# Canonical neural-v3 implementation benchmark
 
 Run from the repository root with Python 3.10+ and the dependencies in
 `pyproject.toml` installed.
@@ -18,6 +18,10 @@ $verunaiPython = "$env:USERPROFILE\AppData\Local\Python\pythoncore-3.14-64\pytho
 & $verunaiPython -B -m verunai.ledger_benchmark --attempts 150 --repeats 5 --blocks 8
 ```
 
+The [reference JSON](../evidence/neural_v3_canonical_benchmark.json) contains
+the raw samples. To save a new run, pipe the command output to
+`Set-Content -Encoding utf8 <output-path>`.
+
 ## What is measured
 
 The benchmark mines a deterministic difficulty-1 chain of empty TEST blocks
@@ -31,13 +35,23 @@ external data.
   fixture tip and tries the same sequence of nonces as the candidate workload.
 - **Candidate generation** additionally commits the new weights and builds and
   hashes a block candidate. Throughput counts all attempts.
-- **SHA-256** measures hashing pre-encoded block payload bytes. This control
-  measures hash throughput only.
-- **Block validation** initializes a fresh chain and validates its first
-  winning block. **Replay** imports already parsed exports at half and full
+- **Block validation** includes fresh chain construction for each sample.
+  The accepted case uses the original winning block. The early rejection
+  case replaces its gradient commitment with malformed text. The late
+  rejection case keeps the winning block intact and alters one weight in the
+  local verifier fixture to simulate disagreement about the expected result.
+  The real validator reaches the neural recomputation in that last case.
+  This measures local rejection cost without constructing or submitting a
+  target-valid block with falsified commitments.
+- **Replay** imports already parsed exports at half and full
   fixture height. It includes parsing block objects and checking their state
   transitions. Disk reads, JSON decoding, transport, and signature verification
   are outside this workload.
+
+The standalone SHA-256 measurement was removed. Repeatedly hashing the same
+pre-encoded payload measures a primitive in isolation. Candidate generation
+includes payload construction and model computation, so comparing those rates
+does not estimate an alternative miner's throughput or a verifier cost ratio.
 
 Each metric gets one warm-up, repeated wall-clock samples, and a separate
 memory pass. JSON output includes all samples, median, range, and median
@@ -55,24 +69,43 @@ performed. This is one local observation with uncontrolled background load.
 
 | Workload | Median | Sample range | Peak traced bytes |
 | --- | ---: | ---: | ---: |
-| Neural computation | 3.39 ms | 3.03–3.90 ms | 51,901 |
-| Candidate generation | 3.91 ms | 3.76–3.99 ms | 51,901 |
-| SHA-256 on pre-encoded bytes | 0.908 µs | 0.901–0.996 µs | 97 |
-| Validate first block | 4.89 ms | 3.75–6.44 ms | 47,277 |
-| Replay 4 blocks (2,147 canonical JSON bytes) | 12.25 ms | 12.00–12.54 ms | 55,920 |
-| Replay 8 blocks (4,170 canonical JSON bytes) | 24.41 ms | 23.59–24.86 ms | 56,846 |
+| Neural computation | 1.915 ms | 1.907–1.922 ms | 51,901 |
+| Candidate generation | 1.934 ms | 1.911–1.973 ms | 51,901 |
+| Accept first block | 1.796 ms | 1.743–2.056 ms | 47,285 |
+| Reject malformed commitment | 0.0031 ms | 0.0029–0.0061 ms | 4,118 |
+| Reject neural mismatch | 1.916 ms | 1.902–2.007 ms | 47,246 |
+| Replay 4 blocks (2,147 canonical JSON bytes) | 7.335 ms | 7.096–7.619 ms | 55,928 |
+| Replay 8 blocks (4,170 canonical JSON bytes) | 15.592 ms | 15.270–15.851 ms | 56,854 |
 
-The median candidate rate was about 256 attempts per second. Replay time
-roughly doubled between these two small fixtures. These observations do not
-establish how larger chains, transaction-heavy blocks, or networked nodes scale.
+The median candidate rate was about 517 attempts per second. Training and
+candidate samples each contained 150 operations. Validation and replay each
+used one operation per sample, with five samples per workload. Late rejection
+cost about as much as acceptance. The early rejection timings are on a
+microsecond scale and include setup, so they are sensitive to harness overhead.
+The observations do not establish how larger chains, transaction-heavy blocks,
+or networked nodes scale. They also do not isolate the performance effect of
+reusing the model digest. The regression test verifies the eliminated call.
 
 ## Protocol and safety limits
 
-The validator checks that the submitted result matches the canonical update
-and that the block hash meets the target. Agreement on the output establishes
-neither a minimum amount of computation per attempt nor the usefulness of
-the toy training task. Verification recomputes the update, so the verifier's
-cost remains relevant to resource exhaustion. See
+**H1 — Result equivalence and minimum work.** The training step is a linear
+model with a squared-error objective. Its gradient can be expressed as
+batch-dependent terms combined with the current weights. Exact integer
+arithmetic permits regrouping those operations while preserving the gradient,
+quantized update, and commitments. The owner relayed Claude's approximately
+17× result for an equivalent calculation in a controlled experiment. The
+experiment's raw data and procedure were unavailable for this report. That
+figure describes the isolated calculation and is unverified here. It cannot
+be used as a v3 candidate-throughput multiplier. A commitment authenticates
+the output against the reference calculation. It contains no record of the
+operations used to produce that output or the time and resources they took.
+The numbers above measure the canonical implementation only.
+
+**M1 — Cost of rejecting invalid work.** The validator recomputes the update
+for commitments that reach the neural check. The local late-rejection
+measurement isolates that path. It does not measure submission cost, network
+effects, or exploitability. The underlying verification-cost risk remains
+open. See
 [v0.6 security findings](SECURITY_FINDINGS_V06.md).
 
 This benchmark introduces no changes to protocol rules, training data, rewards,
