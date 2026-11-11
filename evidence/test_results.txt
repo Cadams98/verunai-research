@@ -1,0 +1,22 @@
+test_cpu_benchmark_smoke (test_core.TestMining.test_cpu_benchmark_smoke) ... ok
+test_deterministic_training_task (test_core.TestMining.test_deterministic_training_task) ... ok
+test_mining_and_replay (test_core.TestMining.test_mining_and_replay) ... ok
+test_reject_forged_chain_export (test_core.TestMining.test_reject_forged_chain_export) ... ok
+test_reject_modified_reward_and_hash (test_core.TestMining.test_reject_modified_reward_and_hash) ... ok
+test_reject_tampered_ai_work (test_core.TestMining.test_reject_tampered_ai_work) ... ok
+test_reject_wrong_parent_or_height (test_core.TestMining.test_reject_wrong_parent_or_height) ... ok
+test_bad_dimensions_refused (test_gpu_research.TestGPUResearch.test_bad_dimensions_refused) ... ok
+test_real_cpu_training_loss_decreases (test_gpu_research.TestGPUResearch.test_real_cpu_training_loss_decreases) ... ok
+test_chain_persistence_and_replay (test_network.TestPrivateTestnet.test_chain_persistence_and_replay) ... ok
+test_fork_choice_uses_fully_verified_chains (test_network.TestPrivateTestnet.test_fork_choice_uses_fully_verified_chains) ... ok
+test_http_block_propagation_and_independent_validation (test_network.TestPrivateTestnet.test_http_block_propagation_and_independent_validation) ... ok
+test_invalid_peer_urls_rejected (test_network.TestPrivateTestnet.test_invalid_peer_urls_rejected) ... ok
+test_late_joiner_synchronizes_complete_verified_history (test_network.TestPrivateTestnet.test_late_joiner_synchronizes_complete_verified_history) ... ok
+test_reject_large_or_malformed_http_requests (test_network.TestPrivateTestnet.test_reject_large_or_malformed_http_requests) ... ok
+test_reject_tampered_longer_peer_chain_without_mutating_state (test_network.TestPrivateTestnet.test_reject_tampered_longer_peer_chain_without_mutating_state) ... ok
+test_two_real_processes_mine_and_converge (test_network.TestPrivateTestnet.test_two_real_processes_mine_and_converge) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 4.364s
+
+OK

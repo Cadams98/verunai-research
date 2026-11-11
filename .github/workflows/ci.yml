@@ -1,0 +1,45 @@
+name: unit-tests
+on:
+  push:
+  pull_request:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install project dependencies
+        run: python -m pip install -e .
+      - name: Validate engineering standards entrypoints
+        run: python scripts/check_project_standards.py
+      - name: Validate safety policy contract tests
+        run: python -m unittest discover -s tests -p test_safety_policy.py -v
+      - name: Validate repository layout
+        run: python scripts/check_repository_layout.py
+      - name: Verify agent definitions
+        run: python scripts/verify_agent_config.py
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Two independent testnet node processes
+        run: python -m verunai demo-testnet --blocks 5 --difficulty 1 --timeout 30
+      - name: Smoke test and audit
+        run: |
+          python -m verunai mine --blocks 3 --difficulty 1 --powers 1,2,5 --output ci-chain.json
+          python -m verunai audit ci-chain.json
+          python -m verunai benchmark --attempts 100
+      - name: Two-process neural gradient testnet
+        run: python -m verunai demo-testnet --protocol neural-v2 --blocks 5 --difficulty 1 --timeout 30
+      - name: Neural v2 audit and mining benchmark
+        run: |
+          python -m verunai mine --protocol neural-v2 --blocks 3 --difficulty 1 --powers 1,2 --output ci-neural.json
+          python -m verunai audit ci-neural.json
+          python -m verunai neural-mining-benchmark --attempts 30
+      - name: Neural-v3 signed transfers across two independent OS processes
+        run: python -m verunai demo-ledger-process --timeout 45
+      - name: Audit v3 forged-work asymmetry
+        run: python -m verunai security-audit --samples 10

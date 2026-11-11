@@ -1,0 +1,60 @@
+{
+  "protocol_version": 2,
+  "mode": "neural-v2",
+  "domain": "verunai-neural-integer-training-v2",
+  "difficulty": 1,
+  "blocks": [
+    {
+      "version": 2,
+      "domain": "verunai-neural-integer-training-v2",
+      "height": 1,
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "miner": "miner2",
+      "nonce": 5,
+      "difficulty": 1,
+      "reward": 50,
+      "gradient_digest": "253ca5f7c6d7d06b3af5c6c2b073bf2934402d4fe8730d24f86c7793b5cff988",
+      "model_digest": "66ea635976e76cd25dd5cdcff69c1c3026072017addf0ddd53e43c3f14ee2130",
+      "hash": "02c222ebbeaf30f7a5a4cfc7fc7fa99e2afbee6d4c702f9c2471d81fae4b883c"
+    },
+    {
+      "version": 2,
+      "domain": "verunai-neural-integer-training-v2",
+      "height": 2,
+      "prev_hash": "02c222ebbeaf30f7a5a4cfc7fc7fa99e2afbee6d4c702f9c2471d81fae4b883c",
+      "miner": "miner2",
+      "nonce": 0,
+      "difficulty": 1,
+      "reward": 50,
+      "gradient_digest": "3bfa07c0f66e1f031ecf377bfc8a0308b411bac24d7be31a2d797dd4fba24d94",
+      "model_digest": "66ea635976e76cd25dd5cdcff69c1c3026072017addf0ddd53e43c3f14ee2130",
+      "hash": "0d33efd167a73fca793217fa5e33862d2d74417d23e891b532bc53861f7bdb88"
+    },
+    {
+      "version": 2,
+      "domain": "verunai-neural-integer-training-v2",
+      "height": 3,
+      "prev_hash": "0d33efd167a73fca793217fa5e33862d2d74417d23e891b532bc53861f7bdb88",
+      "miner": "miner2",
+      "nonce": 17,
+      "difficulty": 1,
+      "reward": 50,
+      "gradient_digest": "245e94a9184c706c299cb64d425420b7bfec5e4ce2b970c0efbf2a6070385e17",
+      "model_digest": "fb9b9eb78b276daef289fe84a62e82031556325500c9b4a9e181e0449cb28e11",
+      "hash": "0e74d8cce3b9a38a9836c528487448d63e909a5a1ae9f0dde013542a45969481"
+    },
+    {
+      "version": 2,
+      "domain": "verunai-neural-integer-training-v2",
+      "height": 4,
+      "prev_hash": "0e74d8cce3b9a38a9836c528487448d63e909a5a1ae9f0dde013542a45969481",
+      "miner": "miner2",
+      "nonce": 1,
+      "difficulty": 1,
+      "reward": 50,
+      "gradient_digest": "db5078e24df1234cbf31de8c2ef4b6b29febca75b6b30bf6f8abab7230a38b72",
+      "model_digest": "fb9b9eb78b276daef289fe84a62e82031556325500c9b4a9e181e0449cb28e11",
+      "hash": "07e9a6a6f259afd5eb6ad2cea92647492fcb72287cff402b6b8a55fc0c309cd2"
+    }
+  ]
+}

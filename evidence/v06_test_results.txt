@@ -1,0 +1,50 @@
+test_cpu_benchmark_smoke (test_core.TestMining.test_cpu_benchmark_smoke) ... ok
+test_deterministic_training_task (test_core.TestMining.test_deterministic_training_task) ... ok
+test_mining_and_replay (test_core.TestMining.test_mining_and_replay) ... ok
+test_reject_forged_chain_export (test_core.TestMining.test_reject_forged_chain_export) ... ok
+test_reject_modified_reward_and_hash (test_core.TestMining.test_reject_modified_reward_and_hash) ... ok
+test_reject_tampered_ai_work (test_core.TestMining.test_reject_tampered_ai_work) ... ok
+test_reject_wrong_parent_or_height (test_core.TestMining.test_reject_wrong_parent_or_height) ... ok
+test_bad_dimensions_refused (test_gpu_research.TestGPUResearch.test_bad_dimensions_refused) ... ok
+test_real_cpu_training_loss_decreases (test_gpu_research.TestGPUResearch.test_real_cpu_training_loss_decreases) ... ok
+test_chain_persistence_and_replay (test_network.TestPrivateTestnet.test_chain_persistence_and_replay) ... ok
+test_fork_choice_uses_fully_verified_chains (test_network.TestPrivateTestnet.test_fork_choice_uses_fully_verified_chains) ... ok
+test_http_block_propagation_and_independent_validation (test_network.TestPrivateTestnet.test_http_block_propagation_and_independent_validation) ... ok
+test_invalid_peer_urls_rejected (test_network.TestPrivateTestnet.test_invalid_peer_urls_rejected) ... ok
+test_late_joiner_synchronizes_complete_verified_history (test_network.TestPrivateTestnet.test_late_joiner_synchronizes_complete_verified_history) ... ok
+test_reject_large_or_malformed_http_requests (test_network.TestPrivateTestnet.test_reject_large_or_malformed_http_requests) ... ok
+test_reject_tampered_longer_peer_chain_without_mutating_state (test_network.TestPrivateTestnet.test_reject_tampered_longer_peer_chain_without_mutating_state) ... ok
+test_two_real_processes_mine_and_converge (test_network.TestPrivateTestnet.test_two_real_processes_mine_and_converge) ... ok
+test_cuda_reference_if_available (test_neural_v2.TestNeuralMining.test_cuda_reference_if_available) ... skipped 'CUDA GPU not present in test environment'
+test_fake_block_reward_does_not_credit_any_balance (test_neural_v2.TestNeuralMining.test_fake_block_reward_does_not_credit_any_balance) ... ok
+test_forged_gradient_model_and_nonce_rejected (test_neural_v2.TestNeuralMining.test_forged_gradient_model_and_nonce_rejected) ... ok
+test_invalid_nonce_inputs_rejected (test_neural_v2.TestNeuralMining.test_invalid_nonce_inputs_rejected) ... ok
+test_neural_step_is_deterministic_and_updates_model (test_neural_v2.TestNeuralMining.test_neural_step_is_deterministic_and_updates_model) ... ok
+test_torch_cpu_and_integer_reference_are_bit_exact (test_neural_v2.TestNeuralMining.test_torch_cpu_and_integer_reference_are_bit_exact) ... ok
+test_training_work_is_bound_to_parent_miner_and_nonce (test_neural_v2.TestNeuralMining.test_training_work_is_bound_to_parent_miner_and_nonce) ... ok
+test_v1_and_v2_cannot_replay_each_other (test_neural_v2.TestNeuralMining.test_v1_and_v2_cannot_replay_each_other) ... ok
+test_differing_protocol_peers_cannot_mix (test_neural_v2.TestNeuralV2Network.test_differing_protocol_peers_cannot_mix) ... ok
+test_neural_nodes_gossip_and_verify (test_neural_v2.TestNeuralV2Network.test_neural_nodes_gossip_and_verify) ... ok
+test_neural_storage_roundtrip (test_neural_v2.TestNeuralV2Network.test_neural_storage_roundtrip) ... ok
+test_reject_fake_neural_peer_chain_no_state_change (test_neural_v2.TestNeuralV2Network.test_reject_fake_neural_peer_chain_no_state_change) ... ok
+test_two_real_processes_neural_blocks_and_consistent_model (test_neural_v2.TestNeuralV2Network.test_two_real_processes_neural_blocks_and_consistent_model) ... ok
+test_same_signed_transfer_cannot_pay_twice_in_mempool (test_neural_v3.TestNetworkTransfers.test_same_signed_transfer_cannot_pay_twice_in_mempool) ... ok
+test_separate_os_processes_mine_and_confirm_payment (test_neural_v3.TestNetworkTransfers.test_separate_os_processes_mine_and_confirm_payment) ... ok
+test_two_http_nodes_mine_sign_transfer_and_replay (test_neural_v3.TestNetworkTransfers.test_two_http_nodes_mine_sign_transfer_and_replay) ... ok
+test_tx_route_rejects_wrong_signature_and_spend_before_mining (test_neural_v3.TestNetworkTransfers.test_tx_route_rejects_wrong_signature_and_spend_before_mining) ... ok
+test_fake_gradient_rejected_even_if_hash_target_met (test_neural_v3.TestWalletAndLedger.test_fake_gradient_rejected_even_if_hash_target_met) ... ok
+test_fake_header_cost_asymmetry_is_demonstrable (test_neural_v3.TestWalletAndLedger.test_fake_header_cost_asymmetry_is_demonstrable) ... ok
+test_invalid_inputs_and_serialization (test_neural_v3.TestWalletAndLedger.test_invalid_inputs_and_serialization) ... ok
+test_mine_transfer_fee_and_total_supply (test_neural_v3.TestWalletAndLedger.test_mine_transfer_fee_and_total_supply) ... ok
+test_old_modes_cannot_replay_v3 (test_neural_v3.TestWalletAndLedger.test_old_modes_cannot_replay_v3) ... ok
+test_reject_forged_block_hash_and_training (test_neural_v3.TestWalletAndLedger.test_reject_forged_block_hash_and_training) ... ok
+test_replay_double_spend_and_no_negative_balances (test_neural_v3.TestWalletAndLedger.test_replay_double_spend_and_no_negative_balances) ... ok
+test_signed_transfer_and_tampering (test_neural_v3.TestWalletAndLedger.test_signed_transfer_and_tampering) ... ok
+test_transaction_atomicity (test_neural_v3.TestWalletAndLedger.test_transaction_atomicity) ... ok
+test_wallet_exploit_attempt_bad_signature_rejected_on_import (test_neural_v3.TestWalletAndLedger.test_wallet_exploit_attempt_bad_signature_rejected_on_import) ... ok
+test_wallet_storage_roundtrip_and_no_overwrite (test_neural_v3.TestWalletAndLedger.test_wallet_storage_roundtrip_and_no_overwrite) ... ok
+
+----------------------------------------------------------------------
+Ran 45 tests in 11.297s
+
+OK (skipped=1)

@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "protocol": "neural-v3",
+  "nodes": 2,
+  "confirmed_height": 2,
+  "transaction_id": "4083294b53d3e1ff7991a59c808c86a5c1048efb0226cb20c3af92431be17183",
+  "sender": "vr89467077461cdeaf0433c5de15720f69d91e4e",
+  "recipient": "vr059320b6333a0c88ed6e010d66b18b953a57f9",
+  "sent_TEST": 12,
+  "miner_fee_TEST": 1,
+  "alice_balance_TEST": 37,
+  "bob_balance_TEST": 63,
+  "total_TEST_issued": 100,
+  "chains_match": true,
+  "models_match": true,
+  "independent_replay": true,
+  "real_money": false,
+  "security_warning": "Local educational blockchain. Not a production wallet, safe public network, or proof of useful AI work."
+}

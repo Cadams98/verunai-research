@@ -1,0 +1,14 @@
+{
+  "framework": "PyTorch 2.10.0+cpu",
+  "device": "cpu",
+  "gpu_name": null,
+  "steps": 15,
+  "network_width": 64,
+  "batch_size": 64,
+  "elapsed_seconds": 0.0117,
+  "training_steps_per_second": 1287.22,
+  "loss_before": 1.084571,
+  "loss_after": 0.537277,
+  "improved_on_training_data": true,
+  "note": "Real neural training benchmark only. NOT consensus, verifiable PoUW, or mining rewards. CPU/CUDA numerical differences can break consensus."
+}

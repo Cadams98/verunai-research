@@ -1,0 +1,46 @@
+{
+  "protocol_version": 3,
+  "mode": "neural-v3",
+  "domain": "verunai-v3-signed-ledger-neural-work-research",
+  "difficulty": 1,
+  "blocks": [
+    {
+      "version": 3,
+      "domain": "verunai-v3-signed-ledger-neural-work-research",
+      "height": 1,
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "miner": "vrdbbc38a43f00827aee350a6be62d7230480b82",
+      "nonce": 8,
+      "difficulty": 1,
+      "reward": 50,
+      "gradient_digest": "639d465c1066be9497743a74718ee21cc68bd8fe6c0c5911364fec29c9e0adf1",
+      "model_digest": "fad4c85a0ed703b53f47e93688516a3cb19f7f9a4f7cd85b7886ac31bb6b9c90",
+      "transfers": [],
+      "hash": "007bdd2338bdeecbbed44b149df29d3bfbc39fb73d2455adfe18f163d39c21a8"
+    },
+    {
+      "version": 3,
+      "domain": "verunai-v3-signed-ledger-neural-work-research",
+      "height": 2,
+      "prev_hash": "007bdd2338bdeecbbed44b149df29d3bfbc39fb73d2455adfe18f163d39c21a8",
+      "miner": "vr543e79a7d5c47830da62b79dd4bcb4add8337f",
+      "nonce": 14,
+      "difficulty": 1,
+      "reward": 50,
+      "gradient_digest": "7f47594246c2f54f6e8df752201dbf7415cff773ad72ef7821206d896cdb94a7",
+      "model_digest": "8691d8b2734c9115860f495b469561501a20c0bfb7c8177f0f30bcede4204f20",
+      "transfers": [
+        {
+          "domain": "verunai-neural-v3-transfer-research-2026",
+          "pubkey": "fa7fa7cfa81e2cdfeadd55e8f824e53673fe1943b57765d7407a16f002e87d9d",
+          "to": "vr543e79a7d5c47830da62b79dd4bcb4add8337f",
+          "amount": 12,
+          "fee": 1,
+          "sequence": 0,
+          "signature": "d22db8a61935d59409984cf39a106a42a688171f77842b7d9d3a28155d83db85b6163e15606dcb6270853bef4431507cc732115029ac3a8dcffcae61f52f9905"
+        }
+      ],
+      "hash": "05b4869dc2478f95432ed2c78ea625c200d09e232cd73fe889f25f7e0c4cd4d1"
+    }
+  ]
+}

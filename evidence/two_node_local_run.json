@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "independent_processes": 2,
+  "chain_height": 8,
+  "same_head": true,
+  "head": "00a70567d4150b042b5c3e3f08ee4c1ce466b9e8a20043891e80e991141ace1b",
+  "balances": {
+    "alice": 150,
+    "bob": 250
+  },
+  "winning_miners": [
+    "alice",
+    "alice",
+    "alice",
+    "bob",
+    "bob",
+    "bob",
+    "bob",
+    "bob"
+  ],
+  "nodes": [
+    {
+      "miner": "alice",
+      "height": 8,
+      "local_blocks_mined": 8,
+      "chain_reorganizations": 1,
+      "peer_syncs": 1
+    },
+    {
+      "miner": "bob",
+      "height": 8,
+      "local_blocks_mined": 7,
+      "chain_reorganizations": 1,
+      "peer_syncs": 1
+    }
+  ],
+  "training_loss": 2.45643,
+  "note": "Local test tokens only. PoW is SHA-256; AI updates are not secure useful-work consensus."
+}

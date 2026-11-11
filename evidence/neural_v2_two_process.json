@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "protocol": "neural-v2",
+  "backend": "python",
+  "independent_processes": 2,
+  "chain_height": 5,
+  "same_head": true,
+  "head": "00050b077078fff5f1264864d8904c344ad6796a483d5f3566e01e37aecf5be1",
+  "balances": {
+    "bob": 150,
+    "alice": 100
+  },
+  "winning_miners": [
+    "bob",
+    "bob",
+    "alice",
+    "bob",
+    "alice"
+  ],
+  "nodes": [
+    {
+      "miner": "alice",
+      "height": 5,
+      "local_blocks_mined": 2,
+      "chain_reorganizations": 0,
+      "peer_syncs": 0
+    },
+    {
+      "miner": "bob",
+      "height": 5,
+      "local_blocks_mined": 4,
+      "chain_reorganizations": 1,
+      "peer_syncs": 1
+    }
+  ],
+  "training_loss": 35.804858,
+  "model_digest": "3e712ed2728b026861bf4b1319fc9eb926508dc9de7dfc447100793936badc90",
+  "note": "Local test tokens only. Training-bound SHA-256 lottery; NOT secure useful-work consensus."
+}

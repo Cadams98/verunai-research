@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+chain.json
+*.log
+.DS_Store
+
+# Never commit even disposable test wallet secrets
+wallet*.json
+*.wallet.json
+*.key
+secrets/
+
+# Local agent credentials and generated state
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+**/.claude/settings.local.json
+**/.codex/*credentials*

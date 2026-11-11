@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: verunai-research
+Version: 0.6.4
+Summary: Open-source Verunai research prototype founded by Christian Adams, with experimental neural mining and signed TEST transfers
+Maintainer: Christian Adams
+Requires-Python: >=3.10
+License-File: LICENSE
+Requires-Dist: cryptography<47,>=41
+Dynamic: license-file

@@ -1,0 +1,14 @@
+{
+  "protocol": "neural-v2",
+  "backend": "python",
+  "candidate_attempts": 150,
+  "candidate_seconds": 0.319873,
+  "candidates_per_second": 468.94,
+  "hash_only_operations_per_second": 504439.06,
+  "independent_full_replay_verifications": 20,
+  "median_verification_milliseconds": 2.1453,
+  "starting_model_mse": 36.0,
+  "accepted_block_model_mse": 36.0,
+  "backend_matches_integer_reference": true,
+  "warning": "Hash-only timing is INVALID WORK, not a successful attack. Validation recomputes the whole neural step; this is NOT succinct Proof of Useful Work."
+}

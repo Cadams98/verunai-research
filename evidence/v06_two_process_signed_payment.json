@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "mode": "neural-v3",
+  "os_processes": 2,
+  "mined_blocks": 2,
+  "confirmed_transfers": 1,
+  "txid": "e222ed05f4d0a49b66b42cb0c0f0380b05fbd196a6e4ab978f4e3e160b81b8ba",
+  "alice_balance_TEST": 37,
+  "bob_balance_TEST": 63,
+  "total_issued_TEST": 100,
+  "head": "059d88e795f5a51223d97a91b93b3b5542eb254c98ad991e011406351136f1d0",
+  "model_digest_matches": true,
+  "independent_replay": true,
+  "warning": "Only localhost TEST units; not public blockchain security or efficient useful-work proof."
+}

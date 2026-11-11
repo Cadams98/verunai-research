@@ -1,0 +1,10 @@
+{
+  "samples": 50,
+  "fake_headers_rejected": 50,
+  "candidate_compute_seconds_per": 0.0018096,
+  "cheap_fake_header_seconds_per": 6.78e-05,
+  "false_header_validation_seconds_per": 0.0016781,
+  "network": "none; CPU-local benchmark",
+  "finding": "Invalid headers can satisfy hash difficulty without authentic AI work, forcing nodes to recompute work to reject them.",
+  "interpretation": "Proof of useful work remains UNSOLVED. CPU timings are platform-dependent and do not establish economic security."
+}

@@ -1,0 +1,15 @@
+[project]
+name = "verunai-research"
+version = "0.6.4"
+description = "Open-source Verunai research prototype founded by Christian Adams, with experimental neural mining and signed TEST transfers"
+maintainers = [{ name = "Christian Adams" }]
+dependencies = ["cryptography>=41,<47"]
+requires-python = ">=3.10"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["verunai*"]
+exclude = ["tests*", "evidence*", "docs*"]
