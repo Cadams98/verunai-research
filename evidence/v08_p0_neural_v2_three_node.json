@@ -1,0 +1,1043 @@
+{
+  "experiment": "verunai-v0.8-P0-three-node-harness",
+  "scope": "Unmodified v0.6 nodes, separate OS processes, 127.0.0.1 only, TEST units only",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.5",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "logical_cpus": 28,
+    "metrics_warning": null
+  },
+  "base_config": {
+    "protocol": "neural-v2",
+    "nodes": 3,
+    "difficulty": 2,
+    "target_height": 10,
+    "timeout": 90.0,
+    "sync_interval": 0.2,
+    "use_relays": true,
+    "node_difficulty_overrides": {}
+  },
+  "base_seed": 201,
+  "summary": {
+    "trials": 5,
+    "passed": 5,
+    "failed": 0,
+    "failures_by_kind": {},
+    "converged_s": {
+      "n": 5,
+      "min": 7.873,
+      "median": 8.702,
+      "p95_nearest_rank": 10.404,
+      "max": 10.404
+    },
+    "first_block_s": {
+      "n": 5,
+      "min": 1.604,
+      "median": 1.69,
+      "p95_nearest_rank": 1.858,
+      "max": 1.858
+    },
+    "trials_with_reorganization": 5,
+    "reorganizations_total": 28,
+    "rejected_blocks_total": 0,
+    "node_cpu_seconds": {
+      "n": 15,
+      "min": 5.75,
+      "median": 7.0,
+      "p95_nearest_rank": 9.125,
+      "max": 9.125
+    },
+    "node_peak_rss_bytes": {
+      "n": 15,
+      "min": 36737024,
+      "median": 37019648,
+      "p95_nearest_rank": 37326848,
+      "max": 37326848
+    },
+    "network_bytes_per_trial": {
+      "n": 5,
+      "min": 252938,
+      "median": 258477,
+      "p95_nearest_rank": 307312,
+      "max": 307312
+    }
+  },
+  "trials": [
+    {
+      "seed": 201,
+      "config": {
+        "seed": 201,
+        "protocol": "neural-v2",
+        "nodes": 3,
+        "difficulty": 2,
+        "target_height": 10,
+        "timeout": 90.0,
+        "sync_interval": 0.2,
+        "use_relays": true,
+        "node_difficulty_overrides": {}
+      },
+      "plan": {
+        "miners": [
+          "p0n0-83f2ee45",
+          "p0n1-6f9e48fb",
+          "p0n2-2b80d734"
+        ],
+        "launch_order": [
+          2,
+          0,
+          1
+        ],
+        "launch_delays": [
+          0.215,
+          0.068,
+          0.076
+        ]
+      },
+      "result": "PASS",
+      "failure_kind": null,
+      "failure_detail": null,
+      "port_retries": 0,
+      "pids": [
+        36840,
+        34400,
+        38660
+      ],
+      "timings": {
+        "all_ready_s": 1.33,
+        "first_block_s": 1.604,
+        "converged_s": 7.873
+      },
+      "nodes": [
+        {
+          "index": 0,
+          "miner": "p0n0-83f2ee45",
+          "reported_height": 10,
+          "reported_head": "00c51113fcf8e67e89ae6adfe043a4380b006625f9f289d5bb6b7750fea10a26",
+          "stats": {
+            "local_blocks_mined": 5,
+            "peer_blocks_received": 5,
+            "chain_reorganizations": 1,
+            "peer_syncs": 1,
+            "rejected_blocks": 0,
+            "candidate_attempts": 806
+          },
+          "resources": {
+            "cpu_seconds": 5.75,
+            "peak_rss_bytes": 37048320,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 17641,
+            "bytes_from_node": 67619,
+            "connections": 73,
+            "upstream_failures": 0
+          }
+        },
+        {
+          "index": 1,
+          "miner": "p0n1-6f9e48fb",
+          "reported_height": 10,
+          "reported_head": "00c51113fcf8e67e89ae6adfe043a4380b006625f9f289d5bb6b7750fea10a26",
+          "stats": {
+            "local_blocks_mined": 3,
+            "peer_blocks_received": 6,
+            "chain_reorganizations": 0,
+            "peer_syncs": 1,
+            "rejected_blocks": 0,
+            "candidate_attempts": 1049
+          },
+          "resources": {
+            "cpu_seconds": 6.3438,
+            "peak_rss_bytes": 36950016,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 18423,
+            "bytes_from_node": 69139,
+            "connections": 75,
+            "upstream_failures": 0
+          }
+        },
+        {
+          "index": 2,
+          "miner": "p0n2-2b80d734",
+          "reported_height": 10,
+          "reported_head": "00c51113fcf8e67e89ae6adfe043a4380b006625f9f289d5bb6b7750fea10a26",
+          "stats": {
+            "local_blocks_mined": 4,
+            "peer_blocks_received": 3,
+            "chain_reorganizations": 2,
+            "peer_syncs": 4,
+            "rejected_blocks": 0,
+            "candidate_attempts": 930
+          },
+          "resources": {
+            "cpu_seconds": 5.8438,
+            "peak_rss_bytes": 37019648,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 18864,
+            "bytes_from_node": 61252,
+            "connections": 70,
+            "upstream_failures": 0
+          }
+        }
+      ],
+      "audits": [
+        {
+          "storage": "node0.json",
+          "storage_bytes": 5959,
+          "fingerprint": {
+            "height": 10,
+            "head": "00c51113fcf8e67e89ae6adfe043a4380b006625f9f289d5bb6b7750fea10a26",
+            "balances": {
+              "p0n0-83f2ee45": 200,
+              "p0n1-6f9e48fb": 150,
+              "p0n2-2b80d734": 150
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "6d7a940bb32650a96daea603c3935eae1104f0f41311b679fbd6d151e1e8d358",
+            "export_sha256": "ed47556444b2909760986d96d12edee4e773d04a33686b607bb37fa41a1cc827"
+          },
+          "cli_audit": "VALID"
+        },
+        {
+          "storage": "node1.json",
+          "storage_bytes": 5959,
+          "fingerprint": {
+            "height": 10,
+            "head": "00c51113fcf8e67e89ae6adfe043a4380b006625f9f289d5bb6b7750fea10a26",
+            "balances": {
+              "p0n0-83f2ee45": 200,
+              "p0n1-6f9e48fb": 150,
+              "p0n2-2b80d734": 150
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "6d7a940bb32650a96daea603c3935eae1104f0f41311b679fbd6d151e1e8d358",
+            "export_sha256": "ed47556444b2909760986d96d12edee4e773d04a33686b607bb37fa41a1cc827"
+          },
+          "cli_audit": "VALID"
+        },
+        {
+          "storage": "node2.json",
+          "storage_bytes": 5959,
+          "fingerprint": {
+            "height": 10,
+            "head": "00c51113fcf8e67e89ae6adfe043a4380b006625f9f289d5bb6b7750fea10a26",
+            "balances": {
+              "p0n0-83f2ee45": 200,
+              "p0n1-6f9e48fb": 150,
+              "p0n2-2b80d734": 150
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "6d7a940bb32650a96daea603c3935eae1104f0f41311b679fbd6d151e1e8d358",
+            "export_sha256": "ed47556444b2909760986d96d12edee4e773d04a33686b607bb37fa41a1cc827"
+          },
+          "cli_audit": "VALID"
+        }
+      ],
+      "ledger": {
+        "height": 10,
+        "head": "00c51113fcf8e67e89ae6adfe043a4380b006625f9f289d5bb6b7750fea10a26",
+        "balances": {
+          "p0n0-83f2ee45": 200,
+          "p0n1-6f9e48fb": 150,
+          "p0n2-2b80d734": 150
+        },
+        "sequences": {},
+        "confirmed_transfers": 0,
+        "model_digest": "6d7a940bb32650a96daea603c3935eae1104f0f41311b679fbd6d151e1e8d358",
+        "export_sha256": "ed47556444b2909760986d96d12edee4e773d04a33686b607bb37fa41a1cc827"
+      },
+      "network_total_bytes": 252938
+    },
+    {
+      "seed": 202,
+      "config": {
+        "seed": 202,
+        "protocol": "neural-v2",
+        "nodes": 3,
+        "difficulty": 2,
+        "target_height": 10,
+        "timeout": 90.0,
+        "sync_interval": 0.2,
+        "use_relays": true,
+        "node_difficulty_overrides": {}
+      },
+      "plan": {
+        "miners": [
+          "p0n0-702c568a",
+          "p0n1-d4626268",
+          "p0n2-068c26f6"
+        ],
+        "launch_order": [
+          0,
+          1,
+          2
+        ],
+        "launch_delays": [
+          0.104,
+          0.011,
+          0.19
+        ]
+      },
+      "result": "PASS",
+      "failure_kind": null,
+      "failure_detail": null,
+      "port_retries": 0,
+      "pids": [
+        35524,
+        38908,
+        9160
+      ],
+      "timings": {
+        "all_ready_s": 1.285,
+        "first_block_s": 1.69,
+        "converged_s": 9.667
+      },
+      "nodes": [
+        {
+          "index": 0,
+          "miner": "p0n0-702c568a",
+          "reported_height": 10,
+          "reported_head": "005ae760202155ac93dbacaad8ed1baf64a78a24914a68a83c6ed0b2c7b79a93",
+          "stats": {
+            "local_blocks_mined": 4,
+            "peer_blocks_received": 6,
+            "chain_reorganizations": 1,
+            "peer_syncs": 1,
+            "rejected_blocks": 0,
+            "candidate_attempts": 1311
+          },
+          "resources": {
+            "cpu_seconds": 7.6094,
+            "peak_rss_bytes": 36737024,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 19956,
+            "bytes_from_node": 65399,
+            "connections": 83,
+            "upstream_failures": 0
+          }
+        },
+        {
+          "index": 1,
+          "miner": "p0n1-d4626268",
+          "reported_height": 10,
+          "reported_head": "005ae760202155ac93dbacaad8ed1baf64a78a24914a68a83c6ed0b2c7b79a93",
+          "stats": {
+            "local_blocks_mined": 4,
+            "peer_blocks_received": 5,
+            "chain_reorganizations": 1,
+            "peer_syncs": 2,
+            "rejected_blocks": 0,
+            "candidate_attempts": 1510
+          },
+          "resources": {
+            "cpu_seconds": 7.75,
+            "peak_rss_bytes": 36909056,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 20360,
+            "bytes_from_node": 72720,
+            "connections": 82,
+            "upstream_failures": 0
+          }
+        },
+        {
+          "index": 2,
+          "miner": "p0n2-068c26f6",
+          "reported_height": 10,
+          "reported_head": "005ae760202155ac93dbacaad8ed1baf64a78a24914a68a83c6ed0b2c7b79a93",
+          "stats": {
+            "local_blocks_mined": 5,
+            "peer_blocks_received": 4,
+            "chain_reorganizations": 2,
+            "peer_syncs": 3,
+            "rejected_blocks": 0,
+            "candidate_attempts": 1416
+          },
+          "resources": {
+            "cpu_seconds": 7.7188,
+            "peak_rss_bytes": 36921344,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 19867,
+            "bytes_from_node": 59787,
+            "connections": 78,
+            "upstream_failures": 0
+          }
+        }
+      ],
+      "audits": [
+        {
+          "storage": "node0.json",
+          "storage_bytes": 5959,
+          "fingerprint": {
+            "height": 10,
+            "head": "005ae760202155ac93dbacaad8ed1baf64a78a24914a68a83c6ed0b2c7b79a93",
+            "balances": {
+              "p0n0-702c568a": 200,
+              "p0n1-d4626268": 150,
+              "p0n2-068c26f6": 150
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "166dd44761c35a2028de416a2331752e58cd0775d1e86a280bbba73bf18a98e8",
+            "export_sha256": "67f5e2ce46affd699cd7becc51ae5c59218d17e7f9078120289ba37bba871276"
+          },
+          "cli_audit": "VALID"
+        },
+        {
+          "storage": "node1.json",
+          "storage_bytes": 5959,
+          "fingerprint": {
+            "height": 10,
+            "head": "005ae760202155ac93dbacaad8ed1baf64a78a24914a68a83c6ed0b2c7b79a93",
+            "balances": {
+              "p0n0-702c568a": 200,
+              "p0n1-d4626268": 150,
+              "p0n2-068c26f6": 150
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "166dd44761c35a2028de416a2331752e58cd0775d1e86a280bbba73bf18a98e8",
+            "export_sha256": "67f5e2ce46affd699cd7becc51ae5c59218d17e7f9078120289ba37bba871276"
+          },
+          "cli_audit": "VALID"
+        },
+        {
+          "storage": "node2.json",
+          "storage_bytes": 5959,
+          "fingerprint": {
+            "height": 10,
+            "head": "005ae760202155ac93dbacaad8ed1baf64a78a24914a68a83c6ed0b2c7b79a93",
+            "balances": {
+              "p0n0-702c568a": 200,
+              "p0n1-d4626268": 150,
+              "p0n2-068c26f6": 150
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "166dd44761c35a2028de416a2331752e58cd0775d1e86a280bbba73bf18a98e8",
+            "export_sha256": "67f5e2ce46affd699cd7becc51ae5c59218d17e7f9078120289ba37bba871276"
+          },
+          "cli_audit": "VALID"
+        }
+      ],
+      "ledger": {
+        "height": 10,
+        "head": "005ae760202155ac93dbacaad8ed1baf64a78a24914a68a83c6ed0b2c7b79a93",
+        "balances": {
+          "p0n0-702c568a": 200,
+          "p0n1-d4626268": 150,
+          "p0n2-068c26f6": 150
+        },
+        "sequences": {},
+        "confirmed_transfers": 0,
+        "model_digest": "166dd44761c35a2028de416a2331752e58cd0775d1e86a280bbba73bf18a98e8",
+        "export_sha256": "67f5e2ce46affd699cd7becc51ae5c59218d17e7f9078120289ba37bba871276"
+      },
+      "network_total_bytes": 258089
+    },
+    {
+      "seed": 203,
+      "config": {
+        "seed": 203,
+        "protocol": "neural-v2",
+        "nodes": 3,
+        "difficulty": 2,
+        "target_height": 10,
+        "timeout": 90.0,
+        "sync_interval": 0.2,
+        "use_relays": true,
+        "node_difficulty_overrides": {}
+      },
+      "plan": {
+        "miners": [
+          "p0n0-d1c86726",
+          "p0n1-25fa2292",
+          "p0n2-0f05c8e0"
+        ],
+        "launch_order": [
+          1,
+          0,
+          2
+        ],
+        "launch_delays": [
+          0.135,
+          0.181,
+          0.152
+        ]
+      },
+      "result": "PASS",
+      "failure_kind": null,
+      "failure_detail": null,
+      "port_retries": 0,
+      "pids": [
+        32800,
+        34184,
+        39360
+      ],
+      "timings": {
+        "all_ready_s": 1.464,
+        "first_block_s": 1.687,
+        "converged_s": 8.702
+      },
+      "nodes": [
+        {
+          "index": 0,
+          "miner": "p0n0-d1c86726",
+          "reported_height": 10,
+          "reported_head": "00116d271c9510ded6c31437a92c79afee9de34f1661bde05659e7d82ae24e86",
+          "stats": {
+            "local_blocks_mined": 5,
+            "peer_blocks_received": 4,
+            "chain_reorganizations": 3,
+            "peer_syncs": 3,
+            "rejected_blocks": 0,
+            "candidate_attempts": 1128
+          },
+          "resources": {
+            "cpu_seconds": 7.0,
+            "peak_rss_bytes": 37003264,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 19948,
+            "bytes_from_node": 88077,
+            "connections": 83,
+            "upstream_failures": 0
+          }
+        },
+        {
+          "index": 1,
+          "miner": "p0n1-25fa2292",
+          "reported_height": 10,
+          "reported_head": "00116d271c9510ded6c31437a92c79afee9de34f1661bde05659e7d82ae24e86",
+          "stats": {
+            "local_blocks_mined": 7,
+            "peer_blocks_received": 3,
+            "chain_reorganizations": 2,
+            "peer_syncs": 2,
+            "rejected_blocks": 0,
+            "candidate_attempts": 980
+          },
+          "resources": {
+            "cpu_seconds": 6.4844,
+            "peak_rss_bytes": 36978688,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 19664,
+            "bytes_from_node": 95149,
+            "connections": 85,
+            "upstream_failures": 0
+          }
+        },
+        {
+          "index": 2,
+          "miner": "p0n2-0f05c8e0",
+          "reported_height": 10,
+          "reported_head": "00116d271c9510ded6c31437a92c79afee9de34f1661bde05659e7d82ae24e86",
+          "stats": {
+            "local_blocks_mined": 5,
+            "peer_blocks_received": 3,
+            "chain_reorganizations": 5,
+            "peer_syncs": 6,
+            "rejected_blocks": 0,
+            "candidate_attempts": 1079
+          },
+          "resources": {
+            "cpu_seconds": 7.0312,
+            "peak_rss_bytes": 37269504,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 19865,
+            "bytes_from_node": 64609,
+            "connections": 78,
+            "upstream_failures": 0
+          }
+        }
+      ],
+      "audits": [
+        {
+          "storage": "node0.json",
+          "storage_bytes": 5960,
+          "fingerprint": {
+            "height": 10,
+            "head": "00116d271c9510ded6c31437a92c79afee9de34f1661bde05659e7d82ae24e86",
+            "balances": {
+              "p0n0-d1c86726": 200,
+              "p0n1-25fa2292": 250,
+              "p0n2-0f05c8e0": 50
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "05aabbaebe799895da94138e7e7637eb3bdb18e46c20554dcb9008442ac2031e",
+            "export_sha256": "7e127d072c04a7ceaaea29245b56234bbfb4bb07c0f46e58eec5f45938b6cfdc"
+          },
+          "cli_audit": "VALID"
+        },
+        {
+          "storage": "node1.json",
+          "storage_bytes": 5960,
+          "fingerprint": {
+            "height": 10,
+            "head": "00116d271c9510ded6c31437a92c79afee9de34f1661bde05659e7d82ae24e86",
+            "balances": {
+              "p0n0-d1c86726": 200,
+              "p0n1-25fa2292": 250,
+              "p0n2-0f05c8e0": 50
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "05aabbaebe799895da94138e7e7637eb3bdb18e46c20554dcb9008442ac2031e",
+            "export_sha256": "7e127d072c04a7ceaaea29245b56234bbfb4bb07c0f46e58eec5f45938b6cfdc"
+          },
+          "cli_audit": "VALID"
+        },
+        {
+          "storage": "node2.json",
+          "storage_bytes": 5960,
+          "fingerprint": {
+            "height": 10,
+            "head": "00116d271c9510ded6c31437a92c79afee9de34f1661bde05659e7d82ae24e86",
+            "balances": {
+              "p0n0-d1c86726": 200,
+              "p0n1-25fa2292": 250,
+              "p0n2-0f05c8e0": 50
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "05aabbaebe799895da94138e7e7637eb3bdb18e46c20554dcb9008442ac2031e",
+            "export_sha256": "7e127d072c04a7ceaaea29245b56234bbfb4bb07c0f46e58eec5f45938b6cfdc"
+          },
+          "cli_audit": "VALID"
+        }
+      ],
+      "ledger": {
+        "height": 10,
+        "head": "00116d271c9510ded6c31437a92c79afee9de34f1661bde05659e7d82ae24e86",
+        "balances": {
+          "p0n0-d1c86726": 200,
+          "p0n1-25fa2292": 250,
+          "p0n2-0f05c8e0": 50
+        },
+        "sequences": {},
+        "confirmed_transfers": 0,
+        "model_digest": "05aabbaebe799895da94138e7e7637eb3bdb18e46c20554dcb9008442ac2031e",
+        "export_sha256": "7e127d072c04a7ceaaea29245b56234bbfb4bb07c0f46e58eec5f45938b6cfdc"
+      },
+      "network_total_bytes": 307312
+    },
+    {
+      "seed": 204,
+      "config": {
+        "seed": 204,
+        "protocol": "neural-v2",
+        "nodes": 3,
+        "difficulty": 2,
+        "target_height": 10,
+        "timeout": 90.0,
+        "sync_interval": 0.2,
+        "use_relays": true,
+        "node_difficulty_overrides": {}
+      },
+      "plan": {
+        "miners": [
+          "p0n0-70bd6893",
+          "p0n1-6d7c3d07",
+          "p0n2-48ccb97c"
+        ],
+        "launch_order": [
+          1,
+          0,
+          2
+        ],
+        "launch_delays": [
+          0.054,
+          0.237,
+          0.244
+        ]
+      },
+      "result": "PASS",
+      "failure_kind": null,
+      "failure_detail": null,
+      "port_retries": 0,
+      "pids": [
+        33036,
+        36556,
+        18540
+      ],
+      "timings": {
+        "all_ready_s": 1.467,
+        "first_block_s": 1.785,
+        "converged_s": 8.585
+      },
+      "nodes": [
+        {
+          "index": 0,
+          "miner": "p0n0-70bd6893",
+          "reported_height": 10,
+          "reported_head": "006c2adfccf12d2ef55adeb140c1c3646c5c0bebe6c7a8396f37e0d54ba17c02",
+          "stats": {
+            "local_blocks_mined": 4,
+            "peer_blocks_received": 6,
+            "chain_reorganizations": 0,
+            "peer_syncs": 0,
+            "rejected_blocks": 0,
+            "candidate_attempts": 1102
+          },
+          "resources": {
+            "cpu_seconds": 6.9531,
+            "peak_rss_bytes": 36945920,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 20522,
+            "bytes_from_node": 65207,
+            "connections": 79,
+            "upstream_failures": 0
+          }
+        },
+        {
+          "index": 1,
+          "miner": "p0n1-6d7c3d07",
+          "reported_height": 10,
+          "reported_head": "006c2adfccf12d2ef55adeb140c1c3646c5c0bebe6c7a8396f37e0d54ba17c02",
+          "stats": {
+            "local_blocks_mined": 6,
+            "peer_blocks_received": 4,
+            "chain_reorganizations": 1,
+            "peer_syncs": 1,
+            "rejected_blocks": 0,
+            "candidate_attempts": 1201
+          },
+          "resources": {
+            "cpu_seconds": 6.9062,
+            "peak_rss_bytes": 37208064,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 20891,
+            "bytes_from_node": 77222,
+            "connections": 82,
+            "upstream_failures": 0
+          }
+        },
+        {
+          "index": 2,
+          "miner": "p0n2-48ccb97c",
+          "reported_height": 10,
+          "reported_head": "006c2adfccf12d2ef55adeb140c1c3646c5c0bebe6c7a8396f37e0d54ba17c02",
+          "stats": {
+            "local_blocks_mined": 2,
+            "peer_blocks_received": 8,
+            "chain_reorganizations": 1,
+            "peer_syncs": 1,
+            "rejected_blocks": 0,
+            "candidate_attempts": 947
+          },
+          "resources": {
+            "cpu_seconds": 6.8125,
+            "peak_rss_bytes": 37183488,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 20276,
+            "bytes_from_node": 54359,
+            "connections": 77,
+            "upstream_failures": 0
+          }
+        }
+      ],
+      "audits": [
+        {
+          "storage": "node0.json",
+          "storage_bytes": 5960,
+          "fingerprint": {
+            "height": 10,
+            "head": "006c2adfccf12d2ef55adeb140c1c3646c5c0bebe6c7a8396f37e0d54ba17c02",
+            "balances": {
+              "p0n0-70bd6893": 200,
+              "p0n1-6d7c3d07": 250,
+              "p0n2-48ccb97c": 50
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "59c6a3d36513cbf07fc39b0db6c9d7a2c4e644974d6b2c8c7e62dd6c50c02c29",
+            "export_sha256": "bca7b767eea1d4ad3b0fd682cf7a7b031602d302a5f267671e7aea2b91213b6c"
+          },
+          "cli_audit": "VALID"
+        },
+        {
+          "storage": "node1.json",
+          "storage_bytes": 5960,
+          "fingerprint": {
+            "height": 10,
+            "head": "006c2adfccf12d2ef55adeb140c1c3646c5c0bebe6c7a8396f37e0d54ba17c02",
+            "balances": {
+              "p0n0-70bd6893": 200,
+              "p0n1-6d7c3d07": 250,
+              "p0n2-48ccb97c": 50
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "59c6a3d36513cbf07fc39b0db6c9d7a2c4e644974d6b2c8c7e62dd6c50c02c29",
+            "export_sha256": "bca7b767eea1d4ad3b0fd682cf7a7b031602d302a5f267671e7aea2b91213b6c"
+          },
+          "cli_audit": "VALID"
+        },
+        {
+          "storage": "node2.json",
+          "storage_bytes": 5960,
+          "fingerprint": {
+            "height": 10,
+            "head": "006c2adfccf12d2ef55adeb140c1c3646c5c0bebe6c7a8396f37e0d54ba17c02",
+            "balances": {
+              "p0n0-70bd6893": 200,
+              "p0n1-6d7c3d07": 250,
+              "p0n2-48ccb97c": 50
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "59c6a3d36513cbf07fc39b0db6c9d7a2c4e644974d6b2c8c7e62dd6c50c02c29",
+            "export_sha256": "bca7b767eea1d4ad3b0fd682cf7a7b031602d302a5f267671e7aea2b91213b6c"
+          },
+          "cli_audit": "VALID"
+        }
+      ],
+      "ledger": {
+        "height": 10,
+        "head": "006c2adfccf12d2ef55adeb140c1c3646c5c0bebe6c7a8396f37e0d54ba17c02",
+        "balances": {
+          "p0n0-70bd6893": 200,
+          "p0n1-6d7c3d07": 250,
+          "p0n2-48ccb97c": 50
+        },
+        "sequences": {},
+        "confirmed_transfers": 0,
+        "model_digest": "59c6a3d36513cbf07fc39b0db6c9d7a2c4e644974d6b2c8c7e62dd6c50c02c29",
+        "export_sha256": "bca7b767eea1d4ad3b0fd682cf7a7b031602d302a5f267671e7aea2b91213b6c"
+      },
+      "network_total_bytes": 258477
+    },
+    {
+      "seed": 205,
+      "config": {
+        "seed": 205,
+        "protocol": "neural-v2",
+        "nodes": 3,
+        "difficulty": 2,
+        "target_height": 10,
+        "timeout": 90.0,
+        "sync_interval": 0.2,
+        "use_relays": true,
+        "node_difficulty_overrides": {}
+      },
+      "plan": {
+        "miners": [
+          "p0n0-a79464ce",
+          "p0n1-959151dc",
+          "p0n2-9ce93ca4"
+        ],
+        "launch_order": [
+          2,
+          1,
+          0
+        ],
+        "launch_delays": [
+          0.048,
+          0.176,
+          0.179
+        ]
+      },
+      "result": "PASS",
+      "failure_kind": null,
+      "failure_detail": null,
+      "port_retries": 0,
+      "pids": [
+        33788,
+        27076,
+        33824
+      ],
+      "timings": {
+        "all_ready_s": 1.372,
+        "first_block_s": 1.858,
+        "converged_s": 10.404
+      },
+      "nodes": [
+        {
+          "index": 0,
+          "miner": "p0n0-a79464ce",
+          "reported_height": 10,
+          "reported_head": "00e5e9e0a8f796cd2171966ded1a54274ecb6122d095394bb67a8b585d22f711",
+          "stats": {
+            "local_blocks_mined": 7,
+            "peer_blocks_received": 2,
+            "chain_reorganizations": 3,
+            "peer_syncs": 3,
+            "rejected_blocks": 0,
+            "candidate_attempts": 1038
+          },
+          "resources": {
+            "cpu_seconds": 7.3438,
+            "peak_rss_bytes": 37113856,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 20076,
+            "bytes_from_node": 81693,
+            "connections": 84,
+            "upstream_failures": 0
+          }
+        },
+        {
+          "index": 1,
+          "miner": "p0n1-959151dc",
+          "reported_height": 10,
+          "reported_head": "00e5e9e0a8f796cd2171966ded1a54274ecb6122d095394bb67a8b585d22f711",
+          "stats": {
+            "local_blocks_mined": 4,
+            "peer_blocks_received": 6,
+            "chain_reorganizations": 3,
+            "peer_syncs": 3,
+            "rejected_blocks": 0,
+            "candidate_attempts": 1451
+          },
+          "resources": {
+            "cpu_seconds": 9.125,
+            "peak_rss_bytes": 37224448,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 19796,
+            "bytes_from_node": 74076,
+            "connections": 86,
+            "upstream_failures": 0
+          }
+        },
+        {
+          "index": 2,
+          "miner": "p0n2-9ce93ca4",
+          "reported_height": 10,
+          "reported_head": "00e5e9e0a8f796cd2171966ded1a54274ecb6122d095394bb67a8b585d22f711",
+          "stats": {
+            "local_blocks_mined": 4,
+            "peer_blocks_received": 4,
+            "chain_reorganizations": 3,
+            "peer_syncs": 4,
+            "rejected_blocks": 0,
+            "candidate_attempts": 1473
+          },
+          "resources": {
+            "cpu_seconds": 8.7031,
+            "peak_rss_bytes": 37326848,
+            "source": "windows-kernel32",
+            "unavailable_reason": null
+          },
+          "network": {
+            "bytes_to_node": 20610,
+            "bytes_from_node": 77085,
+            "connections": 84,
+            "upstream_failures": 0
+          }
+        }
+      ],
+      "audits": [
+        {
+          "storage": "node0.json",
+          "storage_bytes": 5959,
+          "fingerprint": {
+            "height": 10,
+            "head": "00e5e9e0a8f796cd2171966ded1a54274ecb6122d095394bb67a8b585d22f711",
+            "balances": {
+              "p0n0-a79464ce": 350,
+              "p0n1-959151dc": 50,
+              "p0n2-9ce93ca4": 100
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "362b2c523243a79d9fc2a78a5d3f0b6cdfae6a551327c24ca558656ce5161d82",
+            "export_sha256": "cab10874369bace9cc31325889b70b95d342b9df6305607877401b6f61f4f0b7"
+          },
+          "cli_audit": "VALID"
+        },
+        {
+          "storage": "node1.json",
+          "storage_bytes": 5959,
+          "fingerprint": {
+            "height": 10,
+            "head": "00e5e9e0a8f796cd2171966ded1a54274ecb6122d095394bb67a8b585d22f711",
+            "balances": {
+              "p0n0-a79464ce": 350,
+              "p0n1-959151dc": 50,
+              "p0n2-9ce93ca4": 100
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "362b2c523243a79d9fc2a78a5d3f0b6cdfae6a551327c24ca558656ce5161d82",
+            "export_sha256": "cab10874369bace9cc31325889b70b95d342b9df6305607877401b6f61f4f0b7"
+          },
+          "cli_audit": "VALID"
+        },
+        {
+          "storage": "node2.json",
+          "storage_bytes": 5959,
+          "fingerprint": {
+            "height": 10,
+            "head": "00e5e9e0a8f796cd2171966ded1a54274ecb6122d095394bb67a8b585d22f711",
+            "balances": {
+              "p0n0-a79464ce": 350,
+              "p0n1-959151dc": 50,
+              "p0n2-9ce93ca4": 100
+            },
+            "sequences": {},
+            "confirmed_transfers": 0,
+            "model_digest": "362b2c523243a79d9fc2a78a5d3f0b6cdfae6a551327c24ca558656ce5161d82",
+            "export_sha256": "cab10874369bace9cc31325889b70b95d342b9df6305607877401b6f61f4f0b7"
+          },
+          "cli_audit": "VALID"
+        }
+      ],
+      "ledger": {
+        "height": 10,
+        "head": "00e5e9e0a8f796cd2171966ded1a54274ecb6122d095394bb67a8b585d22f711",
+        "balances": {
+          "p0n0-a79464ce": 350,
+          "p0n1-959151dc": 50,
+          "p0n2-9ce93ca4": 100
+        },
+        "sequences": {},
+        "confirmed_transfers": 0,
+        "model_digest": "362b2c523243a79d9fc2a78a5d3f0b6cdfae6a551327c24ca558656ce5161d82",
+        "export_sha256": "cab10874369bace9cc31325889b70b95d342b9df6305607877401b6f61f4f0b7"
+      },
+      "network_total_bytes": 293336
+    }
+  ]
+}
