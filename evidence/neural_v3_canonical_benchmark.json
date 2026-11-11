@@ -1,0 +1,136 @@
+{
+  "protocol": "neural-v3",
+  "backend": "python",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.5",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "logical_cpus": 28
+  },
+  "fixture": {
+    "difficulty": 1,
+    "blocks": 8,
+    "transfers": 0,
+    "head": "0d6b72a60ac351d1d1ede8b956158065b3fc599cb5e1776009e1544196a19009"
+  },
+  "repeats": 5,
+  "measurement_scope": "Canonical implementation performance, with no minimum work guarantee",
+  "training_including_batch_and_gradient_digest": {
+    "operations_per_sample": 150,
+    "samples_ms_per_operation": [
+      1.906586,
+      1.9145193333333332,
+      1.9217013333333333,
+      1.918022,
+      1.9114913333333332
+    ],
+    "median_ms": 1.9145193333333332,
+    "min_ms": 1.906586,
+    "max_ms": 1.9217013333333333,
+    "median_absolute_deviation_ms": 0.003502666666666654,
+    "operations_per_second_at_median": 522.3243153459929,
+    "peak_traced_bytes_per_sample": 51901
+  },
+  "canonical_candidate": {
+    "operations_per_sample": 150,
+    "samples_ms_per_operation": [
+      1.9108553333333334,
+      1.9337473333333333,
+      1.9729473333333332,
+      1.9368733333333332,
+      1.9212433333333332
+    ],
+    "median_ms": 1.9337473333333333,
+    "min_ms": 1.9108553333333334,
+    "max_ms": 1.9729473333333332,
+    "median_absolute_deviation_ms": 0.01250400000000007,
+    "operations_per_second_at_median": 517.1306420245871,
+    "peak_traced_bytes_per_sample": 51901
+  },
+  "validation_including_chain_init": {
+    "accept_canonical_block": {
+      "operations_per_sample": 1,
+      "samples_ms_per_operation": [
+        2.0561,
+        1.8162,
+        1.7963,
+        1.752,
+        1.743
+      ],
+      "median_ms": 1.7963,
+      "min_ms": 1.743,
+      "max_ms": 2.0561,
+      "median_absolute_deviation_ms": 0.044300000000000006,
+      "operations_per_second_at_median": 556.6998830930246,
+      "peak_traced_bytes_per_sample": 47285
+    },
+    "reject_malformed_gradient_digest": {
+      "operations_per_sample": 1,
+      "samples_ms_per_operation": [
+        0.0061,
+        0.0038,
+        0.0031,
+        0.0029,
+        0.003
+      ],
+      "median_ms": 0.0031,
+      "min_ms": 0.0029,
+      "max_ms": 0.0061,
+      "median_absolute_deviation_ms": 0.0002000000000000001,
+      "operations_per_second_at_median": 322580.64516129036,
+      "peak_traced_bytes_per_sample": 4118
+    },
+    "reject_neural_mismatch_with_local_state": {
+      "operations_per_sample": 1,
+      "samples_ms_per_operation": [
+        1.916,
+        1.9018,
+        1.9049,
+        1.9786,
+        2.0065
+      ],
+      "median_ms": 1.916,
+      "min_ms": 1.9018,
+      "max_ms": 2.0065,
+      "median_absolute_deviation_ms": 0.01419999999999999,
+      "operations_per_second_at_median": 521.9206680584551,
+      "peak_traced_bytes_per_sample": 47246
+    }
+  },
+  "replay_by_height": {
+    "4": {
+      "canonical_json_bytes": 2147,
+      "operations_per_sample": 1,
+      "samples_ms_per_operation": [
+        7.3353,
+        7.2428,
+        7.6192,
+        7.0959,
+        7.521
+      ],
+      "median_ms": 7.3353,
+      "min_ms": 7.0959,
+      "max_ms": 7.6192,
+      "median_absolute_deviation_ms": 0.18569999999999975,
+      "operations_per_second_at_median": 136.32707592054857,
+      "peak_traced_bytes_per_sample": 55928
+    },
+    "8": {
+      "canonical_json_bytes": 4170,
+      "operations_per_sample": 1,
+      "samples_ms_per_operation": [
+        15.2696,
+        15.8269,
+        15.8507,
+        15.5921,
+        15.3153
+      ],
+      "median_ms": 15.5921,
+      "min_ms": 15.2696,
+      "max_ms": 15.8507,
+      "median_absolute_deviation_ms": 0.2585999999999995,
+      "operations_per_second_at_median": 64.135042746006,
+      "peak_traced_bytes_per_sample": 56854
+    }
+  }
+}

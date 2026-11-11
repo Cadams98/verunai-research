@@ -61,16 +61,23 @@ class LedgerBlock:
 def ledger_candidate(height: int, prev_hash: str, miner: str, nonce: int,
                      difficulty: int, weights: list[list[int]], transfers: Iterable[Transfer] = (),
                      backend: str = "python") -> LedgerBlock:
+    """Build a candidate from its height, parent hash, miner address, and nonce.
+
+    The difficulty sets the target, weights are the parent model state,
+    transfers are the proposed block contents, and backend selects the
+    training implementation. The returned block still needs validation.
+    """
     if not isinstance(miner, str) or not ADDRESS_RE.fullmatch(miner):
         raise ValueError("Invalid miner reward address")
     txs = tuple(transfers)
     if len(txs) > MAX_TXS:
         raise ValueError("Too many transfers")
     next_weights, grad_digest = compute_step(weights, prev_hash, miner, nonce, backend)
+    model_digest = weights_digest(next_weights)
     draft = LedgerBlock(height, prev_hash, miner, nonce, difficulty, REWARD,
-                        grad_digest, weights_digest(next_weights), txs, "")
+                        grad_digest, model_digest, txs, "")
     return LedgerBlock(height, prev_hash, miner, nonce, difficulty, REWARD,
-                       grad_digest, weights_digest(next_weights), txs,
+                       grad_digest, model_digest, txs,
                        sha256(canonical_bytes(draft.payload())))
 
 
