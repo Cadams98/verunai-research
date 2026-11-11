@@ -35,6 +35,9 @@ Legacy experiments: `verunai/core.py` is v1; `verunai/neural_consensus.py` also 
 | `verunai/__main__.py` | Command-line entry points for experiments | Thin CLI delegating to tested application services |
 | `verunai/gpu_research.py` | Optional CPU/GPU benchmark experiments | Research-only backend, never implicit consensus authority |
 | `verunai/ledger_benchmark.py` | Research-only `benchmark_ledger()` and module CLI for canonical v3 work, validation costs, and allocations | Uses the existing validator with local fixtures for accepted blocks and both early and late rejection |
+| `verunai/testnet_harness.py` | v0.8 P0: launches 3–5 unmodified nodes as local processes, detects convergence, re-audits saved ledgers | Basis for partition, crash and hostile-peer campaigns (P6); see `docs/TESTNET_HARNESS.md` |
+| `verunai/testnet_proxy.py` | Loopback byte-counting relay between harness nodes; forwards bytes unchanged | Becomes the fault-injection proxy (delay, drop, partition) in P6 |
+| `verunai/process_metrics.py` | Standard-library CPU-time, peak-memory and liveness readings for child processes | Shared by later observability work (P5) |
 | `tests/` | Unit/integration and adversarial regression checks | Add deterministic vectors and multi-host stress tests |
 
 ## Protocol invariants to protect

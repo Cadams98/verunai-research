@@ -42,6 +42,14 @@ On Windows: double-click `RUN_V3_LEDGER_DEMO_WINDOWS.bat`. See [v0.6 milestone r
 For the proposed Claude review, Codex draft publishing, and PR handoff checks,
 see the [engineering automation runbook](docs/ENGINEERING_AUTOMATION.md).
 
+## Run three local nodes and audit them (v0.8 P0)
+
+```powershell
+python -m verunai.testnet_harness --trials 1 --difficulty 1 --height 3
+```
+
+This starts three unmodified nodes as separate processes on `127.0.0.1`, waits until they agree, and independently re-verifies each saved ledger. See the [harness guide](docs/TESTNET_HARNESS.md) for options, measurements, reference results and limitations. TEST units only; not a secure or public network.
+
 ## Measure canonical neural-v3 mining
 
 ```powershell

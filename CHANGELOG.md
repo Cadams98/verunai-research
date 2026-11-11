@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — v0.8 P0 three-node testnet harness
+
+- Add `python -m verunai.testnet_harness`. It starts three to five unmodified nodes as separate local processes, waits for convergence, and re-audits every saved ledger in process and with the existing `audit` command.
+- Measure convergence time, CPU time, peak memory and node-to-node traffic. Traffic is counted by a loopback relay that forwards bytes unchanged.
+- Record 20 neural-v3 and 5 each of bigram-v1 and neural-v2 reference trials as raw evidence (30 of 30 passed). Withdraw the first-seen fork-choice proposal for P3 and recommend most-work with a deterministic lowest-hash tie-break.
+- No consensus, fork-choice, networking or storage behaviour changed.
+
 ## Unreleased — engineering automation proposal
 
 - Add PR description validation and an owner-authorized Codex draft publisher.
