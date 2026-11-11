@@ -121,12 +121,20 @@ control aggregate exposure. GitHub Actions runner usage is separate.
 The `PR description` job checks the PR body against the template on open,
 edit, reopen, synchronize, and ready-for-review events. It runs the checker
 from the base commit with a read-only token. It checks section presence and
-obvious placeholders, including the required safety fields. A missing
-checker fails except for PR #3 on base `6236f5d27d2fbc70a7a850b0a85486c8173164fc`
-in VERUNAI. That one bootstrap run needs manual description review.
-After merge, use a test PR to confirm that an empty description fails and
-editing it to a complete one passes. Then require **PR description** from
-GitHub Actions alongside Python 3.10 and 3.12 in the `main` ruleset. A PR
+obvious placeholders, including the required safety fields. The job fails
+if the trusted base is missing the checker.
+
+To demonstrate the check on PR #4, keep a copy of the completed description.
+Edit the PR description, clear it, and save. In the PR's **Checks** tab,
+open the latest **PR handoff** run and confirm **PR description** fails with
+a list of missing headings. Repeat with a description containing only
+`## Purpose` and a sentence to demonstrate an incomplete submission.
+Restore the full description and save. Confirm the newest run passes.
+Each edit triggers a new run. Use the latest result for the PR's current
+head and wait for each run before making the next edit.
+
+After demonstrating both outcomes, the owner can require **PR description**
+from GitHub Actions alongside Python 3.10 and 3.12 in the `main` ruleset. A PR
 can propose changes to the workflow wrapper, so require owner review of
 workflow and checker changes or a trusted required workflow where supported.
 Human reviewers still verify the accuracy of claims.
