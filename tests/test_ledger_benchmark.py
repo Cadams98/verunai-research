@@ -72,13 +72,34 @@ class TestLedgerBenchmark(unittest.TestCase):
     def test_candidate_reuses_digest_and_reproduces_historical_block(self):
         fixture = Path(__file__).resolve().parents[1] / "evidence" / "v06_replayable_signed_chain.json"
         exported = json.loads(fixture.read_text(encoding="utf-8"))
-        block = LedgerBlock.from_dict(exported["blocks"][0])
         parent = LedgerChain(exported["difficulty"])
-        with patch("verunai.neural_v3.weights_digest", wraps=weights_digest) as digest:
-            candidate = ledger_candidate(
-                block.height, parent.head, block.miner, block.nonce, parent.difficulty,
-                parent.weights, block.transfers,
-            )
-            digest.assert_called_once()
-        self.assertEqual(candidate, block)
-        parent.accept(candidate)
+        for entry in exported["blocks"]:
+            block = LedgerBlock.from_dict(entry)
+            with self.subTest(height=block.height):
+                with patch("verunai.neural_v3.weights_digest", wraps=weights_digest) as digest:
+                    candidate = ledger_candidate(
+                        block.height, parent.head, block.miner, block.nonce, parent.difficulty,
+                        parent.weights, block.transfers,
+                    )
+                    digest.assert_called_once()
+                self.assertEqual(candidate, block)
+                parent.accept(candidate)
+        self.assertEqual(parent.export(), exported)
+
+    def test_tampered_model_commitment_is_rejected_after_genesis(self):
+        source = LedgerChain(1)
+        miner = address_from_public_hex("00" * 32)
+        mine_ledger(source, miner)
+        verifier = LedgerChain.import_and_verify(source.export())
+        block, _ = mine_ledger(source, miner)
+        before = verifier.export()
+        model_before = weights_digest(verifier.weights)
+        tampered = replace(block, model_digest="0" * 64)
+        with patch("verunai.neural_v3.compute_step", wraps=compute_step) as train:
+            with self.assertRaisesRegex(ValueError, "Tampered block header"):
+                verifier.accept(tampered)
+            train.assert_not_called()
+        self.assertEqual(verifier.export(), before)
+        self.assertEqual(weights_digest(verifier.weights), model_before)
+        verifier.accept(block)
+        self.assertEqual(verifier.export(), source.export())

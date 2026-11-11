@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased — canonical mining research
+
+- Record repeated neural-v3 CPU benchmark samples across three model states.
+- Extend historical signed-ledger candidate regression coverage and verify rejection of a tampered commitment after genesis.
+
 ## Unreleased — engineering automation proposal
 
 - Add PR description validation and an owner-authorized Codex draft publisher.
