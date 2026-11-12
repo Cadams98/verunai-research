@@ -1,10 +1,12 @@
 # UW-2: can useful learning be verified cheaply?
 
 **Conclusion: INCONCLUSIVE.** In these experiments, none of the specific
-no-work strategies tested was credited when each update was scored on a fresh
-evaluation batch. That result holds only for workers who cannot see or predict
-the evaluation data, which this prototype assumes and does not enforce. The
-experiments also demonstrate four limits, two of which look fundamental. This
+no-work strategies tested was credited when each update was scored on an
+evaluation batch generated after the update was committed. That result holds
+only for workers who cannot see or predict the evaluation data, which this
+prototype assumes and does not enforce. The experiments also demonstrate four
+limits. This implementation assumes a trusted source of labelled evaluation
+data; whether that assumption can be removed is not settled here. This
 is a local, TEST-only research prototype with one trusted coordinator and one
 trusted data source. It is not a reward system, not consensus, not a security
 result, and not secure decentralized Proof of Useful Work.
@@ -41,16 +43,30 @@ Hypotheses, written before running the experiments, and what happened:
 | H2 | A reused or public evaluation set can be gamed without any training data; fresh batches cannot | **Partly supported** (E3): the reused set was gamed; my public-set attack fell just short; one attacker was tried against fresh batches |
 | H3 | Splitting one update across identities earns nothing extra under a proportional reward | **Not contradicted for the one split tested** (E4) |
 | H4 | Verification costs a small fraction of the training it checks | **Only when training is large relative to the evaluation batch** (E6, E7) |
-| H5 | Verified per-update collaboration learns about as well as pooling all data | **Refuted** (E1): small honest improvements are mostly rejected |
+| H5 | Verified per-update collaboration learns about as well as pooling all data | **Refuted** (E1): most later honest updates were rejected; the cause was not isolated |
 | H6 | An accepted update cannot carry hidden harmful behaviour | **Refuted** (E5): a backdoored candidate was accepted on all 30 batches it was scored on |
 
 ## 2. What this experiment models, and what it does not
 
 Read this section before the results.
 
-**Disjoint is not secret.** Training shards, evaluation batches and the test
-set come from separate hash streams, so they share no examples. But every
-stream is a deterministic function of one seed, and the seed
+**Generated later is not the same as independent or unpredictable.** Three
+properties are easy to confuse:
+
+- *Temporal generation*: an evaluation batch is computed after the update is
+  committed. This prototype has that property, in the sense that the batch is
+  derived later from deterministic inputs.
+- *Statistical independence*: the batch is independent of the update. This
+  holds only if the worker had no way to know or influence the inputs the
+  batch is derived from.
+- *Unpredictability*: the worker cannot compute the batch in advance. This
+  prototype does **not** provide it.
+
+Training shards, evaluation batches and the test set are generated under
+separate SHAKE-256 domain labels. Separate labels do not by themselves
+guarantee distinct feature vectors; overlap has to be checked, and section 5
+states exactly what was checked. Every stream is a deterministic function of
+one seed, and the seed
 (`uw2-evidence-v1`) is published in the evidence file so that the results can
 be reproduced. The "beacons" used in the experiments are also recorded labels,
 not live randomness. **Anyone who has the seed can reconstruct the teacher,
@@ -61,8 +77,13 @@ see only their own training shard and the published scores. So the experiments
 model **workers whose data access is restricted**. They do **not** establish
 security against an adaptive worker who knows the seed, predicts the beacon, or
 otherwise learns evaluation data in advance. Such a worker could fit the batch
-it will be scored on. A live system would need real secrecy and real
-unpredictability from a component this prototype does not have.
+it will be scored on. The published seed and the predictable beacons
+give **no secrecy guarantee against adaptive workers**. In the rest of this
+report, "fresh batch" is shorthand for a batch generated after commitment
+from deterministic inputs. It implies neither independence nor
+unpredictability. A live system would
+need real secrecy and real unpredictability from a component this prototype
+does not have.
 
 **What "1 in 1,024" means.** The acceptance test limits the chance that *one*
 test accepts an update that does not help, and only under these conditions:
@@ -76,9 +97,19 @@ test accepts an update that does not help, and only under these conditions:
 
 It is **not** a system-wide security bound:
 
-- **Repeated attempts.** Over q submissions the expected number of false
-  acceptances can reach q ÷ 1,024. Roughly 700 attempts give an even chance of
-  at least one.
+- **Repeated attempts.** Write alpha for the per-test limit (1/1,024). *If*
+  each of q submissions has conditional false-acceptance probability at most
+  alpha, given the relevant prior history and the model selected at that
+  point, then the expected number of false acceptances is at most q × alpha,
+  and the probability of at least one is at most min(1, q × alpha). **That
+  conditional assumption has not been established for unrestricted adaptive
+  workers in this prototype**, because it needs conditions 1 and 2 to hold at
+  every submission.
+- **An illustration, not a prediction.** For 700 *independent* attempts, each
+  succeeding with probability *exactly* 1/1,024, the probability of at least
+  one success is approximately 49.54%. This arithmetic example shows how a
+  small per-test rate adds up. It does not describe what an arbitrary
+  adaptive attacker would achieve.
 - **Multiple identities.** Names are free labels here, so identities simply
   multiply attempts. Nothing in the prototype charges for a submission.
 - **Selection.** Accepted updates are the ones applied and credited, so false
@@ -86,13 +117,16 @@ It is **not** a system-wide security bound:
 - **Adaptive workers.** A worker can use the published scores of earlier
   submissions to choose later ones. Fresh batches keep each single test valid
   under condition 1, but they do not limit how many tests a worker takes.
-- **Evidence.** Zero acceptances in 400 trials give a one-sided 95% upper
-  confidence limit of about 0.75% per attempt. That is consistent with a limit
-  of 0.098% and far too coarse to confirm it. The limit is a property of the
-  test under the conditions above, not something these experiments measured.
+- **Evidence.** Treating the 400 trials of one strategy as independent trials
+  with a common acceptance probability, zero acceptances give a one-sided 95%
+  upper binomial confidence limit of about 0.75% per attempt. That limit
+  applies only to that strategy, in the tested condition, under that
+  independence assumption. It is consistent with 0.098% and far too coarse to
+  confirm it. The per-test limit is a property of the test under the
+  conditions above, not something these experiments measured.
 
 **Repeated measurements.** Unless stated otherwise, a row such as "30 of 30"
-means **one fixed update scored on 30 independent fresh batches**. It estimates
+means **one fixed update scored on 30 separately generated batches**. It estimates
 how reliably that one candidate is accepted. It is not a sample of
 independently trained updates or independent attacks.
 
@@ -178,19 +212,33 @@ the oracle seed or the beacon in advance** (section 2). Assumed honest:
 Out of scope: networking, consensus, payment, privacy of updates, limits on
 submissions, rollback of an accepted update, and denial-of-service.
 
-## 5. Data and disjointness
+## 5. Data and overlap checks
 
 All data is **synthetic** and generated in `verunai/uw2/data.py` from SHAKE-256
 streams. No external dataset, personal information or licensed material is
 used. The task is a hidden "teacher" linear classifier with 24 integer features
 and 6 classes; one label in eight is replaced by a random class.
 
-The harness counts shared feature vectors across training shards, evaluation
-batches and the test set in every verified condition: **0 overlaps**. "True
-accuracy" always means accuracy on a 20,000-example test set that no worker
-strategy and no acceptance decision uses. Attackers choose their trigger class
-from their own training shard. Section 2 explains why disjoint streams are not
-the same as secret data.
+What was checked for shared feature vectors, and what was not:
+
+- **Checked, zero overlap observed:** the four training shards against the
+  20,000-example test set (`training_shards_and_test_overlap`).
+- **Checked, zero overlap observed:** in E1, for the five verified
+  conditions, the training shards, the test set and the evaluation batches
+  that were scored (`evaluation_overlap_with_training_or_test`). The evidence
+  file keeps this count for the first of the five runs of each condition.
+- **Not performed:** a comprehensive overlap audit of the evaluation batches
+  used in E2–E8, or of the larger test set used in E6.
+- A unit test checks a small sample and confirms that the counter detects
+  reuse.
+
+With 17 possible values in each of 24 features, a chance collision is very
+unlikely, but that is an expectation and not a verified fact for E2–E8.
+
+"True accuracy" always means accuracy on a 20,000-example test set that no
+worker strategy and no acceptance decision uses. Attackers choose their
+trigger class from their own training shard. Section 2 explains why none of
+this makes the evaluation data secret.
 
 ## 6. Results
 
@@ -204,7 +252,7 @@ beacons, so they vary the evaluation batches and processing order, not the data.
 
 | Condition | Final true accuracy (mean) | What happened |
 | --- | ---: | --- |
-| Per-update verification, all honest | 82.3% (80.8–84.0) | First update accepted; most later ones rejected as too small to certify |
+| Per-update verification, all honest | 82.3% (80.8–84.0) | First update accepted; most later ones rejected |
 | Per-update verification, 1 wrong-label worker | 81.6% (80.8–82.5) | That worker's update was rejected in every round of every run |
 | Bundle verification, all honest | **85.2%** | Matches unverified averaging; one test per round |
 | Bundle verification, 1 free rider | 82.5% | **Free rider was credited the same score as each honest worker (247)** |
@@ -217,7 +265,10 @@ shifted by one class) was rejected here. It is not evidence of general
 poisoning resistance. E5 is a poisoning attack that succeeds.
 
 H5 is refuted: per-update verification captured only part of the available
-learning (82.3% against 85.2%) because of the resolution limit in E6.
+learning (82.3% against 85.2%). That gap is **consistent with** a
+statistical-resolution limitation of the kind measured in E6, but this
+experiment does not isolate the cause. Processing order, interaction between
+updates and the workers' own validation step were not separated out.
 
 ### E2. Worthless updates (400 fresh-batch trials each)
 
@@ -269,10 +320,10 @@ features, submitted in sequence. Each repeat uses fresh batches.
 | Proportional to net wins | 947.4 (sd 21.2) | 948.8 (sd 50.4) |
 | Fixed credit per accepted update | 1.0 | **6.0** |
 
-Under proportional credit the split earned **the same total credit** as the
-whole, not zero and not more: the mean difference was +1.4 with a standard
-error of 10.3. So no advantage was detected **for this one way of splitting**.
-This is not proof of Sybil resistance. Untested: other ways of splitting, many
+Under proportional credit there was **no detectable advantage for this
+particular split**: the mean difference was +1.4 with a standard error of
+10.3. This does not show that splitting and not splitting are equivalent, and
+it is not evidence of Sybil resistance. Untested: other ways of splitting, many
 names each submitting noise to collect false acceptances (section 2), and names
 used to influence processing order. A fixed credit per acceptance is plainly
 exploitable.
@@ -390,15 +441,16 @@ general poisoning resistance; cost at any scale other than the one measured.
 
 Limits, in order of seriousness:
 
-1. **Fresh labelled data needs a source nobody can corrupt or predict
-   (looks fundamental).** Here that is a trusted oracle with a published seed.
-   E8 shows what one partly dishonest source cost.
-2. **Outcome checks cannot see hidden behaviour (looks fundamental for this
-   design).** E5 is a concrete counterexample.
+1. **This implementation assumes a trusted source of labelled evaluation
+   data.** Here that is an oracle with a published seed. E8 shows what one
+   partly dishonest source cost. Nothing here shows that the assumption is
+   unavoidable in general, or that it can be removed.
+2. **This design's outcome check did not see hidden behaviour.** E5 is a
+   concrete counterexample for the check as implemented.
 3. **Small improvements cannot be certified cheaply (statistical).** Evaluation
    grows with the inverse square of the gain.
 4. **Attribution against robustness.** Per-update checks give credit to
-   individuals but reject small honest work. Bundles learn more and cost less,
+   individuals but rejected most later honest updates in E1. Bundles learn more and cost less,
    but credit free riders and let one bad update block the round.
 5. **The cost advantage is conditional** on training being large relative to
    the evaluation batch.

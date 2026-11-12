@@ -8,8 +8,10 @@ meaning: predicting labels of examples that were never used for training.
 Trust note: producing *fresh labelled* examples requires knowing the teacher.
 The ``Oracle`` is therefore a trusted component of this experiment.
 
-Secrecy note: separate streams make training, evaluation and test examples
-*disjoint*. They do not make evaluation data *secret*. Everything here is a
+Secrecy note: training, evaluation and test examples are generated under
+separate domain labels. That does not by itself guarantee distinct feature
+vectors (use ``overlap`` to check), and it does not make evaluation data
+*secret* or *unpredictable*. Everything here is a
 deterministic function of the seed, so anyone who knows the seed can rebuild
 the teacher, every evaluation batch and the test set. The experiments publish
 their seed for reproducibility. They therefore model workers whose data access
@@ -69,13 +71,13 @@ class Oracle:
         return tuple(xs), tuple(ys)
 
     def training_shard(self, worker: int, count: int) -> Batch:
-        """Return a worker's private training examples (disjoint stream per worker)."""
+        """Return a worker's private training examples (separate domain label per worker)."""
         if type(worker) is not int or not 0 <= worker < 1024:
             raise ValueError("worker index must be 0..1023")
         return self._generate(b"train/%d" % worker, count)
 
     def evaluation_batch(self, beacon: bytes, tag: bytes, count: int) -> Batch:
-        """Return fresh evaluation examples determined by a post-commitment beacon."""
+        """Return evaluation examples derived deterministically from a beacon and a tag."""
         if type(beacon) is not bytes or type(tag) is not bytes or len(beacon) != 32 or len(tag) > 64:
             raise ValueError("beacon must be 32 bytes and tag at most 64 bytes")
         return self._generate(b"eval/" + beacon + b"/" + tag, count)
