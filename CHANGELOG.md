@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — UW-2 usefulness research
+
+- Add `verunai/uw2/`, an isolated TEST-only experiment that scores each committed model update by its measured effect on fresh evaluation data, with an exact sign test, commit-beacon-reveal ordering and deterministic replay.
+- Record eight experiments as raw evidence. Worthless, replayed, wrong-label and identity-split updates earned nothing. A backdoored update was accepted, small honest gains were mostly rejected, and an attacker supplying 20% of evaluation data was paid for damage.
+- Conclusion: INCONCLUSIVE. The design depends on a trusted source of fresh labelled data. No consensus, reward, wallet or networking code changed.
+
 ## Unreleased - UW-1 audit corrections
 
 **UW-1 remains INCOMPLETE / NO-GO.** Full Linux correctness campaigns of

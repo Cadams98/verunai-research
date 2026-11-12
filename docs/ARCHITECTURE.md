@@ -39,6 +39,7 @@ Legacy experiments: `verunai/core.py` is v1; `verunai/neural_consensus.py` also 
 | `verunai/testnet_proxy.py` | Loopback byte-counting relay between harness nodes; forwards bytes unchanged | Becomes the fault-injection proxy (delay, drop, partition) in P6 |
 | `verunai/process_metrics.py` | Standard-library CPU-time, peak-memory and liveness readings for child processes | Shared by later observability work (P5) |
 | `tests/` | Unit/integration and adversarial regression checks | Add deterministic vectors and multi-host stress tests |
+| `verunai/uw2/` | Research-only proof-of-improvement experiment: synthetic data oracle (`data.py`), exact integer model (`model.py`), sign test (`stats.py`), commit-beacon-reveal rounds and replay (`protocol.py`), honest and adversarial workers (`workers.py`), evaluator audit (`audit.py`), experiments CLI (`experiments.py`) | Not imported by consensus, wallet, mining or networking. Trusted coordinator and data oracle; see `docs/USEFULNESS_UW2.md` |
 
 ## Protocol invariants to protect
 

@@ -1,0 +1,1174 @@
+{
+  "config": {
+    "seed": "uw2-evidence-v1",
+    "workers": 4,
+    "shard": 3000,
+    "batch": 1500,
+    "test": 20000,
+    "rounds": 5,
+    "trajectories": 5,
+    "null_trials": 400,
+    "power_trials": 100,
+    "power_batches": [
+      250,
+      500,
+      1000,
+      2000,
+      4000,
+      8000
+    ],
+    "repeats": 30
+  },
+  "data": {
+    "features": 24,
+    "classes": 6,
+    "provenance": "synthetic; generated from SHAKE-256 streams in verunai/uw2/data.py",
+    "training_shards_and_test_overlap": 0
+  },
+  "E1_collaboration": {
+    "chance_accuracy": 0.17725,
+    "teacher_accuracy_ceiling": 0.89315,
+    "centralized_pooled_reference": 0.84365,
+    "single_worker_alone": 0.80155,
+    "per_update_honest": {
+      "history": [
+        {
+          "round": 0,
+          "true_accuracy": 0.80825,
+          "updates": [
+            [
+              "w1-honest",
+              "accepted",
+              997,
+              53
+            ],
+            [
+              "w2-honest",
+              "accepted",
+              90,
+              34
+            ],
+            [
+              "w0-honest",
+              "rejected",
+              77,
+              48
+            ],
+            [
+              "w3-honest",
+              "rejected",
+              74,
+              76
+            ]
+          ]
+        },
+        {
+          "round": 1,
+          "true_accuracy": 0.8166,
+          "updates": [
+            [
+              "w0-honest",
+              "accepted",
+              113,
+              63
+            ]
+          ]
+        },
+        {
+          "round": 2,
+          "true_accuracy": 0.8166,
+          "updates": []
+        },
+        {
+          "round": 3,
+          "true_accuracy": 0.8166,
+          "updates": []
+        },
+        {
+          "round": 4,
+          "true_accuracy": 0.8166,
+          "updates": []
+        }
+      ],
+      "final_true_accuracy": 0.8166,
+      "scores": {
+        "w0-honest": 50,
+        "w1-honest": 944,
+        "w2-honest": 56,
+        "w3-honest": 0
+      },
+      "honest_training_forward_passes": 336000,
+      "verification_forward_passes": 15000,
+      "scored_updates": 5,
+      "evaluation_overlap_with_training_or_test": 0,
+      "final_model": "4460daba2e9d52cad6dff992256b8d9a469a3c976c8fe2fda1edd73b5aad7822",
+      "final_true_accuracy_by_trajectory": [
+        0.8166,
+        0.80825,
+        0.84015,
+        0.84015,
+        0.80825
+      ],
+      "mean_final_true_accuracy": 0.8226800000000001,
+      "scores_by_trajectory": [
+        {
+          "w0-honest": 50,
+          "w1-honest": 944,
+          "w2-honest": 56,
+          "w3-honest": 0
+        },
+        {
+          "w0-honest": 0,
+          "w1-honest": 36,
+          "w2-honest": 912,
+          "w3-honest": 0
+        },
+        {
+          "w0-honest": 23,
+          "w1-honest": 0,
+          "w2-honest": 49,
+          "w3-honest": 907
+        },
+        {
+          "w0-honest": 25,
+          "w1-honest": 0,
+          "w2-honest": 42,
+          "w3-honest": 922
+        },
+        {
+          "w0-honest": 0,
+          "w1-honest": 48,
+          "w2-honest": 939,
+          "w3-honest": 0
+        }
+      ]
+    },
+    "per_update_with_poisoner": {
+      "history": [
+        {
+          "round": 0,
+          "true_accuracy": 0.81605,
+          "updates": [
+            [
+              "w0-honest",
+              "accepted",
+              998,
+              56
+            ],
+            [
+              "w1-honest",
+              "rejected",
+              29,
+              12
+            ],
+            [
+              "w3-poisoner",
+              "rejected",
+              59,
+              1071
+            ],
+            [
+              "w2-honest",
+              "accepted",
+              37,
+              8
+            ]
+          ]
+        },
+        {
+          "round": 1,
+          "true_accuracy": 0.82525,
+          "updates": [
+            [
+              "w3-poisoner",
+              "rejected",
+              37,
+              1219
+            ],
+            [
+              "w2-honest",
+              "rejected",
+              61,
+              68
+            ],
+            [
+              "w0-honest",
+              "accepted",
+              53,
+              23
+            ]
+          ]
+        },
+        {
+          "round": 2,
+          "true_accuracy": 0.82525,
+          "updates": [
+            [
+              "w3-poisoner",
+              "rejected",
+              33,
+              1194
+            ],
+            [
+              "w2-honest",
+              "rejected",
+              60,
+              97
+            ]
+          ]
+        },
+        {
+          "round": 3,
+          "true_accuracy": 0.82525,
+          "updates": [
+            [
+              "w3-poisoner",
+              "rejected",
+              41,
+              1218
+            ],
+            [
+              "w2-honest",
+              "rejected",
+              51,
+              95
+            ]
+          ]
+        },
+        {
+          "round": 4,
+          "true_accuracy": 0.82525,
+          "updates": [
+            [
+              "w3-poisoner",
+              "rejected",
+              33,
+              1250
+            ],
+            [
+              "w2-honest",
+              "rejected",
+              68,
+              84
+            ]
+          ]
+        }
+      ],
+      "final_true_accuracy": 0.82525,
+      "scores": {
+        "w0-honest": 972,
+        "w1-honest": 0,
+        "w2-honest": 29,
+        "w3-poisoner": 0
+      },
+      "honest_training_forward_passes": 252000,
+      "verification_forward_passes": 39000,
+      "scored_updates": 13,
+      "evaluation_overlap_with_training_or_test": 0,
+      "final_model": "246a81b70b4bcbc025e634b36b1e47322a74d25ae6ab967a19af243811e7926f",
+      "final_true_accuracy_by_trajectory": [
+        0.82525,
+        0.80825,
+        0.82165,
+        0.81605,
+        0.80825
+      ],
+      "mean_final_true_accuracy": 0.8158900000000001,
+      "scores_by_trajectory": [
+        {
+          "w0-honest": 972,
+          "w1-honest": 0,
+          "w2-honest": 29,
+          "w3-poisoner": 0
+        },
+        {
+          "w0-honest": 0,
+          "w1-honest": 41,
+          "w2-honest": 902,
+          "w3-poisoner": 0
+        },
+        {
+          "w0-honest": 983,
+          "w1-honest": 0,
+          "w2-honest": 0,
+          "w3-poisoner": 0
+        },
+        {
+          "w0-honest": 49,
+          "w1-honest": 0,
+          "w2-honest": 886,
+          "w3-poisoner": 0
+        },
+        {
+          "w0-honest": 0,
+          "w1-honest": 47,
+          "w2-honest": 924,
+          "w3-poisoner": 0
+        }
+      ]
+    },
+    "bundle_honest": {
+      "history": [
+        {
+          "round": 0,
+          "true_accuracy": 0.81155,
+          "updates": [
+            [
+              "bundle",
+              "accepted",
+              991,
+              52
+            ]
+          ]
+        },
+        {
+          "round": 1,
+          "true_accuracy": 0.85195,
+          "updates": [
+            [
+              "bundle",
+              "accepted",
+              69,
+              13
+            ]
+          ]
+        },
+        {
+          "round": 2,
+          "true_accuracy": 0.85195,
+          "updates": []
+        },
+        {
+          "round": 3,
+          "true_accuracy": 0.85195,
+          "updates": []
+        },
+        {
+          "round": 4,
+          "true_accuracy": 0.85195,
+          "updates": []
+        }
+      ],
+      "final_true_accuracy": 0.85195,
+      "scores": {
+        "w0-honest": 248,
+        "w1-honest": 248,
+        "w2-honest": 248,
+        "w3-honest": 248
+      },
+      "honest_training_forward_passes": 336000,
+      "verification_forward_passes": 6000,
+      "scored_updates": 2,
+      "evaluation_overlap_with_training_or_test": 0,
+      "final_model": "0c20f915bb86d4a31465fbf9e419936d116f80d756ae2b31c3e2a91909e967fd",
+      "final_true_accuracy_by_trajectory": [
+        0.85195,
+        0.85195,
+        0.85195,
+        0.85195,
+        0.85195
+      ],
+      "mean_final_true_accuracy": 0.8519500000000001,
+      "scores_by_trajectory": [
+        {
+          "w0-honest": 248,
+          "w1-honest": 248,
+          "w2-honest": 248,
+          "w3-honest": 248
+        },
+        {
+          "w0-honest": 247,
+          "w1-honest": 247,
+          "w2-honest": 247,
+          "w3-honest": 247
+        },
+        {
+          "w0-honest": 265,
+          "w1-honest": 265,
+          "w2-honest": 265,
+          "w3-honest": 265
+        },
+        {
+          "w0-honest": 254,
+          "w1-honest": 254,
+          "w2-honest": 254,
+          "w3-honest": 254
+        },
+        {
+          "w0-honest": 251,
+          "w1-honest": 251,
+          "w2-honest": 251,
+          "w3-honest": 251
+        }
+      ]
+    },
+    "bundle_with_free_rider": {
+      "history": [
+        {
+          "round": 0,
+          "true_accuracy": 0.8251,
+          "updates": [
+            [
+              "bundle",
+              "accepted",
+              1034,
+              46
+            ]
+          ]
+        },
+        {
+          "round": 1,
+          "true_accuracy": 0.8251,
+          "updates": [
+            [
+              "bundle",
+              "rejected",
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "round": 2,
+          "true_accuracy": 0.8251,
+          "updates": [
+            [
+              "bundle",
+              "rejected",
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "round": 3,
+          "true_accuracy": 0.8251,
+          "updates": [
+            [
+              "bundle",
+              "rejected",
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "round": 4,
+          "true_accuracy": 0.8251,
+          "updates": [
+            [
+              "bundle",
+              "rejected",
+              0,
+              0
+            ]
+          ]
+        }
+      ],
+      "final_true_accuracy": 0.8251,
+      "scores": {
+        "w0-honest": 247,
+        "w1-honest": 247,
+        "w2-honest": 247,
+        "w3-freerider": 247
+      },
+      "honest_training_forward_passes": 252000,
+      "verification_forward_passes": 15000,
+      "scored_updates": 5,
+      "evaluation_overlap_with_training_or_test": 0,
+      "final_model": "c585ea5aef0c977fa7a3157dfb33ea7af8e6d6e04750e780fa72576df704185d",
+      "final_true_accuracy_by_trajectory": [
+        0.8251,
+        0.8251,
+        0.8251,
+        0.8251,
+        0.8251
+      ],
+      "mean_final_true_accuracy": 0.8251,
+      "scores_by_trajectory": [
+        {
+          "w0-honest": 247,
+          "w1-honest": 247,
+          "w2-honest": 247,
+          "w3-freerider": 247
+        },
+        {
+          "w0-honest": 251,
+          "w1-honest": 251,
+          "w2-honest": 251,
+          "w3-freerider": 251
+        },
+        {
+          "w0-honest": 239,
+          "w1-honest": 239,
+          "w2-honest": 239,
+          "w3-freerider": 239
+        },
+        {
+          "w0-honest": 246,
+          "w1-honest": 246,
+          "w2-honest": 246,
+          "w3-freerider": 246
+        },
+        {
+          "w0-honest": 247,
+          "w1-honest": 247,
+          "w2-honest": 247,
+          "w3-freerider": 247
+        }
+      ]
+    },
+    "bundle_with_poisoner": {
+      "history": [
+        {
+          "round": 0,
+          "true_accuracy": 0.17725,
+          "updates": [
+            [
+              "bundle",
+              "rejected",
+              190,
+              249
+            ]
+          ]
+        },
+        {
+          "round": 1,
+          "true_accuracy": 0.17725,
+          "updates": [
+            [
+              "bundle",
+              "rejected",
+              215,
+              228
+            ]
+          ]
+        },
+        {
+          "round": 2,
+          "true_accuracy": 0.17725,
+          "updates": [
+            [
+              "bundle",
+              "rejected",
+              199,
+              241
+            ]
+          ]
+        },
+        {
+          "round": 3,
+          "true_accuracy": 0.17725,
+          "updates": [
+            [
+              "bundle",
+              "rejected",
+              202,
+              246
+            ]
+          ]
+        },
+        {
+          "round": 4,
+          "true_accuracy": 0.17725,
+          "updates": [
+            [
+              "bundle",
+              "rejected",
+              174,
+              235
+            ]
+          ]
+        }
+      ],
+      "final_true_accuracy": 0.17725,
+      "scores": {},
+      "honest_training_forward_passes": 252000,
+      "verification_forward_passes": 15000,
+      "scored_updates": 5,
+      "evaluation_overlap_with_training_or_test": 0,
+      "final_model": "50f04b8037ca7a911fe4c5774bc15e497a4448229572e779ff39600f8403c8ec",
+      "final_true_accuracy_by_trajectory": [
+        0.17725,
+        0.17725,
+        0.17725,
+        0.17725,
+        0.17725
+      ],
+      "mean_final_true_accuracy": 0.17725,
+      "scores_by_trajectory": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    "unverified_average_honest": {
+      "history": [
+        {
+          "round": 0,
+          "true_accuracy": 0.81155,
+          "updates": [
+            [
+              "bundle",
+              "applied_unverified",
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "round": 1,
+          "true_accuracy": 0.85195,
+          "updates": [
+            [
+              "bundle",
+              "applied_unverified",
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "round": 2,
+          "true_accuracy": 0.85195,
+          "updates": []
+        },
+        {
+          "round": 3,
+          "true_accuracy": 0.85195,
+          "updates": []
+        },
+        {
+          "round": 4,
+          "true_accuracy": 0.85195,
+          "updates": []
+        }
+      ],
+      "final_true_accuracy": 0.85195,
+      "scores": {},
+      "honest_training_forward_passes": 336000,
+      "verification_forward_passes": 0,
+      "scored_updates": 0,
+      "evaluation_overlap_with_training_or_test": null,
+      "final_model": "0c20f915bb86d4a31465fbf9e419936d116f80d756ae2b31c3e2a91909e967fd",
+      "final_true_accuracy_by_trajectory": [
+        0.85195,
+        0.85195,
+        0.85195,
+        0.85195,
+        0.85195
+      ],
+      "mean_final_true_accuracy": 0.8519500000000001,
+      "scores_by_trajectory": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    "unverified_average_with_poisoner": {
+      "history": [
+        {
+          "round": 0,
+          "true_accuracy": 0.1463,
+          "updates": [
+            [
+              "bundle",
+              "applied_unverified",
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "round": 1,
+          "true_accuracy": 0.5045,
+          "updates": [
+            [
+              "bundle",
+              "applied_unverified",
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "round": 2,
+          "true_accuracy": 0.60705,
+          "updates": [
+            [
+              "bundle",
+              "applied_unverified",
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "round": 3,
+          "true_accuracy": 0.37505,
+          "updates": [
+            [
+              "bundle",
+              "applied_unverified",
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "round": 4,
+          "true_accuracy": 0.6179,
+          "updates": [
+            [
+              "bundle",
+              "applied_unverified",
+              0,
+              0
+            ]
+          ]
+        }
+      ],
+      "final_true_accuracy": 0.6179,
+      "scores": {},
+      "honest_training_forward_passes": 252000,
+      "verification_forward_passes": 0,
+      "scored_updates": 0,
+      "evaluation_overlap_with_training_or_test": null,
+      "final_model": "024848b3f952b2eec92be5bf533697ac472103dc215ae9184c1b90cd7f7777cb",
+      "final_true_accuracy_by_trajectory": [
+        0.6179,
+        0.6179,
+        0.6179,
+        0.6179,
+        0.6179
+      ],
+      "mean_final_true_accuracy": 0.6179,
+      "scores_by_trajectory": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    }
+  },
+  "E2_null_attacks": {
+    "base_true_accuracy": 0.80155,
+    "trials_per_strategy": 400,
+    "zero": {
+      "accepted_at_1_in_1024": 0,
+      "accepted_at_1_in_16": 0,
+      "mean_true_accuracy_change_first_5": 0.0
+    },
+    "replay_accepted_update": {
+      "accepted_at_1_in_1024": 0,
+      "accepted_at_1_in_16": 0,
+      "mean_true_accuracy_change_first_5": 0.0
+    },
+    "label_flip_correct_procedure": {
+      "accepted_at_1_in_1024": 0,
+      "accepted_at_1_in_16": 0,
+      "mean_true_accuracy_change_first_5": -0.7642
+    },
+    "noise_sparse_tiny": {
+      "accepted_at_1_in_1024": 0,
+      "accepted_at_1_in_16": 3,
+      "mean_true_accuracy_change_first_5": 0.00010000000000001119
+    },
+    "noise_dense_small": {
+      "accepted_at_1_in_1024": 0,
+      "accepted_at_1_in_16": 11,
+      "mean_true_accuracy_change_first_5": -0.00042999999999997484
+    },
+    "noise_dense_large": {
+      "accepted_at_1_in_1024": 0,
+      "accepted_at_1_in_16": 0,
+      "mean_true_accuracy_change_first_5": -0.25288
+    },
+    "expected_upper_limits": {
+      "at_1_in_1024": 0.390625,
+      "at_1_in_16": 25.0
+    }
+  },
+  "E3_evaluator_overfitting": {
+    "base_true_accuracy": 0.84365,
+    "attacker_training_examples": 0,
+    "public_fixed_set": {
+      "offline_queries": 4000,
+      "set_size": 375,
+      "measured_wins": 10,
+      "measured_losses": 1,
+      "accepted_on_that_set": false,
+      "true_accuracy_change": -0.0023499999999999632,
+      "same_update_on_fresh_batch": {
+        "wins": 10,
+        "losses": 15,
+        "accepted": false
+      }
+    },
+    "hidden_reused_set": {
+      "queries": 400,
+      "set_size": 375,
+      "measured_wins": 11,
+      "measured_losses": 0,
+      "accepted_on_that_set": true,
+      "true_accuracy_change": -0.0040999999999999925,
+      "same_update_on_fresh_batch": {
+        "wins": 1,
+        "losses": 12,
+        "accepted": false
+      }
+    },
+    "fresh_batch_per_submission": {
+      "queries": 400,
+      "attacker_believed_net_wins": 6,
+      "final_submission": {
+        "wins": 9,
+        "losses": 10,
+        "accepted": false
+      },
+      "true_accuracy_change": -0.0023499999999999632
+    }
+  },
+  "E4_sybil_splitting": {
+    "pieces": 6,
+    "repeats": 30,
+    "proportional_rule": {
+      "whole_mean_score": 947.3666666666667,
+      "split_mean_total_score": 948.8
+    },
+    "fixed_reward_per_acceptance_rule": {
+      "whole_mean_rewards": 1.0,
+      "split_mean_rewards": 6.0
+    },
+    "raw": {
+      "whole_scores": [
+        975,
+        919,
+        961,
+        972,
+        1010,
+        940,
+        946,
+        955,
+        969,
+        928,
+        930,
+        927,
+        942,
+        957,
+        924,
+        931,
+        938,
+        935,
+        930,
+        929,
+        983,
+        923,
+        958,
+        952,
+        932,
+        952,
+        972,
+        928,
+        954,
+        949
+      ],
+      "split_scores": [
+        1003,
+        1085,
+        983,
+        971,
+        932,
+        974,
+        996,
+        891,
+        836,
+        908,
+        858,
+        988,
+        934,
+        941,
+        1002,
+        938,
+        949,
+        963,
+        917,
+        943,
+        1018,
+        942,
+        877,
+        909,
+        953,
+        904,
+        968,
+        961,
+        936,
+        984
+      ],
+      "split_accepted_pieces": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    }
+  },
+  "E5_backdoor": {
+    "base_true_accuracy": 0.6249,
+    "trigger_target_class": 3,
+    "attack_success_rate_before": 0.0002,
+    "honest": {
+      "submitted": true,
+      "accepted": 30,
+      "of": 30,
+      "mean_net_wins": 243.16666666666666,
+      "clean_true_accuracy_change": 0.15805000000000002,
+      "attack_success_rate_after": 0.0002
+    },
+    "backdoored": {
+      "submitted": true,
+      "accepted": 30,
+      "of": 30,
+      "mean_net_wins": 154.96666666666667,
+      "clean_true_accuracy_change": 0.10229999999999995,
+      "attack_success_rate_after": 0.6108
+    },
+    "trigger_only": {
+      "submitted": true,
+      "accepted": 0,
+      "of": 30,
+      "mean_net_wins": -7.7,
+      "clean_true_accuracy_change": -0.0023499999999999632,
+      "attack_success_rate_after": 0.039
+    }
+  },
+  "E6_resolution": {
+    "trials_per_cell": 100,
+    "alpha": [
+      1,
+      1024
+    ],
+    "ground_truth_examples": 100000,
+    "updates": [
+      {
+        "base_training_examples": 150,
+        "submitted": true,
+        "base_true_accuracy": 0.52998,
+        "true_gain": 0.24332,
+        "discordant_rate": 0.27548,
+        "acceptance_rate_by_batch": {
+          "250": 1.0,
+          "500": 1.0,
+          "1000": 1.0,
+          "2000": 1.0,
+          "4000": 1.0,
+          "8000": 1.0
+        },
+        "normal_approximation_batch_for_half_power": 44
+      },
+      {
+        "base_training_examples": 300,
+        "submitted": true,
+        "base_true_accuracy": 0.63074,
+        "true_gain": 0.16073,
+        "discordant_rate": 0.24387,
+        "acceptance_rate_by_batch": {
+          "250": 0.95,
+          "500": 1.0,
+          "1000": 1.0,
+          "2000": 1.0,
+          "4000": 1.0,
+          "8000": 1.0
+        },
+        "normal_approximation_batch_for_half_power": 90
+      },
+      {
+        "base_training_examples": 600,
+        "submitted": true,
+        "base_true_accuracy": 0.70567,
+        "true_gain": 0.10437,
+        "discordant_rate": 0.19261,
+        "acceptance_rate_by_batch": {
+          "250": 0.72,
+          "500": 1.0,
+          "1000": 1.0,
+          "2000": 1.0,
+          "4000": 1.0,
+          "8000": 1.0
+        },
+        "normal_approximation_batch_for_half_power": 169
+      },
+      {
+        "base_training_examples": 1200,
+        "submitted": true,
+        "base_true_accuracy": 0.76518,
+        "true_gain": 0.05557,
+        "discordant_rate": 0.10105,
+        "acceptance_rate_by_batch": {
+          "250": 0.3,
+          "500": 0.81,
+          "1000": 1.0,
+          "2000": 1.0,
+          "4000": 1.0,
+          "8000": 1.0
+        },
+        "normal_approximation_batch_for_half_power": 312
+      },
+      {
+        "base_training_examples": 2400,
+        "submitted": true,
+        "base_true_accuracy": 0.80764,
+        "true_gain": 0.02517,
+        "discordant_rate": 0.07837,
+        "acceptance_rate_by_batch": {
+          "250": 0.05,
+          "500": 0.12,
+          "1000": 0.4,
+          "2000": 0.81,
+          "4000": 1.0,
+          "8000": 1.0
+        },
+        "normal_approximation_batch_for_half_power": 1181
+      }
+    ]
+  },
+  "E7_costs": {
+    "forward_passes": {
+      "worker_training": 16800,
+      "full_reexecution": 16800,
+      "verification": 3000,
+      "verification_over_training": 0.17857142857142858,
+      "verification_over_training_if_shard_were": {
+        "3000": 0.17857142857142858,
+        "12000": 0.044642857142857144,
+        "48000": 0.011160714285714286,
+        "192000": 0.0027901785714285715
+      }
+    },
+    "multiplications_per_example": {
+      "score_matrix": 144,
+      "audited_check": 30
+    },
+    "timing_ms": {
+      "worker_training_ms": 111.66180000873283,
+      "evaluation_data_generation_ms": 9.423199997399934,
+      "verification_two_model_evaluation_ms": 12.808699990273453,
+      "first_evaluator_score_matrices_ms": 12.418199999956414,
+      "second_validator_audit_ms": 3.838199991150759,
+      "verification_including_data_ms": 22.231899987673387
+    },
+    "timing_ratios": {
+      "verification_including_data_over_training": 0.1991003188730137,
+      "second_validator_over_first_evaluator": 0.30907860971511414
+    },
+    "forged_score_claim_rejected": true,
+    "update_bytes": 576,
+    "correct_but_harmful_step": {
+      "description": "exact training procedure run on wrong labels",
+      "recomputation_matches_submission": true,
+      "accepted_by_improvement_test": false,
+      "wins": 33,
+      "losses": 1178,
+      "true_accuracy_change": -0.7642
+    }
+  },
+  "E8_colluding_evaluation_data": {
+    "base_true_accuracy": 0.80155,
+    "trigger_target_class": 3,
+    "attacker_learned_anything": false,
+    "by_attacker_share": [
+      {
+        "attacker_share_per_thousand": 0,
+        "planted_examples": 0,
+        "chosen_strength": 8,
+        "accepted": 0,
+        "of": 30,
+        "mean_net_wins": 0.8333333333333334,
+        "true_accuracy_change": 0.000500000000000056
+      },
+      {
+        "attacker_share_per_thousand": 10,
+        "planted_examples": 15,
+        "chosen_strength": 8,
+        "accepted": 0,
+        "of": 30,
+        "mean_net_wins": 1.1,
+        "true_accuracy_change": 0.000500000000000056
+      },
+      {
+        "attacker_share_per_thousand": 20,
+        "planted_examples": 30,
+        "chosen_strength": 8,
+        "accepted": 0,
+        "of": 30,
+        "mean_net_wins": 1.1,
+        "true_accuracy_change": 0.000500000000000056
+      },
+      {
+        "attacker_share_per_thousand": 50,
+        "planted_examples": 75,
+        "chosen_strength": 8,
+        "accepted": 0,
+        "of": 30,
+        "mean_net_wins": 0.26666666666666666,
+        "true_accuracy_change": 0.000500000000000056
+      },
+      {
+        "attacker_share_per_thousand": 100,
+        "planted_examples": 150,
+        "chosen_strength": 256,
+        "accepted": 0,
+        "of": 30,
+        "mean_net_wins": 24.6,
+        "true_accuracy_change": -0.08694999999999997
+      },
+      {
+        "attacker_share_per_thousand": 200,
+        "planted_examples": 300,
+        "chosen_strength": 256,
+        "accepted": 30,
+        "of": 30,
+        "mean_net_wins": 185.3,
+        "true_accuracy_change": -0.08694999999999997
+      }
+    ]
+  },
+  "environment": {
+    "python": "3.14.5",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "logical_cpus": 28,
+    "note": "single process, pure-Python exact integers, no GPU"
+  }
+}
