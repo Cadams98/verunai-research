@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — UW-2 usefulness research
+
+- Add `verunai/uw2/`, an isolated TEST-only experiment that scores each committed model update by its measured effect on evaluation data generated later from deterministic inputs, with an exact sign test, commit-beacon-reveal ordering and unauthenticated arithmetic recomputation.
+- Record eight experiments as raw evidence. The zero, noise, re-applied and wrong-label updates tested were not accepted, and one tested way of splitting an update across names earned no detectable extra credit. A backdoored update was accepted, small honest gains were mostly rejected, and an attacker supplying 20% of evaluation data was credited for damage.
+- Conclusion: INCONCLUSIVE. This implementation assumes a trusted source of labelled evaluation data. No consensus, reward, wallet or networking code changed.
+- After independent review: state that the published seed and predictable beacons give no secrecy against adaptive workers, that the 1-in-1,024 figure is a conditional per-test limit and not a system-wide bound, that overlap was checked only for the training and test pools and E1's evaluation batches, and that no replay protection or Sybil resistance was shown. Rename `replay` to `recompute_arithmetic` and document it as an unauthenticated arithmetic check. Recorded evidence is unchanged.
+
 ## Unreleased - UW-1 audit corrections
 
 **UW-1 remains INCOMPLETE / NO-GO.** Full Linux correctness campaigns of

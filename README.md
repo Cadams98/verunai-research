@@ -42,6 +42,14 @@ On Windows: double-click `RUN_V3_LEDGER_DEMO_WINDOWS.bat`. See [v0.6 milestone r
 For the proposed Claude review, Codex draft publishing, and PR handoff checks,
 see the [engineering automation runbook](docs/ENGINEERING_AUTOMATION.md).
 
+## UW-2 usefulness research (inconclusive)
+
+```powershell
+python -m verunai.uw2.experiments --quick --output my-quick.json
+```
+
+A local, TEST-only experiment that accepts a model update only if it measurably improves predictions on an evaluation batch generated later from deterministic inputs. None of the specific no-work strategies tested was credited, for workers who cannot see or predict the evaluation data. The experiment publishes its seed and uses predictable beacons, so that data is not secret or unpredictable, and nothing here is a security result. It needs a trusted source of evaluation data, accepted a backdoored update, and could not certify small improvements cheaply. It is not a reward system or Proof of Useful Work. See the [UW-2 report](docs/USEFULNESS_UW2.md).
+
 ## Run three local nodes and audit them (v0.8 P0)
 
 ```powershell
