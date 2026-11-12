@@ -54,7 +54,7 @@ digest it unpacks each signed integer section once, checks the full bounds,
 and builds row tuples only after every section passes. Only then does it
 record the commitment and draw challenges. The submitted bytes and decoded
 tuples are immutable. The lock serializes attempt counting, commitment,
-challenge and local eligibility. An otherwise valid packet always has its
+challenge and local task completion. An otherwise valid packet always has its
 digest checked. A worker can hash arbitrary data, so bounds remain mandatory
 and a matching digest is only a commitment to bytes.
 
@@ -66,12 +66,12 @@ and a matching digest is only a commitment to bytes.
 | Authoritative head and model | Supply a current head and the associated model from the authoritative state. Retire or invalidate stale tasks according to the caller's head policy. The embedded head label is only a binding. |
 | Assignee | Authenticate the submitting worker and verify the worker owns the registered task. An assignee string is an identifier, not a credential. |
 | Attempt budget and replay | Keep one authoritative, atomic budget per issued scope. Enforce it across concurrent verifiers, restarts and retries, and retain enough state to detect repeat submissions. Charge malformed requests under that policy. |
-| Eligibility | Consume an accepted decision at most once under the same authoritative task state. The local flag is an experimental decision for one verifier, with no payout or consensus role. |
+| Local completion | Consume an accepted decision at most once under the same authoritative task state. The completion flag belongs to one research verifier and has no payout or consensus role. |
 
-The prototype implements a serialized in-memory budget and eligibility flag
+The prototype implements a serialized in-memory budget and completion state
 per verifier. Persistent coordination, identity, cross-instance replay
-prevention, chain-head freshness and reward execution belong to the caller
-and are outside the prototype.
+prevention and chain-head freshness belong to the caller. UW-1 has no
+blockchain reward integration.
 
 ## Why the check works
 
@@ -115,7 +115,11 @@ there is no unconditional security level for a wider system.
 
 The canonical transcript contains the task context, commitment, session and
 attempt metadata, challenge parameters and vectors, both projected sides in
-each round, exact update result, eligibility and final outcome. Replay takes
+each round, exact update result, acceptance and local task completion. In
+Python, the old `reward_eligible` attribute is now `local_task_completed`.
+The v1 transcript still stores that boolean in the same position and hashes
+the same bytes, so recorded transcripts and their digests remain valid.
+Replay takes
 the original task and packet plus a separately trusted digest, and recomputes
 the transcript without drawing new randomness. Comparing against the trusted
 digest detects changed records. Someone who can replace both the transcript
@@ -166,7 +170,8 @@ for seeds 0 and 1 at each dimension. It checks both provers and verifies both
 submissions for every task. These small fixtures are separate from the
 1,000-task manifests.
 
-The earlier `uw1_honest_16_64.json` file describes the original task split.
+The [original d=16/64 evidence](../evidence/uw1_honest_16_64.json) is
+**superseded research evidence** from the split that allowed content overlap.
 Compare corrected runs to the corrected Windows manifest only.
 
 ### Correctness campaigns
@@ -229,6 +234,20 @@ peaked at 11,142,077 traced bytes and used a median
 31.25 ms of process CPU time. The complete
 allocation and CPU measurements are in the raw JSON, including separate
 CPU batches for short operations. Traced allocations are not RSS.
+
+The performance gates apply at d=256. Smaller tasks did not see the same
+speedup. Full verification cost 37.34% of canonical proving and 66.91% of
+optimized proving at d=16, and 13.73% and 23.16% respectively at d=64.
+Worst malformed rejection was 4.16%, 2.14%, and 1.12% of optimized proving
+at d=16, 64, and 128 respectively.
+
+**Fixed-width overflow warning.** Signed 32-bit packet cells bound the wire
+format only. Intermediate products and projection sums use exact Python
+integers. In the 64-bit challenge settings, a single large challenge entry
+multiplied by a valid gradient entry can exceed signed 64-bit range before
+any summation. A fixed-width port must prove bounds for every intermediate
+and use wider or checked exact arithmetic. Wraparound can invalidate both
+verification results and the soundness argument over integers.
 
 ### Adversarial and held-out results
 

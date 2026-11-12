@@ -66,7 +66,7 @@ Distinguish consensus validity, miner data/model contributions, model release pi
 ## UW-1 research boundary
 
 [UW-1](USEFUL_WORK_UW1.md) uses a trusted local verifier and an experimental
-eligibility flag. No ledger, wallet, node or mining module imports it; it
+task completion flag. No ledger, wallet, node or mining module imports it; it
 reads the embedded corpus from the historical package. It does not adopt a
 reward architecture or change consensus.
 
@@ -76,7 +76,7 @@ reward architecture or change consensus.
 | prover.py | `canonical_prover()` and `optimized_prover()` produce exact immutable results |
 | commitment.py | `encode()` and `parse()` define and validate fixed-width result commitments |
 | challenge.py | `sample()` draws verifier challenges; `check()` projects both products and checks updates |
-| attempts.py | `Attempts` enforces the in-memory budget and award state |
+| attempts.py | `Attempts` enforces the in-memory budget and local completion state |
 | verifier.py | `Verifier.submit()` serializes attempt admission, commitment and randomized checks |
 | transcript.py | `Transcript` exports/imports bounded records; `replay()` checks against a trusted digest |
 | evaluation.py | `evaluate_steps()` measures held-out results independently of correctness |

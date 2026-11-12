@@ -7,7 +7,7 @@ class Attempts:
     """Bounded in-memory attempt state; callers must serialize access."""
     limit: int
     count: int = 0
-    awarded: bool = False
+    task_completed: bool = False
 
     def __post_init__(self) -> None:
         if type(self.limit) is not int or not 1 <= self.limit <= 10_000:
@@ -15,7 +15,7 @@ class Attempts:
 
     def reserve(self) -> int:
         """Charge one attempt, including malformed input, or refuse it."""
-        if self.awarded:
+        if self.task_completed:
             raise ValueError("task already has a valid submission")
         if self.count >= self.limit:
             raise ValueError("attempt limit exhausted")

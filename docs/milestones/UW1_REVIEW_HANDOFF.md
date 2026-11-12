@@ -14,14 +14,14 @@ Add corpus-derived tasks, canonical and optimized exact provers, a
 fixed-width submission format, fresh CSPRNG challenges after commitment,
 bounded attempt accounting, projected matrix checks, deterministic transcript
 replay, and independent held-out scoring. Both provers generate identical
-packets on the tested tasks. The local eligibility flag only records the first
-accepted result for an issued scope.
+packets on the tested tasks. The local completion flag records the first accepted result for an issued
+scope. The Python rename preserves v1 transcript bytes and digests.
 
 ## Testing
 
 The repository layout and engineering standards checks passed. On Windows
-with CPython 3.14.5, the full unit suite on the rebased branch ran 106 tests,
-with 103 passing, zero failures and three optional PyTorch skips. The suite includes v1, v2,
+with CPython 3.14.5, the full unit suite on the rebased branch ran 107 tests,
+with 104 passing, zero failures and three optional PyTorch skips. The suite includes v1, v2,
 and signed-v3 compatibility, the UW-1 adversarial regressions, exact signed
 bounds, content-disjoint splitting and an independent scalar oracle.
 
@@ -90,7 +90,7 @@ between arithmetic correctness and usefulness.
 No merge without both independent reviews and founder approval. No
 reward-channel work may proceed on the current incomplete evidence.
 Unexpected false accepts outside the stated model, stale or duplicated
-eligibility, or a fixed acceptance-gate failure also stop advancement.
+local completion, or a fixed acceptance-gate failure also stop advancement.
 
 ## Performance and limitations
 
@@ -101,7 +101,7 @@ to reject. The packet is 786,510 bytes. The report links the wall time,
 CPU and traced allocation samples. The prototype holds attempts in memory.
 A separate trusted issuer must own task provenance, current head and model
 state, authenticated assignment, the cross-instance budget, replay state and
-one-time eligibility decisions. Transcript integrity needs a separately
+one-time local acceptance decisions. Transcript integrity needs a separately
 trusted digest. The decision remains INCOMPLETE / NO-GO PENDING EVIDENCE
 until the cross-environment correctness evidence is available and all
 fixed gates pass.

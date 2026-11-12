@@ -11,7 +11,7 @@ from verunai.useful_work.experiments import _toy_grinding, perturb, with_gradien
 from verunai.useful_work.prover import canonical_prover, optimized_prover, updated
 from verunai.useful_work.task import (DIMENSIONS, GRADIENT_BOUND, RESIDUAL_BOUND,
                                      WEIGHT_BOUND, held_out, make_task, training_pool)
-from verunai.useful_work.transcript import Transcript, replay
+from verunai.useful_work.transcript import Transcript, record, replay
 from verunai.useful_work.verifier import Verifier
 
 
@@ -37,6 +37,16 @@ class UsefulWorkTests(unittest.TestCase):
             self.assertEqual(t, Transcript.from_bytes(t.to_bytes()))
             self.assertTrue(replay(self.task, self.packet, Transcript.from_bytes(t.to_bytes()), t.digest))
         self.assertEqual(updated(((0, 0),), ((-3, 3),), 2), ((1, -1),))
+
+    def test_transcript_v1_digest_survives_local_completion_rename(self):
+        transcript = record(self.task, parse(self.task, self.packet), "a" * 32,
+                            1, 3, self.params, self.probe)
+        # Captured from PR #7 at 5f3bcae, before the Python attribute was renamed.
+        original_digest = "9c42800849e8c74eadbd56fee97a913266a3686570c5985a84bd0d23355071d1"
+        self.assertEqual(transcript.digest, original_digest)
+        decoded = Transcript.from_bytes(transcript.to_bytes())
+        self.assertTrue(decoded.local_task_completed)
+        self.assertTrue(replay(self.task, self.packet, decoded, original_digest))
 
     def test_a1_gradient_unit_errors(self):
         for delta in (-1, 1):
@@ -142,9 +152,9 @@ class UsefulWorkTests(unittest.TestCase):
     def test_a8_exact_weight_update(self):
         self.rejected(replace(self.honest, weights=perturb(self.honest.weights, {(0, 0): 1})))
 
-    def test_a9_one_reward_and_b3_retry_limit(self):
+    def test_a9_one_local_completion_and_b3_retry_limit(self):
         verifier = Verifier(self.task)
-        self.assertTrue(verifier.submit(self.packet).reward_eligible)
+        self.assertTrue(verifier.submit(self.packet).local_task_completed)
         with self.assertRaisesRegex(ValueError, "already"):
             verifier.submit(self.packet)
         wrong = with_gradient(self.task, self.honest, perturb(self.honest.gradient, {(0, 0): 1}))
@@ -153,7 +163,7 @@ class UsefulWorkTests(unittest.TestCase):
             for expected in (1, 2):
                 t = verifier.submit(encode(self.task, wrong))
                 self.assertEqual(t.attempt, expected)
-                self.assertFalse(t.reward_eligible)
+                self.assertFalse(t.local_task_completed)
         with self.assertRaisesRegex(ValueError, "exhausted"):
             verifier.submit(self.packet)
 

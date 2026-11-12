@@ -23,15 +23,15 @@ class Transcript:
     projections: tuple[Round, ...]
     exact_update: bool
     accepted: bool
-    reward_eligible: bool
+    local_task_completed: bool
     digest: str = ""
 
     def body(self) -> bytes:
-        """Encode the transcript fields covered by the digest."""
+        """Encode the transcript fields covered by the digest in their original v1 order."""
         return canonical(["UW1/transcript/v1", self.context, self.commitment, self.session,
                           self.attempt, self.limit, self.parameters.bits, self.parameters.rounds,
                           self.challenges, self.projections, self.exact_update, self.accepted,
-                          self.reward_eligible])
+                          self.local_task_completed])
 
     def to_bytes(self) -> bytes:
         """Export canonical transcript body followed by its hex digest and newline."""
@@ -48,13 +48,13 @@ class Transcript:
             if end or not re.fullmatch(rb"[0-9a-f]{64}", digest):
                 raise ValueError("invalid transcript framing")
             (domain, context, commitment, session, attempt, limit, bits, rounds,
-             vectors, projections, exact, accepted, reward) = json.loads(body)
+             vectors, projections, exact, accepted, local_task_completed) = json.loads(body)
             if domain != "UW1/transcript/v1":
                 raise ValueError("invalid transcript domain")
             result = cls(context, commitment, session, attempt, limit, Parameters(bits, rounds),
                          tuple(tuple(v) for v in vectors),
                          tuple(tuple(tuple(v) for v in row) for row in projections),
-                         exact, accepted, reward, digest.decode("ascii"))
+                         exact, accepted, local_task_completed, digest.decode("ascii"))
             if result.to_bytes() != raw:
                 raise ValueError("noncanonical transcript")
             return result

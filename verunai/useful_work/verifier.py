@@ -10,7 +10,7 @@ from .transcript import Transcript, record
 
 
 class Verifier:
-    """Own one trusted task, its attempt budget and its local experimental award.
+    """Own one trusted task, its attempt budget and its local completion state.
 
     The caller must keep one live verifier per issued scope. Restarting or
     creating another verifier does not share state; this is an in-memory prototype.
@@ -37,5 +37,5 @@ class Verifier:
             challenges = sample(self._task.dimension, self._parameters)
             transcript = record(self._task, committed, self._session, attempt,
                                 self._attempts.limit, self._parameters, challenges)
-            self._attempts.awarded = transcript.accepted
+            self._attempts.task_completed = transcript.accepted
             return transcript

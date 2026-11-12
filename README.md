@@ -222,6 +222,11 @@ Do not publish a publicly tradable token or ask anyone to dedicate significant p
 
 ## UW-1 research experiment
 
+**UW-1 remains INCOMPLETE / NO-GO.** Full Linux correctness campaigns of
+1,000 tasks per dimension remain outstanding. On the corrected held-out split,
+loss worsened 7.11% against the no-training baseline. UW-1 activates no
+blockchain rewards or decentralized consensus changes.
+
 Run the local commit-then-challenge benchmark with:
 
 ```powershell

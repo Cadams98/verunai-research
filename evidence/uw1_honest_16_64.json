@@ -1,5 +1,7 @@
 {
   "mode": "honest",
+  "evidence_status": "superseded",
+  "superseded_reason": "Original task split allowed training and evaluation content to overlap. Use uw1_honest_windows.json for the corrected split.",
   "python": "3.14.5",
   "os": "Windows-11-10.0.26300-SP0",
   "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
