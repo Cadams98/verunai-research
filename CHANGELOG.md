@@ -38,6 +38,11 @@ blockchain rewards or decentralized consensus changes.
 - Address the automation audit with a fail-closed handoff check, explicit safety fields, pinned CI actions, and revision-bound Claude reports.
 - Remove the PR #3 bootstrap exception and test failing and passing descriptions through the handoff job.
 
+## Unreleased — canonical mining research
+
+- Record repeated neural-v3 CPU benchmark samples across three model states.
+- Extend historical signed-ledger candidate regression coverage and verify rejection of a tampered commitment after genesis.
+
 ## Unreleased — canonical neural-v3 benchmark
 
 - Added a local benchmark for canonical model computation, candidate generation, block validation, and replay, with timing variability and peak traced Python allocations.

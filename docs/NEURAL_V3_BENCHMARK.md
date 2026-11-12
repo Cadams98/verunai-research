@@ -86,6 +86,59 @@ The observations do not establish how larger chains, transaction-heavy blocks,
 or networked nodes scale. They also do not isolate the performance effect of
 reusing the model digest. The regression test verifies the eliminated call.
 
+## Milestone 1 canonical trials
+
+Run the following from the repository root using the Python interpreter
+with the project dependencies installed.
+
+```powershell
+foreach ($height in 2, 8, 16) {
+    foreach ($trial in 1, 2) {
+        python -B -m verunai.ledger_benchmark --attempts 64 --repeats 5 --blocks $height
+    }
+}
+```
+
+The [raw trial evidence](../evidence/neural_v3_canonical_workfactor_trials.json)
+records each argument list, fixture head, and sample. Each run used a fresh
+Python process. Candidate measurements used the model at the selected
+fixture tip and 64 nonce-derived batch selections per sample. Each report
+contains five timed samples per workload. Fixture construction and a warm-up per workload were outside the timed
+samples. A fresh chain replays the fixture using the same v3 implementation.
+The attempts-per-second figure counts complete canonical candidates before
+filtering for a winning hash. Acceptance and both rejection controls use
+the first block of the fixture in every run.
+
+| Fixture height | Candidate attempts/s, two trial medians | Peak traced candidate bytes | Full replay median range |
+| --- | ---: | ---: | ---: |
+| 2 | 435.5, 442.9 | 51,580 | 4.34–4.66 ms |
+| 8 | 432.8, 450.4 | 51,594 | 17.95–19.13 ms |
+| 16 | 516.5, 515.4 | 51,670 | 32.17–35.66 ms |
+
+The CPU host ran Windows 11 build 26300 and Python 3.14.5 on Intel Family 6
+Model 183 with 28 logical CPUs. These are sequential trials on one host
+with uncontrolled background load. The height order was fixed and each trial
+reused the same deterministic nonce range. The five samples within a trial are repeated measurements of one
+fixture and workload. With two process runs per height, these medians
+describe the runs only. They do not estimate cross-host throughput, establish
+a height effect, or support a statistical confidence claim. Acceptance
+medians ranged from 1.89 to 2.45 ms. Late neural mismatch rejection ranged from 1.90 to 2.31 ms.
+All three validation controls include fresh chain initialization. The late
+rejection case changes the verifier's local model before checking an intact
+mined block. It measures recomputation under state disagreement. The raw
+evidence includes within-trial minima, maxima, and median absolute
+deviations. Peak traced bytes come from a separate Python allocation pass
+and exclude total process memory.
+
+These trials cover empty TEST blocks. A separate compatibility regression
+rebuilds and validates both historical signed-ledger fixture blocks. Another
+test checks that the validator rejects a changed commitment after genesis,
+preserves the prior state, and accepts the original. No optimized candidate
+throughput, precomputation, energy, GPU, or network measurements were made.
+The captured evidence contains synthetic fixture identifiers, generic host
+metadata, and measurements. The experiment adds no user data or credentials
+and uses the existing local benchmark.
+
 ## Protocol and safety limits
 
 **H1 — Result equivalence and minimum work.** The training step is a linear
