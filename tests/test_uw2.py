@@ -10,7 +10,9 @@ from verunai.uw2.data import CLASSES, FEATURES, Oracle, overlap
 from verunai.uw2.experiments import Config, recorded_beacon, run
 from verunai.uw2.model import (DELTA_BOUND, ENCODED_SIZE, accuracy_count, add, decode, digest,
                                encode, predict, train_averaged, zero_weights)
-from verunai.uw2.protocol import Round, commitment, paired_counts, replay, submit
+from verunai.uw2 import protocol
+from verunai.uw2.protocol import (Round, Settlement, commitment, paired_counts,
+                                  recompute_arithmetic, submit)
 from verunai.uw2.stats import improved, tail_numerator
 from verunai.uw2.workers import (honest_update, label_flip_update, mean_update, noise_update,
                                  split_by_features, zero_update)
@@ -122,13 +124,13 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(by_worker["honest"].status, "accepted")
         self.assertEqual(by_worker["honest"].score, by_worker["honest"].wins - by_worker["honest"].losses)
         self.assertEqual((by_worker["zero"].status, by_worker["zero"].score), ("rejected", 0))
-        self.assertTrue(replay(round_.record(), self.oracle, zero_weights(), reveals))
+        self.assertTrue(recompute_arithmetic(round_.record(), self.oracle, zero_weights(), reveals))
         json.dumps(round_.record())
 
     def test_harmful_correct_procedure_is_rejected_after_a_good_model_exists(self):
         base = add(zero_weights(), self.honest)
         flip = label_flip_update(base, self.shards[1])
-        _, results, _ = self.settle("flip", {"flip": flip, "replay": self.honest}, base)
+        _, results, _ = self.settle("flip", {"flip": flip, "reapplied": self.honest}, base)
         self.assertEqual({r.status for r in results}, {"rejected"})
 
     def test_commitments_close_before_the_beacon_and_bind_the_worker(self):
@@ -179,16 +181,49 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             Round(self.oracle, zero_weights(), 0, beacon_source=lambda: b"short").close_commitments()
 
-    def test_replay_detects_tampered_records(self):
+    def test_arithmetic_recomputation_detects_inconsistent_records(self):
         round_, _, reveals = self.settle("tamper", {"honest": self.honest})
         record = round_.record()
-        self.assertTrue(replay(record, self.oracle, zero_weights(), reveals))
+        check = lambda rec, before=zero_weights(), rev=reveals: recompute_arithmetic(
+            rec, self.oracle, before, rev)
+        self.assertTrue(check(record))
         forged = json.loads(json.dumps(record))
         forged["settlements"][0]["score"] += 1
-        self.assertFalse(replay(forged, self.oracle, zero_weights(), reveals))
-        self.assertFalse(replay({**record, "beacon": "00" * 32}, self.oracle, zero_weights(), reveals))
-        self.assertFalse(replay(record, self.oracle, zero_weights(), {}))
-        self.assertFalse(replay(record, self.oracle, add(zero_weights(), self.honest), reveals))
+        self.assertFalse(check(forged))
+        self.assertFalse(check({**record, "beacon": "00" * 32}))
+        self.assertFalse(check(record, rev={}))
+        self.assertFalse(check(record, before=add(zero_weights(), self.honest)))
+        self.assertFalse(hasattr(protocol, "replay"))  # the broader name was withdrawn
+
+    def test_arithmetic_recomputation_does_not_authenticate_history(self):
+        # A fabricated round that never happened passes when it is internally consistent:
+        # invented beacon, invented worker, no commitment ever recorded by a coordinator.
+        beacon, fake = bytes(range(32)), "ab" * 32
+        update = encode(self.honest)
+        after = add(zero_weights(), self.honest)
+        wins, losses = paired_counts(zero_weights(), after,
+                                     self.oracle.evaluation_batch(beacon, bytes.fromhex(fake), 300))
+        fabricated = {"round": 7, "model_before": digest(zero_weights()), "model_after": digest(after),
+                      "beacon": beacon.hex(), "batch_size": 300, "alpha": [1, 1024],
+                      "settlements": [vars(Settlement("nobody", fake, "accepted", wins, losses, wins - losses))]}
+        self.assertTrue(improved(wins, losses))
+        self.assertTrue(recompute_arithmetic(fabricated, self.oracle, zero_weights(), {"nobody": update}))
+
+    def test_published_seed_reconstructs_evaluation_data(self):
+        # Disjoint is not secret: anyone with the seed rebuilds the batch a worker is scored on.
+        round_, results, _ = self.settle("seed", {"honest": self.honest})
+        tag = bytes.fromhex(results[0].commitment)
+        scored = self.oracle.evaluation_batch(round_.beacon, tag, 300)
+        self.assertEqual(scored, Oracle(b"uw2-test").evaluation_batch(round_.beacon, tag, 300))
+        self.assertEqual(Oracle(b"uw2-test").test_set(50), self.oracle.test_set(50))
+        self.assertNotEqual(Oracle(b"uw2-other").evaluation_batch(round_.beacon, b"x", 50),
+                            self.oracle.evaluation_batch(round_.beacon, b"x", 50))
+
+    def test_the_same_material_is_accepted_again_by_a_second_coordinator(self):
+        # No persistent state: commitments bind a round and model, not a coordinator instance.
+        outcomes = [self.settle("twice", {"honest": self.honest})[1][0] for _ in range(2)]
+        self.assertEqual(outcomes[0], outcomes[1])
+        self.assertEqual(outcomes[0].status, "accepted")
 
     def test_default_beacon_is_fresh_randomness(self):
         beacons = {Round(self.oracle, zero_weights(), 0).close_commitments() for _ in range(3)}

@@ -7,6 +7,16 @@ Every number except wall-clock timings is deterministic: data comes from
 SHAKE-256 streams, training is integer arithmetic, and beacons are *recorded*
 values derived from labels. A live protocol must draw beacons from a CSPRNG
 after commitments close; ``protocol.Round`` does that by default.
+
+Because the seed and the beacon labels are published, every evaluation batch
+used here can be reconstructed by anyone. The attackers in this module are
+written NOT to use that knowledge: they see only their own shard and published
+scores. The results therefore describe workers with restricted data access.
+They say nothing about a worker who knows the seed or predicts the beacon.
+
+Repeated measurements usually score ONE fixed update on many fresh batches.
+That estimates how often that candidate is accepted. It is not a sample of
+independently trained updates.
 """
 
 from __future__ import annotations
@@ -25,7 +35,7 @@ from . import audit
 from .data import CLASSES, FEATURES, Oracle, overlap
 from .model import (Weights, accuracy_count, add, decode, digest, encode, predict, subtract,
                     train_averaged, zero_weights)
-from .protocol import Round, paired_counts, replay, submit
+from .protocol import Round, paired_counts, recompute_arithmetic, submit
 from .stats import DEFAULT_ALPHA, improved
 from .workers import (HONEST_STEPS, backdoor_update, honest_training_forward_passes,
                       honest_update, label_flip_update, mean_update, noise_update,
@@ -123,8 +133,9 @@ def _run_rounds(cfg: Config, oracle: Oracle, shards, test, strategies, label: st
             before = weights
             settlements = round_.settle()
             weights = round_.weights
-            if not replay(round_.record(), oracle, before, {n: u for n, (u, _) in reveals.items()}):
-                raise RuntimeError("round replay disagreed with the settlement")
+            if not recompute_arithmetic(round_.record(), oracle, before,
+                                        {n: u for n, (u, _) in reveals.items()}):
+                raise RuntimeError("recomputed arithmetic disagreed with the settlement")
             for item in settlements:
                 scores[item.worker] = scores.get(item.worker, 0) + item.score
                 if item.status in ("accepted", "rejected"):
@@ -199,6 +210,9 @@ def experiment_null_attacks(cfg: Config, oracle: Oracle, shards, test) -> dict:
     """E2: how often do worthless or harmful updates get accepted?"""
     first = honest_update(zero_weights(), shards[0])
     base = add(zero_weights(), first)
+    # "replay_accepted_update" re-applies the same numeric update to a model that already
+    # contains it. It is not a test of cryptographic or protocol-level replay protection.
+    # The key name is kept so the recorded evidence stays comparable.
     fixed = {"zero": zero_update(), "replay_accepted_update": first,
              "label_flip_correct_procedure": label_flip_update(base, shards[1])}
     scale = _scale(base)

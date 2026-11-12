@@ -7,6 +7,14 @@ meaning: predicting labels of examples that were never used for training.
 
 Trust note: producing *fresh labelled* examples requires knowing the teacher.
 The ``Oracle`` is therefore a trusted component of this experiment.
+
+Secrecy note: separate streams make training, evaluation and test examples
+*disjoint*. They do not make evaluation data *secret*. Everything here is a
+deterministic function of the seed, so anyone who knows the seed can rebuild
+the teacher, every evaluation batch and the test set. The experiments publish
+their seed for reproducibility. They therefore model workers whose data access
+is restricted to their own shard. They do not establish security against a
+worker who knows the seed or can predict the beacon.
 """
 
 from __future__ import annotations

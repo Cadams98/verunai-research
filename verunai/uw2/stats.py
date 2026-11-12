@@ -8,6 +8,14 @@ among ``wins + losses`` discordant examples is at most the Binomial(n, 1/2)
 upper tail. The update is accepted only when that tail is at most ``alpha``.
 
 All arithmetic is exact integers; there is no floating-point rounding.
+
+Scope of the guarantee. ``alpha`` bounds the chance that ONE test accepts an
+update that does not help, and only if: (1) the evaluation batch was drawn
+independently of the update, after the update was fixed, and was unknown to
+its author; (2) the examples are independent draws from the distribution the
+model is meant for. It is not a system-wide bound. Over ``q`` submissions, by
+one or many identities, the expected number of false acceptances can reach
+``q * alpha``, and accepted updates are the ones that get applied.
 """
 
 from __future__ import annotations

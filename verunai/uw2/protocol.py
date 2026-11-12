@@ -15,6 +15,13 @@ One round:
 Trusted in this prototype: the coordinator (ordering, beacon, bookkeeping) and
 the data oracle (fresh labelled examples). Worker identities are labels. The
 "score" is a number in a local record and has no monetary or consensus role.
+
+Not provided: authenticated workers, persistent state across coordinator
+instances, a signed or append-only settlement history, any limit on
+submissions, or secrecy of evaluation data from someone who knows the oracle
+seed. A commitment binds its round number, model fingerprint and worker label,
+which stops reuse inside one ``Round``; nothing here prevents a restarted or
+second coordinator from accepting the same material again.
 """
 
 from __future__ import annotations
@@ -169,7 +176,11 @@ class Round:
         return results
 
     def record(self) -> dict:
-        """Return a JSON-serialisable record sufficient to replay the round."""
+        """Return a JSON-serialisable record of the round's arithmetic outcome.
+
+        The record is unsigned. It is an input to ``recompute_arithmetic``, not
+        an authenticated history.
+        """
         if self.settlements is None:
             raise ValueError("round is not settled")
         return {"round": self.round_number, "model_before": self.model_digest,
@@ -185,15 +196,22 @@ def submit(round_: Round, worker: str, delta: Weights, salt: bytes) -> tuple[byt
     return update, salt
 
 
-def replay(record: dict, oracle: Oracle, weights_before: Weights,
-           reveals: dict[str, bytes]) -> bool:
-    """Recompute a settled round from its record and revealed updates.
+def recompute_arithmetic(record: dict, oracle: Oracle, weights_before: Weights,
+                         reveals: dict[str, bytes]) -> bool:
+    """Recompute a round's scores and final model from inputs the caller already trusts.
 
-    Anyone holding the oracle's evaluation data can run this. It checks the
-    scores, decisions and resulting model digest, not how the beacon was drawn.
+    This is an arithmetic consistency check only. Given a record, the starting
+    model, the revealed updates and the oracle, it recomputes each listed
+    update's wins, losses, decision and the final model fingerprint.
+
+    It does NOT authenticate anything. It does not check that the beacon was
+    drawn after the commitments, that reveals match their commitments, that
+    the listed workers or order are genuine, or that the record is the one the
+    coordinator produced. A fabricated record that is internally consistent
+    passes. It also needs the oracle, whose seed discloses the evaluation data.
 
     Returns:
-        ``True`` if every settlement and the final model digest match.
+        ``True`` if the recomputed settlements and final fingerprint match the record.
     """
     if digest(weights_before) != record["model_before"]:
         return False
