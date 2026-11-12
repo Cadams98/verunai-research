@@ -1,9 +1,34 @@
 # Changelog
 
-## Unreleased — canonical mining research
+## Unreleased — UW-2 usefulness research
 
-- Record repeated neural-v3 CPU benchmark samples across three model states.
-- Extend historical signed-ledger candidate regression coverage and verify rejection of a tampered commitment after genesis.
+- Add `verunai/uw2/`, an isolated TEST-only experiment that scores each committed model update by its measured effect on evaluation data generated later from deterministic inputs, with an exact sign test, commit-beacon-reveal ordering and unauthenticated arithmetic recomputation.
+- Record eight experiments as raw evidence. The zero, noise, re-applied and wrong-label updates tested were not accepted, and one tested way of splitting an update across names earned no detectable extra credit. A backdoored update was accepted, small honest gains were mostly rejected, and an attacker supplying 20% of evaluation data was credited for damage.
+- Conclusion: INCONCLUSIVE. This implementation assumes a trusted source of labelled evaluation data. No consensus, reward, wallet or networking code changed.
+- After independent review: state that the published seed and predictable beacons give no secrecy against adaptive workers, that the 1-in-1,024 figure is a conditional per-test limit and not a system-wide bound, that overlap was checked only for the training and test pools and E1's evaluation batches, and that no replay protection or Sybil resistance was shown. Rename `replay` to `recompute_arithmetic` and document it as an unauthenticated arithmetic check. Recorded evidence is unchanged.
+
+## Unreleased - UW-1 audit corrections
+
+**UW-1 remains INCOMPLETE / NO-GO.** Full Linux correctness campaigns of
+1,000 tasks per dimension remain outstanding. On the corrected held-out split,
+loss worsened 7.11% against the no-training baseline. UW-1 activates no
+blockchain rewards or decentralized consensus changes.
+
+- Check exact framing and the packet commitment before integer decoding, while retaining full signed bounds and mathematical checks.
+- Split training and evaluation by unique encoded content and version the research task binding.
+- Add independent scalar checks, an interleaved CPU and memory benchmark, and portable correctness manifests.
+
+## Unreleased - UW-1 research
+
+- Add a standalone commit-then-challenge matrix verification experiment, exact CPU provers, transcript replay and local attempt limits.
+- Record cost, adversarial and held-out evidence; the full correctness gate remains open. Ledger consensus and rewards are unchanged.
+
+## Unreleased — v0.8 P0 three-node testnet harness
+
+- Add `python -m verunai.testnet_harness`. It starts three to five unmodified nodes as separate local processes, waits for convergence, and re-audits every saved ledger in process and with the existing `audit` command.
+- Measure convergence time, CPU time, peak memory and node-to-node traffic. Traffic is counted by a loopback relay that forwards bytes unchanged.
+- Record 20 neural-v3 and 5 each of bigram-v1 and neural-v2 reference trials as raw evidence (30 of 30 passed). Withdraw the first-seen fork-choice proposal for P3 and recommend most-work with a deterministic lowest-hash tie-break.
+- No consensus, fork-choice, networking or storage behaviour changed.
 
 ## Unreleased — engineering automation proposal
 
@@ -11,6 +36,12 @@
 - Propose bounded, opt-in Claude Code PR reviews with paid execution disabled by default.
 - Clarify implementation ownership and document authentication, costs, and human merge authority.
 - Address the automation audit with a fail-closed handoff check, explicit safety fields, pinned CI actions, and revision-bound Claude reports.
+- Remove the PR #3 bootstrap exception and test failing and passing descriptions through the handoff job.
+
+## Unreleased — canonical mining research
+
+- Record repeated neural-v3 CPU benchmark samples across three model states.
+- Extend historical signed-ledger candidate regression coverage and verify rejection of a tampered commitment after genesis.
 
 ## Unreleased — canonical neural-v3 benchmark
 

@@ -103,8 +103,8 @@ The [raw trial evidence](../evidence/neural_v3_canonical_workfactor_trials.json)
 records each argument list, fixture head, and sample. Each run used a fresh
 Python process. Candidate measurements used the model at the selected
 fixture tip and 64 nonce-derived batch selections per sample. Each report
-contains five timed samples per workload. Setup was outside the timed
-samples. Fixture blocks were independently replayed by the v3 validator.
+contains five timed samples per workload. Fixture construction and a warm-up per workload were outside the timed
+samples. A fresh chain replays the fixture using the same v3 implementation.
 The attempts-per-second figure counts complete canonical candidates before
 filtering for a winning hash. Acceptance and both rejection controls use
 the first block of the fixture in every run.
@@ -117,11 +117,18 @@ the first block of the fixture in every run.
 
 The CPU host ran Windows 11 build 26300 and Python 3.14.5 on Intel Family 6
 Model 183 with 28 logical CPUs. These are sequential trials on one host
-with uncontrolled background load. The trial ranges cannot attribute the
-rate differences to the model state alone. Acceptance medians ranged from
-1.89 to 2.45 ms. Late neural mismatch rejection ranged from 1.90 to 2.31 ms.
-Both include fresh chain setup. The raw evidence includes within-trial
-minima, maxima, and median absolute deviations.
+with uncontrolled background load. The height order was fixed and each trial
+reused the same deterministic nonce range. The five samples within a trial are repeated measurements of one
+fixture and workload. With two process runs per height, these medians
+describe the runs only. They do not estimate cross-host throughput, establish
+a height effect, or support a statistical confidence claim. Acceptance
+medians ranged from 1.89 to 2.45 ms. Late neural mismatch rejection ranged from 1.90 to 2.31 ms.
+All three validation controls include fresh chain initialization. The late
+rejection case changes the verifier's local model before checking an intact
+mined block. It measures recomputation under state disagreement. The raw
+evidence includes within-trial minima, maxima, and median absolute
+deviations. Peak traced bytes come from a separate Python allocation pass
+and exclude total process memory.
 
 These trials cover empty TEST blocks. A separate compatibility regression
 rebuilds and validates both historical signed-ledger fixture blocks. Another

@@ -35,7 +35,11 @@ Legacy experiments: `verunai/core.py` is v1; `verunai/neural_consensus.py` also 
 | `verunai/__main__.py` | Command-line entry points for experiments | Thin CLI delegating to tested application services |
 | `verunai/gpu_research.py` | Optional CPU/GPU benchmark experiments | Research-only backend, never implicit consensus authority |
 | `verunai/ledger_benchmark.py` | Research-only `benchmark_ledger()` and module CLI for canonical v3 work, validation costs, and allocations | Uses the existing validator with local fixtures for accepted blocks and both early and late rejection |
+| `verunai/testnet_harness.py` | v0.8 P0: launches 3–5 unmodified nodes as local processes, detects convergence, re-audits saved ledgers | Basis for partition, crash and hostile-peer campaigns (P6); see `docs/TESTNET_HARNESS.md` |
+| `verunai/testnet_proxy.py` | Loopback byte-counting relay between harness nodes; forwards bytes unchanged | Becomes the fault-injection proxy (delay, drop, partition) in P6 |
+| `verunai/process_metrics.py` | Standard-library CPU-time, peak-memory and liveness readings for child processes | Shared by later observability work (P5) |
 | `tests/` | Unit/integration and adversarial regression checks | Add deterministic vectors and multi-host stress tests |
+| `verunai/uw2/` | Research-only proof-of-improvement experiment: synthetic data oracle (`data.py`), exact integer model (`model.py`), sign test (`stats.py`), commit-beacon-reveal rounds and unauthenticated arithmetic recomputation (`protocol.py`), honest and adversarial workers (`workers.py`), evaluator audit (`audit.py`), experiments CLI (`experiments.py`) | Not imported by consensus, wallet, mining or networking. Trusted coordinator and data oracle; published seed and predictable experiment beacons, so evaluation data is not secret or unpredictable; see `docs/USEFULNESS_UW2.md` |
 
 ## Protocol invariants to protect
 
@@ -59,3 +63,22 @@ and the local Codex helper publishes draft PRs from authorized task branches.
 See the [engineering automation runbook](ENGINEERING_AUTOMATION.md).
 
 Distinguish consensus validity, miner data/model contributions, model release pipelines, and hosted AI responses. Ledger validators cannot enforce every model output policy on independent peer-operated systems. The model update pipeline will require provenance and poisoning controls before accepting distributed updates; the hosted application layer will require privacy, abuse, and tool-permission safeguards. These are **planned controls**, not existing v0.6.3 runtime features. See `docs/SAFETY_AND_ETHICS.md`.
+
+## UW-1 research boundary
+
+[UW-1](USEFUL_WORK_UW1.md) uses a trusted local verifier and an experimental
+task completion flag. No ledger, wallet, node or mining module imports it; it
+reads the embedded corpus from the historical package. It does not adopt a
+reward architecture or change consensus.
+
+| Module under verunai/useful_work | Responsibility and interface |
+| --- | --- |
+| task.py | `make_task()` derives immutable corpus tasks; `held_out()` returns evaluation rows |
+| prover.py | `canonical_prover()` and `optimized_prover()` produce exact immutable results |
+| commitment.py | `encode()` and `parse()` define and validate fixed-width result commitments |
+| challenge.py | `sample()` draws verifier challenges; `check()` projects both products and checks updates |
+| attempts.py | `Attempts` enforces the in-memory budget and local completion state |
+| verifier.py | `Verifier.submit()` serializes attempt admission, commitment and randomized checks |
+| transcript.py | `Transcript` exports/imports bounded records; `replay()` checks against a trusted digest |
+| evaluation.py | `evaluate_steps()` measures held-out results independently of correctness |
+| benchmark.py / experiments.py | CLI, timing harness, honest sweeps and small adversarial fixtures |

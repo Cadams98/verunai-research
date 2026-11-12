@@ -42,6 +42,22 @@ On Windows: double-click `RUN_V3_LEDGER_DEMO_WINDOWS.bat`. See [v0.6 milestone r
 For the proposed Claude review, Codex draft publishing, and PR handoff checks,
 see the [engineering automation runbook](docs/ENGINEERING_AUTOMATION.md).
 
+## UW-2 usefulness research (inconclusive)
+
+```powershell
+python -m verunai.uw2.experiments --quick --output my-quick.json
+```
+
+A local, TEST-only experiment that accepts a model update only if it measurably improves predictions on an evaluation batch generated later from deterministic inputs. None of the specific no-work strategies tested was credited, for workers who cannot see or predict the evaluation data. The experiment publishes its seed and uses predictable beacons, so that data is not secret or unpredictable, and nothing here is a security result. It needs a trusted source of evaluation data, accepted a backdoored update, and could not certify small improvements cheaply. It is not a reward system or Proof of Useful Work. See the [UW-2 report](docs/USEFULNESS_UW2.md).
+
+## Run three local nodes and audit them (v0.8 P0)
+
+```powershell
+python -m verunai.testnet_harness --trials 1 --difficulty 1 --height 3
+```
+
+This starts three unmodified nodes as separate processes on `127.0.0.1`, waits until they agree, and independently re-verifies each saved ledger. See the [harness guide](docs/TESTNET_HARNESS.md) for options, measurements, reference results and limitations. TEST units only; not a secure or public network.
+
 ## Measure canonical neural-v3 mining
 
 ```powershell
@@ -211,3 +227,19 @@ Do not publish a publicly tradable token or ask anyone to dedicate significant p
 ## Ethics and safety: our highest priority
 
 **Verunai is intended to serve all humanity.** Human rights, user safety, privacy, truthful knowledge, accessibility, community accountability, and responsible energy use take priority over token value or speed. Read `docs/SAFETY_AND_ETHICS.md`, `docs/SAFETY_TEST_PLAN.md`, and [ADR 0003](docs/decisions/0003-humanity-first-safety.md). These are binding development policies, **not** evidence that this experimental prototype has passed an AI safety evaluation. A new `safety-reviewer` Claude subagent can independently review changes, but human accountability remains essential.
+
+## UW-1 research experiment
+
+**UW-1 remains INCOMPLETE / NO-GO.** Full Linux correctness campaigns of
+1,000 tasks per dimension remain outstanding. On the corrected held-out split,
+loss worsened 7.11% against the no-training baseline. UW-1 activates no
+blockchain rewards or decentralized consensus changes.
+
+Run the local commit-then-challenge benchmark with:
+
+```powershell
+python -m verunai.useful_work.benchmark --output evidence/uw1_benchmark.json
+```
+
+See the [UW-1 report](docs/USEFUL_WORK_UW1.md) for the measured results,
+open acceptance gates and opt-in correctness and adversarial commands.
