@@ -1081,16 +1081,16 @@
       "audited_check": 30
     },
     "timing_ms": {
-      "worker_training_ms": 111.66180000873283,
-      "evaluation_data_generation_ms": 9.423199997399934,
-      "verification_two_model_evaluation_ms": 12.808699990273453,
-      "first_evaluator_score_matrices_ms": 12.418199999956414,
-      "second_validator_audit_ms": 3.838199991150759,
-      "verification_including_data_ms": 22.231899987673387
+      "worker_training_ms": 104.13880000123754,
+      "evaluation_data_generation_ms": 8.28449999971781,
+      "verification_two_model_evaluation_ms": 11.975500005064532,
+      "first_evaluator_score_matrices_ms": 12.841100004152395,
+      "second_validator_audit_ms": 3.918799993698485,
+      "verification_including_data_ms": 20.26000000478234
     },
     "timing_ratios": {
-      "verification_including_data_over_training": 0.1991003188730137,
-      "second_validator_over_first_evaluator": 0.30907860971511414
+      "verification_including_data_over_training": 0.19454804553674115,
+      "second_validator_over_first_evaluator": 0.3051763472312553
     },
     "forged_score_claim_rejected": true,
     "update_bytes": 576,

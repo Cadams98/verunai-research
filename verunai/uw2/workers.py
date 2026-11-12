@@ -1,7 +1,9 @@
 """Honest and adversarial worker strategies. Each returns an integer update.
 
 The adversaries are deliberately simple and strong against naive designs.
-They exist to try to defeat the protocol, not to demonstrate it.
+They exist to try to defeat the protocol, not to demonstrate it. They are
+research-only textbook attacks on this package's synthetic linear model and
+are not exposed through any command-line option.
 """
 
 from __future__ import annotations

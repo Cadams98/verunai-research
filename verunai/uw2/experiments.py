@@ -86,10 +86,10 @@ def _base_from(shard, examples: int) -> Weights:
     return train_averaged(zero_weights(), shard[0][:examples], shard[1][:examples], 2, 16)
 
 
-def _hardest_target(weights: Weights, test) -> int:
-    """Return the class an honest model predicts least often on triggered inputs."""
+def _hardest_target(weights: Weights, own_data) -> int:
+    """Return the class a model predicts least often on triggered copies of the attacker's own inputs."""
     counts = [0] * CLASSES
-    for x in test[0][:3000]:
+    for x in own_data[0]:
         counts[predict(weights, with_trigger(x))] += 1
     return counts.index(min(counts))
 
@@ -312,7 +312,7 @@ def experiment_backdoor(cfg: Config, oracle: Oracle, shards, test) -> dict:
     xs, ys = shards[1]
     cut = len(xs) * 4 // 5
     honest = honest_update(base, shards[1])
-    target = _hardest_target(add(base, honest) if honest is not None else base, test)
+    target = _hardest_target(add(base, honest) if honest is not None else base, shards[1])
     best, best_count = None, -1
     for step in HONEST_STEPS:  # the attacker also keeps its best candidate on clean validation data
         delta = backdoor_update(base, (xs[:cut], ys[:cut]), cut // 4, target, 2, step)
@@ -435,7 +435,7 @@ def experiment_costs(cfg: Config, oracle: Oracle, shards, test) -> dict:
 def experiment_colluding_evaluation_data(cfg: Config, oracle: Oracle, shards, test) -> dict:
     """E8: what if the attacker supplies a fraction of the evaluation examples?"""
     base = add(zero_weights(), honest_update(zero_weights(), shards[0]))
-    target = _hardest_target(base, test)
+    target = _hardest_target(base, shards[-1])
     base_rate = _rate(base, test)
 
     def mixed(xs, ys, planted: int):

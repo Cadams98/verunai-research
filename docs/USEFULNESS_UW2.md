@@ -11,6 +11,10 @@ decentralized Proof of Useful Work.
 Raw evidence: [`evidence/uw2_results.json`](../evidence/uw2_results.json).
 Code: `verunai/uw2/`. Tests: `tests/test_uw2.py`.
 
+An AI agent (Claude) designed and implemented this experiment and wrote this
+report. Independent review of the code by another agent or person is still
+pending, and the owner decides on any merge.
+
 ## 1. The question and the plan
 
 > Can independent participants contribute computations that measurably improve
@@ -45,7 +49,7 @@ Hypotheses, written before running the experiments, and what happened:
 | A | **Exact step verification** (UW-1 Freivalds; refereed delegation such as Verde) | That a prescribed calculation was done correctly | Low for matrix products; dispute games need bit-identical arithmetic on all hardware | Correct is not useful. E7 shows an exactly reproducible training step on wrong labels that destroys the model. The task issuer must also be trusted to pick useful work. |
 | B | **Cryptographic proof of training** (zero-knowledge ML) | Same as A, without re-execution | Very low to verify; proving is reported at thousands of times the training cost | Same "correct is not useful" gap, plus prover cost. |
 | C | **Proof of improvement on fresh evaluation** (selected) | The *effect* of an update on unseen data | One evaluation pass per update, independent of how the update was made | Needs fresh labelled data nobody could train on; cannot see hidden behaviours; cannot resolve small gains cheaply. |
-| D | **Bundled improvement** (verify the average of all updates once per round) | The effect of the group | One evaluation per round | Free riders are paid; one poisoner blocks everyone (E1). |
+| D | **Bundled improvement** (verify the average of all updates once per round) | The effect of the group | One evaluation per round | Free riders are credited; one poisoner blocks everyone (E1). |
 | E | **Peer-supplied evaluation data** (workers commit evaluation examples in advance) | As C, without a central data source | As C | Whoever supplies evaluation data can sell answers. E8 measures how much share an attacker needs. |
 
 Selection, using the same four criteria for each:
@@ -53,7 +57,7 @@ Selection, using the same four criteria for each:
 | Criterion | A exact step | B zk proof | C fresh improvement | D bundle | E peer data |
 | --- | --- | --- | --- | --- | --- |
 | Rewards only useful work | No | No | **Yes, for visible behaviour** | Group only | If data is honest |
-| Resists no-work earning | Yes | Yes | **Yes** | No (free riders) | Depends on collusion |
+| Resists no-work earning | Yes | Yes | **Yes, given an honest data source and beacon** | No (free riders) | Depends on collusion |
 | Feasible in pure Python now | Yes (UW-1) | No | **Yes** | Yes | Yes |
 | Verification cost | Low | Lowest | Moderate, set by statistics | **Lowest** | Moderate |
 
@@ -83,11 +87,15 @@ disagree matter. If an update does not truly help, each such example is a win
 with probability at most one half. The update is accepted only if the chance of
 seeing that many wins by luck is at most 1 in 1,024. The calculation uses exact
 integers. Because every update gets a batch that did not exist when it was
-committed, this limit holds for every submission, however adaptive the worker.
+committed, this limit holds for every submission, however adaptive the worker,
+**provided the data source and the beacon are honest**.
 
 **Workers may train however they like.** Only the submitted integer update and
 its measured effect matter. Evaluation is exact integer arithmetic, so any node
-with the evaluation data recomputes every score bit for bit (`replay`).
+with the evaluation data recomputes every score bit for bit (`replay`). In this
+prototype that data comes from the oracle, whose secret also reveals the
+teacher. Public re-checking and a secret data source pull against each other;
+that tension is unresolved here.
 
 **Auditing the evaluator** (`audit.py`). A second validator can check a first
 evaluator's published score matrix with a Freivalds-style check instead of
@@ -122,7 +130,8 @@ separate streams. The harness counts shared feature vectors across all of them
 in every verified condition: **0 overlaps** (`evaluation_overlap_with_training_or_test`
 and `training_shards_and_test_overlap` in the evidence; also a unit test).
 "True accuracy" always means accuracy on a 20,000-example test set that no
-worker and no acceptance decision ever uses.
+worker and no acceptance decision ever uses. Attackers choose their trigger
+class from their own training shard.
 
 ## 5. Results
 
@@ -136,7 +145,7 @@ Reference points: chance 17.7%, best possible (teacher) 89.3%, one worker alone
 | Per-update verification, all honest | 82.3% (80.8–84.0) | First update accepted; most later ones rejected as too small to certify |
 | Per-update verification, 1 poisoner | 81.6% (80.8–82.5) | Poisoner rejected every time; earned 0 |
 | Bundle verification, all honest | **85.2%** | Matches unverified averaging; one test per round |
-| Bundle verification, 1 free rider | 82.5% | **Free rider earned the same score as each honest worker (247)** |
+| Bundle verification, 1 free rider | 82.5% | **Free rider was credited the same score as each honest worker (247)** |
 | Bundle verification, 1 poisoner | **17.7%** | **Every bundle rejected; nobody learns or earns** |
 | Unverified averaging, all honest | 85.2% | Simple baseline, no checks |
 | Unverified averaging, 1 poisoner | 61.8% | Model badly damaged |
@@ -144,7 +153,7 @@ Reference points: chance 17.7%, best possible (teacher) 89.3%, one worker alone
 Verification is clearly worth having when someone misbehaves. But H5 is
 refuted: per-update verification captured only part of the available learning
 (82.3% against 85.2%), because of the resolution limit in E6. Bundling recovers
-the learning and loses attribution: it pays free riders and lets one poisoner
+the learning and loses attribution: it credits free riders and lets one poisoner
 stop everyone.
 
 ### E2. Do worthless updates get through? (400 fresh-batch trials each)
@@ -158,6 +167,7 @@ stop everyone.
 | Dense small noise | 0 | 11 | −0.04% |
 | Dense large noise | 0 | 0 | −25.3% |
 
+The true accuracy change is the mean over the first 5 trials of each row.
 The weaker 1/16 level was included only to check that the test behaves as
 calculated. Zero acceptances in 400 trials do not prove the rate is zero; the
 1-in-1,024 limit is the claim, and it follows from the test itself.
@@ -201,7 +211,7 @@ stamped with an out-of-range "trigger" and labelled with a class of its choice.
 
 H6 is refuted. Evaluation on clean data cannot see behaviour that only appears
 on inputs the evaluator never draws. The backdoor cost the attacker about a
-third of its score, so it is paid less, but it is still paid.
+third of its score, so it is credited less, but it is still credited.
 
 ### E6. The resolution limit
 
@@ -226,12 +236,12 @@ honest update is worth +2.5% is rejected 60% of the time at 1,000 examples.
 
 | Quantity | Measured |
 | --- | ---: |
-| Worker training (3,000-example shard) | 16,800 example passes, 111.7 ms |
+| Worker training (3,000-example shard) | 16,800 example passes, 104.1 ms |
 | Full re-execution | Same as training |
-| Verification (1,500 fresh examples, two models) | 3,000 passes, 22.2 ms including data generation |
-| **Verification ÷ training** | **17.9% by passes, 19.9% by time** |
+| Verification (1,500 fresh examples, two models) | 3,000 passes, 20.3 ms including data generation |
+| **Verification ÷ training** | **17.9% by passes, 19.5% by time** |
 | Same batch if the shard were 4×, 16×, 64× larger | 4.5%, 1.1%, 0.28% |
-| Second validator's audit ÷ first evaluator's work | 30.9% by time (20.8% by multiplications) |
+| Second validator's audit ÷ first evaluator's work | 30.5% by time (20.8% by multiplications) |
 | Update size | 576 bytes |
 
 Verification cost does not depend on how much training went into an update.
@@ -259,7 +269,7 @@ batch and submits a trigger-only update.
 | 10% | 0 / 30 | +24.6 | −8.7% |
 | 20% | **30 / 30** | +185.3 | **−8.7%** |
 
-With a fifth of the evaluation data, an attacker is paid every time for
+With a fifth of the evaluation data, an attacker is credited every time for
 damaging the model. This crude attack needed a large share; a subtler one that
 combines planted examples with real learning would need less.
 
@@ -267,7 +277,9 @@ combines planted examples with real learning would need less.
 
 Supported by this evidence, under the stated trust assumptions:
 
-- Zero, noise, replayed, copied and wrong-label updates earned nothing.
+- Zero, noise, replayed and wrong-label updates earned nothing (E2). Copying
+  another worker's revealed update is refused by the commitment check, which is
+  covered by a unit test and not by a statistical experiment.
 - Splitting across identities earned nothing extra under proportional scoring.
 - Fresh batches defeated a query attack that beat a reused evaluation set.
 - Poisoned updates were blocked where unverified averaging was badly damaged.
@@ -292,7 +304,7 @@ Limits, in order of seriousness:
    exactly when the model is good.
 4. **Attribution against robustness.** Verifying each update gives fair
    credit but rejects small honest work. Verifying the bundle learns more and
-   costs less, but pays free riders and lets one poisoner veto the round.
+   costs less, but credits free riders and lets one poisoner veto the round.
    Leave-one-out attribution would need one more evaluation per worker and
    meets limit 3 again.
 5. **The cost advantage is conditional.** At this scale verification costs
@@ -308,7 +320,8 @@ was replaced by averaging as the fair baseline.
 Remaining uncertainties: one synthetic linear task; one machine; pure Python;
 no real dataset; no authenticated identities; no economic model for fees
 against the 1-in-1,024 false-acceptance rate; attackers limited to the
-strategies listed. Published work on adaptive holdout reuse, backdoor
+strategies listed; no cap on submissions per round and no rollback of an
+accepted update. Published work on adaptive holdout reuse, backdoor
 poisoning, robust aggregation and data valuation is relevant and was not
 re-verified in this session.
 
@@ -356,4 +369,5 @@ All numbers except the timings in E7 are identical on every run and platform:
 data comes from hash streams, training is integer arithmetic, and the beacons
 in the experiments are recorded values. A live round draws its beacon from the
 system's secure random generator. Reference environment: Windows 11 build
-26300, CPython 3.14.5, single process, no GPU. Energy was not measured.
+26300, CPython 3.14.5, Intel family 6 model 183 with 28 logical CPUs, single
+process, no GPU. Energy was not measured.
