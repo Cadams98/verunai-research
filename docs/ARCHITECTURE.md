@@ -62,3 +62,22 @@ and the local Codex helper publishes draft PRs from authorized task branches.
 See the [engineering automation runbook](ENGINEERING_AUTOMATION.md).
 
 Distinguish consensus validity, miner data/model contributions, model release pipelines, and hosted AI responses. Ledger validators cannot enforce every model output policy on independent peer-operated systems. The model update pipeline will require provenance and poisoning controls before accepting distributed updates; the hosted application layer will require privacy, abuse, and tool-permission safeguards. These are **planned controls**, not existing v0.6.3 runtime features. See `docs/SAFETY_AND_ETHICS.md`.
+
+## UW-1 research boundary
+
+[UW-1](USEFUL_WORK_UW1.md) uses a trusted local verifier and an experimental
+task completion flag. No ledger, wallet, node or mining module imports it; it
+reads the embedded corpus from the historical package. It does not adopt a
+reward architecture or change consensus.
+
+| Module under verunai/useful_work | Responsibility and interface |
+| --- | --- |
+| task.py | `make_task()` derives immutable corpus tasks; `held_out()` returns evaluation rows |
+| prover.py | `canonical_prover()` and `optimized_prover()` produce exact immutable results |
+| commitment.py | `encode()` and `parse()` define and validate fixed-width result commitments |
+| challenge.py | `sample()` draws verifier challenges; `check()` projects both products and checks updates |
+| attempts.py | `Attempts` enforces the in-memory budget and local completion state |
+| verifier.py | `Verifier.submit()` serializes attempt admission, commitment and randomized checks |
+| transcript.py | `Transcript` exports/imports bounded records; `replay()` checks against a trusted digest |
+| evaluation.py | `evaluate_steps()` measures held-out results independently of correctness |
+| benchmark.py / experiments.py | CLI, timing harness, honest sweeps and small adversarial fixtures |

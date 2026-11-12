@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased - UW-1 audit corrections
+
+**UW-1 remains INCOMPLETE / NO-GO.** Full Linux correctness campaigns of
+1,000 tasks per dimension remain outstanding. On the corrected held-out split,
+loss worsened 7.11% against the no-training baseline. UW-1 activates no
+blockchain rewards or decentralized consensus changes.
+
+- Check exact framing and the packet commitment before integer decoding, while retaining full signed bounds and mathematical checks.
+- Split training and evaluation by unique encoded content and version the research task binding.
+- Add independent scalar checks, an interleaved CPU and memory benchmark, and portable correctness manifests.
+
+## Unreleased - UW-1 research
+
+- Add a standalone commit-then-challenge matrix verification experiment, exact CPU provers, transcript replay and local attempt limits.
+- Record cost, adversarial and held-out evidence; the full correctness gate remains open. Ledger consensus and rewards are unchanged.
+
 ## Unreleased — v0.8 P0 three-node testnet harness
 
 - Add `python -m verunai.testnet_harness`. It starts three to five unmodified nodes as separate local processes, waits for convergence, and re-audits every saved ledger in process and with the existing `audit` command.

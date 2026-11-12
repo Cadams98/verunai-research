@@ -1,0 +1,4073 @@
+{
+  "mode": "benchmark",
+  "python": "3.14.5",
+  "os": "Windows-11-10.0.26300-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "logical_cpus": 28,
+  "backend": "CPython exact integers",
+  "gpu": "not measured; no GPU backend selected",
+  "workers": 1,
+  "result": {
+    "repeats": 12,
+    "warmups_per_workload_per_fixture": 1,
+    "parameters": [
+      32,
+      2
+    ],
+    "dimensions": {
+      "16": {
+        "metrics": {
+          "canonical": {
+            "samples_ns": [
+              1537100,
+              1558400,
+              1577600,
+              1598600,
+              1623200,
+              1608200,
+              1583800,
+              1641400,
+              1595100,
+              1605000,
+              1595700,
+              1598900
+            ],
+            "median_ns": 1597150.0,
+            "min_ns": 1537100,
+            "max_ns": 1641400,
+            "mad_ns": 12200.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              15625000,
+              0,
+              0,
+              0,
+              15625000,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 57328,
+            "fixture_peaks_bytes": [
+              30272,
+              57232,
+              57328
+            ],
+            "fixture_median_ns": [
+              1591200.0,
+              1609450.0,
+              1597000.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 78,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 1402243.5897435897
+              },
+              {
+                "operations": 77,
+                "total_cpu_ns": 156250000,
+                "cpu_ns_per_operation": 2029220.7792207792
+              },
+              {
+                "operations": 78,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 1602564.1025641025
+              }
+            ]
+          },
+          "optimized": {
+            "samples_ns": [
+              826800,
+              871100,
+              873700,
+              857000,
+              910200,
+              911600,
+              858900,
+              954000,
+              942400,
+              862300,
+              908800,
+              911100
+            ],
+            "median_ns": 891250.0,
+            "min_ns": 826800,
+            "max_ns": 954000,
+            "mad_ns": 24650.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 57496,
+            "fixture_peaks_bytes": [
+              29984,
+              57400,
+              57496
+            ],
+            "fixture_median_ns": [
+              857950.0,
+              909500.0,
+              911350.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 145,
+                "total_cpu_ns": 140625000,
+                "cpu_ns_per_operation": 969827.5862068966
+              },
+              {
+                "operations": 137,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 912408.7591240876
+              },
+              {
+                "operations": 137,
+                "total_cpu_ns": 140625000,
+                "cpu_ns_per_operation": 1026459.8540145985
+              }
+            ]
+          },
+          "submission_encoding": {
+            "samples_ns": [
+              64000,
+              74400,
+              60000,
+              86100,
+              57500,
+              55400,
+              64900,
+              114200,
+              116000,
+              79300,
+              67300,
+              56000
+            ],
+            "median_ns": 66100.0,
+            "min_ns": 55400,
+            "max_ns": 116000,
+            "mad_ns": 9350.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 25319,
+            "fixture_peaks_bytes": [
+              25319,
+              25319,
+              25319
+            ],
+            "fixture_median_ns": [
+              72100.0,
+              70850.0,
+              58000.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 1733,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 54096.94171956145
+              },
+              {
+                "operations": 1764,
+                "total_cpu_ns": 78125000,
+                "cpu_ns_per_operation": 44288.54875283447
+              },
+              {
+                "operations": 2155,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 50754.06032482599
+              }
+            ]
+          },
+          "verifier": {
+            "samples_ns": [
+              605900,
+              550500,
+              605900,
+              613100,
+              601400,
+              568900,
+              631300,
+              587700,
+              591200,
+              648300,
+              577900,
+              569200
+            ],
+            "median_ns": 596300.0,
+            "min_ns": 550500,
+            "max_ns": 648300,
+            "mad_ns": 17600.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              15625000
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 82969,
+            "fixture_peaks_bytes": [
+              44281,
+              82817,
+              82969
+            ],
+            "fixture_median_ns": [
+              622200.0,
+              582800.0,
+              580200.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 200,
+                "total_cpu_ns": 140625000,
+                "cpu_ns_per_operation": 703125.0
+              },
+              {
+                "operations": 214,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 584112.1495327103
+              },
+              {
+                "operations": 215,
+                "total_cpu_ns": 140625000,
+                "cpu_ns_per_operation": 654069.7674418605
+              }
+            ]
+          },
+          "malformed_short": {
+            "samples_ns": [
+              1400,
+              1200,
+              1100,
+              2400,
+              1100,
+              1200,
+              1100,
+              900,
+              1200,
+              2400,
+              2000,
+              1700
+            ],
+            "median_ns": 1200.0,
+            "min_ns": 900,
+            "max_ns": 2400,
+            "mad_ns": 150.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1200,
+            "fixture_peaks_bytes": [
+              1200,
+              1200,
+              1200
+            ],
+            "fixture_median_ns": [
+              1900.0,
+              1150.0,
+              1200.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 50000,
+                "total_cpu_ns": 31250000,
+                "cpu_ns_per_operation": 625.0
+              },
+              {
+                "operations": 50000,
+                "total_cpu_ns": 46875000,
+                "cpu_ns_per_operation": 937.5
+              },
+              {
+                "operations": 50000,
+                "total_cpu_ns": 46875000,
+                "cpu_ns_per_operation": 937.5
+              }
+            ]
+          },
+          "malformed_oversized": {
+            "samples_ns": [
+              3100,
+              2800,
+              900,
+              2400,
+              1700,
+              2400,
+              1800,
+              2100,
+              2000,
+              1500,
+              1900,
+              900
+            ],
+            "median_ns": 1950.0,
+            "min_ns": 900,
+            "max_ns": 3100,
+            "mad_ns": 450.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1200,
+            "fixture_peaks_bytes": [
+              1200,
+              1200,
+              1200
+            ],
+            "fixture_median_ns": [
+              2100.0,
+              2000.0,
+              1450.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 50000,
+                "total_cpu_ns": 31250000,
+                "cpu_ns_per_operation": 625.0
+              },
+              {
+                "operations": 50000,
+                "total_cpu_ns": 31250000,
+                "cpu_ns_per_operation": 625.0
+              },
+              {
+                "operations": 50000,
+                "total_cpu_ns": 46875000,
+                "cpu_ns_per_operation": 937.5
+              }
+            ]
+          },
+          "malformed_context": {
+            "samples_ns": [
+              2600,
+              1600,
+              2500,
+              1600,
+              1400,
+              1100,
+              1500,
+              1100,
+              3900,
+              1800,
+              1300,
+              2100
+            ],
+            "median_ns": 1600.0,
+            "min_ns": 1100,
+            "max_ns": 3900,
+            "mad_ns": 400.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1200,
+            "fixture_peaks_bytes": [
+              1200,
+              1200,
+              1200
+            ],
+            "fixture_median_ns": [
+              1700.0,
+              1350.0,
+              2300.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 50000,
+                "total_cpu_ns": 46875000,
+                "cpu_ns_per_operation": 937.5
+              },
+              {
+                "operations": 50000,
+                "total_cpu_ns": 46875000,
+                "cpu_ns_per_operation": 937.5
+              },
+              {
+                "operations": 50000,
+                "total_cpu_ns": 31250000,
+                "cpu_ns_per_operation": 625.0
+              }
+            ]
+          },
+          "malformed_digest": {
+            "samples_ns": [
+              6200,
+              5400,
+              5900,
+              7300,
+              6500,
+              4600,
+              4800,
+              4500,
+              8000,
+              6300,
+              6200,
+              7000
+            ],
+            "median_ns": 6200.0,
+            "min_ns": 4500,
+            "max_ns": 8000,
+            "mad_ns": 800.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1265,
+            "fixture_peaks_bytes": [
+              1265,
+              1265,
+              1265
+            ],
+            "fixture_median_ns": [
+              6250.0,
+              5800.0,
+              6450.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 20000,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 4687.5
+              },
+              {
+                "operations": 21551,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 4350.146164911141
+              },
+              {
+                "operations": 19379,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 4837.710924196295
+              }
+            ]
+          },
+          "malformed_dense_digest": {
+            "samples_ns": [
+              7100,
+              8200,
+              6300,
+              4800,
+              8100,
+              5100,
+              7300,
+              5400,
+              4900,
+              6100,
+              5400,
+              5300
+            ],
+            "median_ns": 5750.0,
+            "min_ns": 4800,
+            "max_ns": 8200,
+            "mad_ns": 750.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1265,
+            "fixture_peaks_bytes": [
+              1265,
+              1265,
+              1265
+            ],
+            "fixture_median_ns": [
+              6600.0,
+              6750.0,
+              5200.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 18939,
+                "total_cpu_ns": 78125000,
+                "cpu_ns_per_operation": 4125.085801784677
+              },
+              {
+                "operations": 18518,
+                "total_cpu_ns": 78125000,
+                "cpu_ns_per_operation": 4218.868128307593
+              },
+              {
+                "operations": 24038,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 4550.087361677344
+              }
+            ]
+          },
+          "malformed_dense_bounds": {
+            "samples_ns": [
+              29200,
+              35000,
+              21100,
+              28900,
+              37400,
+              19100,
+              31100,
+              36800,
+              22900,
+              31100,
+              39000,
+              19100
+            ],
+            "median_ns": 30150.0,
+            "min_ns": 19100,
+            "max_ns": 39000,
+            "mad_ns": 6950.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 59937,
+            "fixture_peaks_bytes": [
+              49617,
+              59937,
+              39265
+            ],
+            "fixture_median_ns": [
+              30150.0,
+              37100.0,
+              20100.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 4145,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 26387.213510253318
+              },
+              {
+                "operations": 3369,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 37102.99792223212
+              },
+              {
+                "operations": 6218,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 20102.926986169186
+              }
+            ]
+          },
+          "dishonest_math": {
+            "samples_ns": [
+              616500,
+              559900,
+              547100,
+              606000,
+              593800,
+              575500,
+              671100,
+              563000,
+              571900,
+              618700,
+              574800,
+              567000
+            ],
+            "median_ns": 575150.0,
+            "min_ns": 547100,
+            "max_ns": 671100,
+            "mad_ns": 16950.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 82941,
+            "fixture_peaks_bytes": [
+              44013,
+              82785,
+              82941
+            ],
+            "fixture_median_ns": [
+              617600.0,
+              568900.0,
+              569450.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 202,
+                "total_cpu_ns": 140625000,
+                "cpu_ns_per_operation": 696163.3663366337
+              },
+              {
+                "operations": 219,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 570776.2557077626
+              },
+              {
+                "operations": 219,
+                "total_cpu_ns": 140625000,
+                "cpu_ns_per_operation": 642123.2876712328
+              }
+            ]
+          }
+        },
+        "order": [
+          {
+            "fixture": 0,
+            "workloads": [
+              "optimized",
+              "malformed_oversized",
+              "malformed_dense_digest",
+              "dishonest_math",
+              "malformed_digest",
+              "malformed_short",
+              "malformed_dense_bounds",
+              "verifier",
+              "submission_encoding",
+              "malformed_context",
+              "canonical"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "verifier",
+              "canonical",
+              "optimized",
+              "malformed_dense_digest",
+              "submission_encoding",
+              "malformed_dense_bounds",
+              "dishonest_math",
+              "malformed_oversized",
+              "malformed_context",
+              "malformed_digest",
+              "malformed_short"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "verifier",
+              "malformed_context",
+              "malformed_short",
+              "malformed_oversized",
+              "submission_encoding",
+              "dishonest_math",
+              "malformed_dense_digest",
+              "canonical",
+              "malformed_dense_bounds",
+              "optimized",
+              "malformed_digest"
+            ]
+          },
+          {
+            "fixture": 0,
+            "workloads": [
+              "malformed_dense_digest",
+              "dishonest_math",
+              "malformed_short",
+              "malformed_dense_bounds",
+              "verifier",
+              "optimized",
+              "malformed_digest",
+              "submission_encoding",
+              "canonical",
+              "malformed_oversized",
+              "malformed_context"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "malformed_digest",
+              "malformed_context",
+              "optimized",
+              "malformed_dense_bounds",
+              "malformed_short",
+              "dishonest_math",
+              "verifier",
+              "canonical",
+              "malformed_dense_digest",
+              "submission_encoding",
+              "malformed_oversized"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "malformed_dense_digest",
+              "malformed_short",
+              "malformed_context",
+              "malformed_digest",
+              "malformed_dense_bounds",
+              "dishonest_math",
+              "canonical",
+              "optimized",
+              "malformed_oversized",
+              "submission_encoding",
+              "verifier"
+            ]
+          },
+          {
+            "fixture": 0,
+            "workloads": [
+              "malformed_dense_bounds",
+              "malformed_context",
+              "malformed_digest",
+              "submission_encoding",
+              "verifier",
+              "optimized",
+              "canonical",
+              "dishonest_math",
+              "malformed_dense_digest",
+              "malformed_oversized",
+              "malformed_short"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "malformed_dense_digest",
+              "malformed_context",
+              "malformed_short",
+              "malformed_digest",
+              "malformed_dense_bounds",
+              "verifier",
+              "malformed_oversized",
+              "optimized",
+              "dishonest_math",
+              "submission_encoding",
+              "canonical"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "canonical",
+              "submission_encoding",
+              "malformed_digest",
+              "malformed_dense_digest",
+              "malformed_dense_bounds",
+              "optimized",
+              "malformed_context",
+              "verifier",
+              "malformed_oversized",
+              "malformed_short",
+              "dishonest_math"
+            ]
+          },
+          {
+            "fixture": 0,
+            "workloads": [
+              "malformed_dense_digest",
+              "canonical",
+              "malformed_short",
+              "malformed_oversized",
+              "verifier",
+              "malformed_dense_bounds",
+              "malformed_context",
+              "submission_encoding",
+              "optimized",
+              "malformed_digest",
+              "dishonest_math"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "malformed_digest",
+              "optimized",
+              "malformed_short",
+              "dishonest_math",
+              "submission_encoding",
+              "canonical",
+              "malformed_dense_bounds",
+              "verifier",
+              "malformed_oversized",
+              "malformed_dense_digest",
+              "malformed_context"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "optimized",
+              "canonical",
+              "malformed_digest",
+              "dishonest_math",
+              "malformed_short",
+              "malformed_dense_digest",
+              "malformed_oversized",
+              "malformed_dense_bounds",
+              "submission_encoding",
+              "verifier",
+              "malformed_context"
+            ]
+          }
+        ],
+        "fixtures": [
+          {
+            "seed": 2026,
+            "submission_bytes": 6222,
+            "packet_sha256": "7515346d2af6f2e117c790d04377b3bf3f6e79207358f510265f0e2059e472dd",
+            "overflow_section": "gradient"
+          },
+          {
+            "seed": 2027,
+            "submission_bytes": 6222,
+            "packet_sha256": "507e51bcfffadf57ed533ecd71a2c4fdb7bad2601bbb7d32439aa2bae63d91ad",
+            "overflow_section": "weights"
+          },
+          {
+            "seed": 2028,
+            "submission_bytes": 6222,
+            "packet_sha256": "55f3a0eade3f68cb447f336858c3959fabb5faffeeb6597b013f82e2b4c1ac09",
+            "overflow_section": "residual"
+          }
+        ],
+        "submission_bytes": 6222,
+        "precomputation_ns": 0,
+        "verifier_over_canonical": 0.3733525342015465,
+        "verifier_over_optimized": 0.6690603085553998,
+        "worst_malformed_fixture_median_ns": 37100.0,
+        "malformed_over_canonical": 0.023228876436151895,
+        "malformed_over_optimized": 0.04162692847124825
+      },
+      "64": {
+        "metrics": {
+          "canonical": {
+            "samples_ns": [
+              20667600,
+              20219900,
+              19583500,
+              20350800,
+              19800600,
+              19663600,
+              20636200,
+              19833700,
+              19364100,
+              20400100,
+              20144900,
+              19642200
+            ],
+            "median_ns": 19989300.0,
+            "min_ns": 19364100,
+            "max_ns": 20667600,
+            "mad_ns": 354300.0,
+            "cpu_samples_ns": [
+              31250000,
+              15625000,
+              15625000,
+              15625000,
+              15625000,
+              15625000,
+              15625000,
+              15625000,
+              15625000,
+              31250000,
+              15625000,
+              15625000
+            ],
+            "cpu_median_ns": 15625000.0,
+            "peak_traced_bytes": 571472,
+            "fixture_peaks_bytes": [
+              322896,
+              571472,
+              571184
+            ],
+            "fixture_median_ns": [
+              20518150.0,
+              19989300.0,
+              19612850.0
+            ],
+            "fixture_batched_cpu": [
+              null,
+              {
+                "operations": 6,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 20833333.333333332
+              },
+              {
+                "operations": 6,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 18229166.666666668
+              }
+            ]
+          },
+          "optimized": {
+            "samples_ns": [
+              10815400,
+              12378100,
+              11868200,
+              11032300,
+              11733400,
+              11828800,
+              11200300,
+              12016800,
+              11947700,
+              10760900,
+              12143300,
+              12054800
+            ],
+            "median_ns": 11848500.0,
+            "min_ns": 10760900,
+            "max_ns": 12378100,
+            "mad_ns": 250550.0,
+            "cpu_samples_ns": [
+              15625000,
+              15625000,
+              15625000,
+              15625000,
+              15625000,
+              15625000,
+              15625000,
+              0,
+              15625000,
+              0,
+              0,
+              15625000
+            ],
+            "cpu_median_ns": 15625000.0,
+            "peak_traced_bytes": 571640,
+            "fixture_peaks_bytes": [
+              323032,
+              571640,
+              571352
+            ],
+            "fixture_median_ns": [
+              10923850.0,
+              12080050.0,
+              11907950.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 11,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 9943181.818181818
+              },
+              {
+                "operations": 10,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 12500000.0
+              },
+              {
+                "operations": 10,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 10937500.0
+              }
+            ]
+          },
+          "submission_encoding": {
+            "samples_ns": [
+              618700,
+              450000,
+              383100,
+              415500,
+              367300,
+              460200,
+              499500,
+              370300,
+              327900,
+              565000,
+              378100,
+              362700
+            ],
+            "median_ns": 399300.0,
+            "min_ns": 327900,
+            "max_ns": 618700,
+            "mad_ns": 43650.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              15625000,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 206503,
+            "fixture_peaks_bytes": [
+              206503,
+              206503,
+              206503
+            ],
+            "fixture_median_ns": [
+              532250.0,
+              374200.0,
+              372900.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 234,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 400641.0256410256
+              },
+              {
+                "operations": 334,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 280688.622754491
+              },
+              {
+                "operations": 335,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 326492.53731343284
+              }
+            ]
+          },
+          "verifier": {
+            "samples_ns": [
+              2888200,
+              2755400,
+              2784300,
+              2977200,
+              2732300,
+              2671700,
+              3202100,
+              2627500,
+              2683800,
+              2838300,
+              2625500,
+              2606000
+            ],
+            "median_ns": 2743850.0,
+            "min_ns": 2606000,
+            "max_ns": 3202100,
+            "mad_ns": 105400.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              15625000,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 730373,
+            "fixture_peaks_bytes": [
+              356077,
+              730373,
+              730041
+            ],
+            "fixture_median_ns": [
+              2932700.0,
+              2679900.0,
+              2677750.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 42,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 2976190.476190476
+              },
+              {
+                "operations": 46,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 2717391.304347826
+              },
+              {
+                "operations": 46,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 2717391.304347826
+              }
+            ]
+          },
+          "malformed_short": {
+            "samples_ns": [
+              1900,
+              1100,
+              2000,
+              5500,
+              1800,
+              1500,
+              1100,
+              900,
+              1600,
+              5200,
+              5000,
+              4800
+            ],
+            "median_ns": 1850.0,
+            "min_ns": 900,
+            "max_ns": 5500,
+            "mad_ns": 750.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1200,
+            "fixture_peaks_bytes": [
+              1200,
+              1200,
+              1200
+            ],
+            "fixture_median_ns": [
+              3550.0,
+              1450.0,
+              1800.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 35211,
+                "total_cpu_ns": 31250000,
+                "cpu_ns_per_operation": 887.5067450512624
+              },
+              {
+                "operations": 50000,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 312.5
+              },
+              {
+                "operations": 50000,
+                "total_cpu_ns": 31250000,
+                "cpu_ns_per_operation": 625.0
+              }
+            ]
+          },
+          "malformed_oversized": {
+            "samples_ns": [
+              9900,
+              4600,
+              1000,
+              6200,
+              5200,
+              5800,
+              1600,
+              3600,
+              4700,
+              2400,
+              4800,
+              1200
+            ],
+            "median_ns": 4650.0,
+            "min_ns": 1000,
+            "max_ns": 9900,
+            "mad_ns": 1350.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1200,
+            "fixture_peaks_bytes": [
+              1200,
+              1200,
+              1200
+            ],
+            "fixture_median_ns": [
+              4300.0,
+              4700.0,
+              2950.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 29069,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 537.5141903746259
+              },
+              {
+                "operations": 26595,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 587.5164504606129
+              },
+              {
+                "operations": 42372,
+                "total_cpu_ns": 31250000,
+                "cpu_ns_per_operation": 737.5153403190786
+              }
+            ]
+          },
+          "malformed_context": {
+            "samples_ns": [
+              7000,
+              2100,
+              5900,
+              2500,
+              1400,
+              1300,
+              1800,
+              1200,
+              5500,
+              1800,
+              1200,
+              3500
+            ],
+            "median_ns": 1950.0,
+            "min_ns": 1200,
+            "max_ns": 7000,
+            "mad_ns": 700.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1200,
+            "fixture_peaks_bytes": [
+              1200,
+              1200,
+              1200
+            ],
+            "fixture_median_ns": [
+              2150.0,
+              1300.0,
+              4500.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 50000,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 312.5
+              },
+              {
+                "operations": 50000,
+                "total_cpu_ns": 46875000,
+                "cpu_ns_per_operation": 937.5
+              },
+              {
+                "operations": 27777,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 562.5157504410123
+              }
+            ]
+          },
+          "malformed_digest": {
+            "samples_ns": [
+              32400,
+              23400,
+              34200,
+              34200,
+              27500,
+              21600,
+              21500,
+              21200,
+              27300,
+              33000,
+              27200,
+              36000
+            ],
+            "median_ns": 27400.0,
+            "min_ns": 21200,
+            "max_ns": 36000,
+            "mad_ns": 5700.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1265,
+            "fixture_peaks_bytes": [
+              1265,
+              1265,
+              1265
+            ],
+            "fixture_median_ns": [
+              32700.0,
+              25300.0,
+              30750.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 3822,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 24529.042386185243
+              },
+              {
+                "operations": 4940,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 22140.688259109313
+              },
+              {
+                "operations": 4065,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 23062.73062730627
+              }
+            ]
+          },
+          "malformed_dense_digest": {
+            "samples_ns": [
+              164600,
+              45600,
+              28800,
+              23600,
+              31700,
+              24200,
+              25600,
+              21700,
+              21700,
+              26800,
+              23800,
+              24300
+            ],
+            "median_ns": 24950.0,
+            "min_ns": 21700,
+            "max_ns": 164600,
+            "mad_ns": 2550.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1265,
+            "fixture_peaks_bytes": [
+              1265,
+              1265,
+              1265
+            ],
+            "fixture_median_ns": [
+              26200.0,
+              27750.0,
+              24250.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 4770,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 19654.088050314465
+              },
+              {
+                "operations": 4504,
+                "total_cpu_ns": 78125000,
+                "cpu_ns_per_operation": 17345.69271758437
+              },
+              {
+                "operations": 5154,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 21221.38145129996
+              }
+            ]
+          },
+          "malformed_dense_bounds": {
+            "samples_ns": [
+              154700,
+              254300,
+              139600,
+              151500,
+              248600,
+              76300,
+              155600,
+              272600,
+              75800,
+              148200,
+              253200,
+              80600
+            ],
+            "median_ns": 153100.0,
+            "min_ns": 75800,
+            "max_ns": 272600,
+            "mad_ns": 74650.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 490017,
+            "fixture_peaks_bytes": [
+              326097,
+              490017,
+              162145
+            ],
+            "fixture_median_ns": [
+              153100.0,
+              253750.0,
+              78450.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 816,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 153186.27450980392
+              },
+              {
+                "operations": 492,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 254065.0406504065
+              },
+              {
+                "operations": 1593,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 68659.76145637162
+              }
+            ]
+          },
+          "dishonest_math": {
+            "samples_ns": [
+              2870700,
+              2707500,
+              2797100,
+              3114400,
+              2694500,
+              2715800,
+              2806300,
+              2651700,
+              2851400,
+              2985800,
+              2609000,
+              2662400
+            ],
+            "median_ns": 2756450.0,
+            "min_ns": 2609000,
+            "max_ns": 3114400,
+            "mad_ns": 94500.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              15625000,
+              0,
+              0,
+              0,
+              0,
+              15625000,
+              0,
+              15625000,
+              15625000,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 730229,
+            "fixture_peaks_bytes": [
+              356045,
+              730229,
+              730061
+            ],
+            "fixture_median_ns": [
+              2928250.0,
+              2673100.0,
+              2756450.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 42,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 2604166.6666666665
+              },
+              {
+                "operations": 46,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 2717391.304347826
+              },
+              {
+                "operations": 45,
+                "total_cpu_ns": 156250000,
+                "cpu_ns_per_operation": 3472222.222222222
+              }
+            ]
+          }
+        },
+        "order": [
+          {
+            "fixture": 0,
+            "workloads": [
+              "optimized",
+              "malformed_oversized",
+              "malformed_dense_digest",
+              "dishonest_math",
+              "malformed_digest",
+              "malformed_short",
+              "malformed_dense_bounds",
+              "verifier",
+              "submission_encoding",
+              "malformed_context",
+              "canonical"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "verifier",
+              "canonical",
+              "optimized",
+              "malformed_dense_digest",
+              "submission_encoding",
+              "malformed_dense_bounds",
+              "dishonest_math",
+              "malformed_oversized",
+              "malformed_context",
+              "malformed_digest",
+              "malformed_short"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "verifier",
+              "malformed_context",
+              "malformed_short",
+              "malformed_oversized",
+              "submission_encoding",
+              "dishonest_math",
+              "malformed_dense_digest",
+              "canonical",
+              "malformed_dense_bounds",
+              "optimized",
+              "malformed_digest"
+            ]
+          },
+          {
+            "fixture": 0,
+            "workloads": [
+              "malformed_dense_digest",
+              "dishonest_math",
+              "malformed_short",
+              "malformed_dense_bounds",
+              "verifier",
+              "optimized",
+              "malformed_digest",
+              "submission_encoding",
+              "canonical",
+              "malformed_oversized",
+              "malformed_context"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "malformed_digest",
+              "malformed_context",
+              "optimized",
+              "malformed_dense_bounds",
+              "malformed_short",
+              "dishonest_math",
+              "verifier",
+              "canonical",
+              "malformed_dense_digest",
+              "submission_encoding",
+              "malformed_oversized"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "malformed_dense_digest",
+              "malformed_short",
+              "malformed_context",
+              "malformed_digest",
+              "malformed_dense_bounds",
+              "dishonest_math",
+              "canonical",
+              "optimized",
+              "malformed_oversized",
+              "submission_encoding",
+              "verifier"
+            ]
+          },
+          {
+            "fixture": 0,
+            "workloads": [
+              "malformed_dense_bounds",
+              "malformed_context",
+              "malformed_digest",
+              "submission_encoding",
+              "verifier",
+              "optimized",
+              "canonical",
+              "dishonest_math",
+              "malformed_dense_digest",
+              "malformed_oversized",
+              "malformed_short"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "malformed_dense_digest",
+              "malformed_context",
+              "malformed_short",
+              "malformed_digest",
+              "malformed_dense_bounds",
+              "verifier",
+              "malformed_oversized",
+              "optimized",
+              "dishonest_math",
+              "submission_encoding",
+              "canonical"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "canonical",
+              "submission_encoding",
+              "malformed_digest",
+              "malformed_dense_digest",
+              "malformed_dense_bounds",
+              "optimized",
+              "malformed_context",
+              "verifier",
+              "malformed_oversized",
+              "malformed_short",
+              "dishonest_math"
+            ]
+          },
+          {
+            "fixture": 0,
+            "workloads": [
+              "malformed_dense_digest",
+              "canonical",
+              "malformed_short",
+              "malformed_oversized",
+              "verifier",
+              "malformed_dense_bounds",
+              "malformed_context",
+              "submission_encoding",
+              "optimized",
+              "malformed_digest",
+              "dishonest_math"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "malformed_digest",
+              "optimized",
+              "malformed_short",
+              "dishonest_math",
+              "submission_encoding",
+              "canonical",
+              "malformed_dense_bounds",
+              "verifier",
+              "malformed_oversized",
+              "malformed_dense_digest",
+              "malformed_context"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "optimized",
+              "canonical",
+              "malformed_digest",
+              "dishonest_math",
+              "malformed_short",
+              "malformed_dense_digest",
+              "malformed_oversized",
+              "malformed_dense_bounds",
+              "submission_encoding",
+              "verifier",
+              "malformed_context"
+            ]
+          }
+        ],
+        "fixtures": [
+          {
+            "seed": 2026,
+            "submission_bytes": 49230,
+            "packet_sha256": "ed5d5538714dfc6b4b6624f3b99d4656b34b466419561e0c919b6655cb04d896",
+            "overflow_section": "gradient"
+          },
+          {
+            "seed": 2027,
+            "submission_bytes": 49230,
+            "packet_sha256": "a0c05c15c79999eadf0d9492ed40c456efb2a0b66d6b20b48bcda7b7f29ee6d2",
+            "overflow_section": "weights"
+          },
+          {
+            "seed": 2028,
+            "submission_bytes": 49230,
+            "packet_sha256": "103f2e12cd1f71f9b4f0dc8e92bb385f807927c76c410c07d2c7c7be32842b14",
+            "overflow_section": "residual"
+          }
+        ],
+        "submission_bytes": 49230,
+        "precomputation_ns": 0,
+        "verifier_over_canonical": 0.1372659372764429,
+        "verifier_over_optimized": 0.23157783685698613,
+        "worst_malformed_fixture_median_ns": 253750.0,
+        "malformed_over_canonical": 0.012694291445923569,
+        "malformed_over_optimized": 0.021416213022745496
+      },
+      "128": {
+        "metrics": {
+          "canonical": {
+            "samples_ns": [
+              155930400,
+              145865900,
+              148609700,
+              175962500,
+              162456000,
+              158152200,
+              174948000,
+              164154200,
+              160563800,
+              165096600,
+              159019700,
+              162641500
+            ],
+            "median_ns": 161509900.0,
+            "min_ns": 145865900,
+            "max_ns": 175962500,
+            "mad_ns": 3472200.0,
+            "cpu_samples_ns": [
+              156250000,
+              156250000,
+              156250000,
+              156250000,
+              156250000,
+              171875000,
+              171875000,
+              156250000,
+              171875000,
+              156250000,
+              156250000,
+              171875000
+            ],
+            "cpu_median_ns": 156250000.0,
+            "peak_traced_bytes": 2255856,
+            "fixture_peaks_bytes": [
+              1357584,
+              2255856,
+              2255312
+            ],
+            "fixture_median_ns": [
+              170022300.0,
+              160737850.0,
+              159358000.0
+            ],
+            "fixture_batched_cpu": [
+              null,
+              null,
+              null
+            ]
+          },
+          "optimized": {
+            "samples_ns": [
+              80407900,
+              100996700,
+              111104200,
+              90886900,
+              108295600,
+              105076800,
+              88290900,
+              103561300,
+              106388100,
+              89500000,
+              100183600,
+              111748800
+            ],
+            "median_ns": 102279000.0,
+            "min_ns": 80407900,
+            "max_ns": 111748800,
+            "mad_ns": 7420900.0,
+            "cpu_samples_ns": [
+              78125000,
+              93750000,
+              109375000,
+              93750000,
+              109375000,
+              93750000,
+              93750000,
+              109375000,
+              78125000,
+              93750000,
+              78125000,
+              109375000
+            ],
+            "cpu_median_ns": 93750000.0,
+            "peak_traced_bytes": 2256024,
+            "fixture_peaks_bytes": [
+              1357720,
+              2256024,
+              2255480
+            ],
+            "fixture_median_ns": [
+              88895450.0,
+              102279000.0,
+              108746150.0
+            ],
+            "fixture_batched_cpu": [
+              null,
+              null,
+              null
+            ]
+          },
+          "submission_encoding": {
+            "samples_ns": [
+              1571600,
+              1701800,
+              1628300,
+              2277100,
+              1452200,
+              1809900,
+              1656600,
+              1808400,
+              1536200,
+              2050400,
+              1639900,
+              1851500
+            ],
+            "median_ns": 1679200.0,
+            "min_ns": 1452200,
+            "max_ns": 2277100,
+            "mad_ns": 129950.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              15625000,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              15625000
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 788487,
+            "fixture_peaks_bytes": [
+              788487,
+              788487,
+              788487
+            ],
+            "fixture_median_ns": [
+              1853500.0,
+              1670850.0,
+              1719100.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 67,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 1399253.7313432836
+              },
+              {
+                "operations": 74,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 1478040.5405405406
+              },
+              {
+                "operations": 72,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 1519097.2222222222
+              }
+            ]
+          },
+          "verifier": {
+            "samples_ns": [
+              10649700,
+              10091100,
+              10215400,
+              11828900,
+              11233400,
+              10367400,
+              10791400,
+              10916400,
+              10985900,
+              11703700,
+              11204000,
+              11468700
+            ],
+            "median_ns": 10951150.0,
+            "min_ns": 10091100,
+            "max_ns": 11828900,
+            "mad_ns": 409500.0,
+            "cpu_samples_ns": [
+              15625000,
+              0,
+              15625000,
+              0,
+              15625000,
+              15625000,
+              15625000,
+              0,
+              15625000,
+              15625000,
+              15625000,
+              0
+            ],
+            "cpu_median_ns": 15625000.0,
+            "peak_traced_bytes": 2832541,
+            "fixture_peaks_bytes": [
+              1473593,
+              2832541,
+              2831453
+            ],
+            "fixture_median_ns": [
+              11247550.0,
+              11060200.0,
+              10676650.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 11,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 11363636.363636363
+              },
+              {
+                "operations": 11,
+                "total_cpu_ns": 140625000,
+                "cpu_ns_per_operation": 12784090.909090908
+              },
+              {
+                "operations": 11,
+                "total_cpu_ns": 140625000,
+                "cpu_ns_per_operation": 12784090.909090908
+              }
+            ]
+          },
+          "malformed_short": {
+            "samples_ns": [
+              1800,
+              1100,
+              1900,
+              10600,
+              5100,
+              1800,
+              1400,
+              1100,
+              1600,
+              11200,
+              12200,
+              10100
+            ],
+            "median_ns": 1850.0,
+            "min_ns": 1100,
+            "max_ns": 12200,
+            "mad_ns": 750.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1200,
+            "fixture_peaks_bytes": [
+              1200,
+              1200,
+              1200
+            ],
+            "fixture_median_ns": [
+              6200.0,
+              3100.0,
+              1850.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 20161,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 775.0111601607064
+              },
+              {
+                "operations": 40322,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 387.5055800803532
+              },
+              {
+                "operations": 50000,
+                "total_cpu_ns": 31250000,
+                "cpu_ns_per_operation": 625.0
+              }
+            ]
+          },
+          "malformed_oversized": {
+            "samples_ns": [
+              7400,
+              10300,
+              1300,
+              10900,
+              6100,
+              10600,
+              2300,
+              8900,
+              9500,
+              2700,
+              9200,
+              1500
+            ],
+            "median_ns": 8150.0,
+            "min_ns": 1300,
+            "max_ns": 10900,
+            "mad_ns": 2300.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1200,
+            "fixture_peaks_bytes": [
+              1200,
+              1200,
+              1200
+            ],
+            "fixture_median_ns": [
+              5050.0,
+              9050.0,
+              5500.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 24752,
+                "total_cpu_ns": 31250000,
+                "cpu_ns_per_operation": 1262.5242404654168
+              },
+              {
+                "operations": 13812,
+                "total_cpu_ns": 0,
+                "cpu_ns_per_operation": null
+              },
+              {
+                "operations": 22727,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 687.5082500990012
+              }
+            ]
+          },
+          "malformed_context": {
+            "samples_ns": [
+              7100,
+              2800,
+              10900,
+              4200,
+              1600,
+              1200,
+              3200,
+              1400,
+              13700,
+              3300,
+              1400,
+              10000
+            ],
+            "median_ns": 3250.0,
+            "min_ns": 1200,
+            "max_ns": 13700,
+            "mad_ns": 1850.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1200,
+            "fixture_peaks_bytes": [
+              1200,
+              1200,
+              1200
+            ],
+            "fixture_median_ns": [
+              3750.0,
+              1500.0,
+              10450.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 33333,
+                "total_cpu_ns": 31250000,
+                "cpu_ns_per_operation": 937.5093750937509
+              },
+              {
+                "operations": 50000,
+                "total_cpu_ns": 46875000,
+                "cpu_ns_per_operation": 937.5
+              },
+              {
+                "operations": 11961,
+                "total_cpu_ns": 0,
+                "cpu_ns_per_operation": null
+              }
+            ]
+          },
+          "malformed_digest": {
+            "samples_ns": [
+              91000,
+              84100,
+              115300,
+              113200,
+              106600,
+              85300,
+              83200,
+              86600,
+              100400,
+              116200,
+              99200,
+              122500
+            ],
+            "median_ns": 99800.0,
+            "min_ns": 83200,
+            "max_ns": 122500,
+            "mad_ns": 13950.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1265,
+            "fixture_peaks_bytes": [
+              1265,
+              1265,
+              1265
+            ],
+            "fixture_median_ns": [
+              102100.0,
+              92900.0,
+              107850.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 1224,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 76593.13725490196
+              },
+              {
+                "operations": 1345,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 81319.70260223048
+              },
+              {
+                "operations": 1159,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 80888.69715271785
+              }
+            ]
+          },
+          "malformed_dense_digest": {
+            "samples_ns": [
+              97200,
+              108100,
+              91400,
+              90500,
+              113500,
+              98700,
+              102700,
+              87800,
+              88200,
+              109600,
+              93200,
+              97600
+            ],
+            "median_ns": 97400.0,
+            "min_ns": 87800,
+            "max_ns": 113500,
+            "mad_ns": 6450.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1265,
+            "fixture_peaks_bytes": [
+              1265,
+              1265,
+              1265
+            ],
+            "fixture_median_ns": [
+              99950.0,
+              100650.0,
+              94500.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 1250,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 75000.0
+              },
+              {
+                "operations": 1241,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 88134.56889605157
+              },
+              {
+                "operations": 1322,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 82734.49319213313
+              }
+            ]
+          },
+          "malformed_dense_bounds": {
+            "samples_ns": [
+              566300,
+              1114200,
+              332500,
+              733600,
+              1158800,
+              315800,
+              661100,
+              1132900,
+              331600,
+              667000,
+              1220900,
+              345000
+            ],
+            "median_ns": 664050.0,
+            "min_ns": 315800,
+            "max_ns": 1220900,
+            "mad_ns": 332000.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              15625000,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1964577,
+            "fixture_peaks_bytes": [
+              1309137,
+              1964577,
+              653665
+            ],
+            "fixture_median_ns": [
+              664050.0,
+              1145850.0,
+              332050.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 188,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 581781.914893617
+              },
+              {
+                "operations": 109,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 1003440.3669724771
+              },
+              {
+                "operations": 376,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 332446.8085106383
+              }
+            ]
+          },
+          "dishonest_math": {
+            "samples_ns": [
+              10555600,
+              10042900,
+              9851200,
+              11978700,
+              10729100,
+              10475600,
+              11811700,
+              11301200,
+              11584700,
+              11871100,
+              11014600,
+              11452800
+            ],
+            "median_ns": 11157900.0,
+            "min_ns": 9851200,
+            "max_ns": 11978700,
+            "mad_ns": 628050.0,
+            "cpu_samples_ns": [
+              15625000,
+              15625000,
+              0,
+              15625000,
+              0,
+              0,
+              0,
+              15625000,
+              15625000,
+              15625000,
+              15625000,
+              0
+            ],
+            "cpu_median_ns": 15625000.0,
+            "peak_traced_bytes": 2832593,
+            "fixture_peaks_bytes": [
+              1473561,
+              2832593,
+              2831441
+            ],
+            "fixture_median_ns": [
+              11841400.0,
+              10871850.0,
+              10964200.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 10,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 10937500.0
+              },
+              {
+                "operations": 11,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 9943181.818181818
+              },
+              {
+                "operations": 11,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 11363636.363636363
+              }
+            ]
+          }
+        },
+        "order": [
+          {
+            "fixture": 0,
+            "workloads": [
+              "optimized",
+              "malformed_oversized",
+              "malformed_dense_digest",
+              "dishonest_math",
+              "malformed_digest",
+              "malformed_short",
+              "malformed_dense_bounds",
+              "verifier",
+              "submission_encoding",
+              "malformed_context",
+              "canonical"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "verifier",
+              "canonical",
+              "optimized",
+              "malformed_dense_digest",
+              "submission_encoding",
+              "malformed_dense_bounds",
+              "dishonest_math",
+              "malformed_oversized",
+              "malformed_context",
+              "malformed_digest",
+              "malformed_short"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "verifier",
+              "malformed_context",
+              "malformed_short",
+              "malformed_oversized",
+              "submission_encoding",
+              "dishonest_math",
+              "malformed_dense_digest",
+              "canonical",
+              "malformed_dense_bounds",
+              "optimized",
+              "malformed_digest"
+            ]
+          },
+          {
+            "fixture": 0,
+            "workloads": [
+              "malformed_dense_digest",
+              "dishonest_math",
+              "malformed_short",
+              "malformed_dense_bounds",
+              "verifier",
+              "optimized",
+              "malformed_digest",
+              "submission_encoding",
+              "canonical",
+              "malformed_oversized",
+              "malformed_context"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "malformed_digest",
+              "malformed_context",
+              "optimized",
+              "malformed_dense_bounds",
+              "malformed_short",
+              "dishonest_math",
+              "verifier",
+              "canonical",
+              "malformed_dense_digest",
+              "submission_encoding",
+              "malformed_oversized"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "malformed_dense_digest",
+              "malformed_short",
+              "malformed_context",
+              "malformed_digest",
+              "malformed_dense_bounds",
+              "dishonest_math",
+              "canonical",
+              "optimized",
+              "malformed_oversized",
+              "submission_encoding",
+              "verifier"
+            ]
+          },
+          {
+            "fixture": 0,
+            "workloads": [
+              "malformed_dense_bounds",
+              "malformed_context",
+              "malformed_digest",
+              "submission_encoding",
+              "verifier",
+              "optimized",
+              "canonical",
+              "dishonest_math",
+              "malformed_dense_digest",
+              "malformed_oversized",
+              "malformed_short"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "malformed_dense_digest",
+              "malformed_context",
+              "malformed_short",
+              "malformed_digest",
+              "malformed_dense_bounds",
+              "verifier",
+              "malformed_oversized",
+              "optimized",
+              "dishonest_math",
+              "submission_encoding",
+              "canonical"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "canonical",
+              "submission_encoding",
+              "malformed_digest",
+              "malformed_dense_digest",
+              "malformed_dense_bounds",
+              "optimized",
+              "malformed_context",
+              "verifier",
+              "malformed_oversized",
+              "malformed_short",
+              "dishonest_math"
+            ]
+          },
+          {
+            "fixture": 0,
+            "workloads": [
+              "malformed_dense_digest",
+              "canonical",
+              "malformed_short",
+              "malformed_oversized",
+              "verifier",
+              "malformed_dense_bounds",
+              "malformed_context",
+              "submission_encoding",
+              "optimized",
+              "malformed_digest",
+              "dishonest_math"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "malformed_digest",
+              "optimized",
+              "malformed_short",
+              "dishonest_math",
+              "submission_encoding",
+              "canonical",
+              "malformed_dense_bounds",
+              "verifier",
+              "malformed_oversized",
+              "malformed_dense_digest",
+              "malformed_context"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "optimized",
+              "canonical",
+              "malformed_digest",
+              "dishonest_math",
+              "malformed_short",
+              "malformed_dense_digest",
+              "malformed_oversized",
+              "malformed_dense_bounds",
+              "submission_encoding",
+              "verifier",
+              "malformed_context"
+            ]
+          }
+        ],
+        "fixtures": [
+          {
+            "seed": 2026,
+            "submission_bytes": 196686,
+            "packet_sha256": "4c18cf18f52a00ba87003ae4916b3889bc2636430a5f0411a865257ff9597021",
+            "overflow_section": "gradient"
+          },
+          {
+            "seed": 2027,
+            "submission_bytes": 196686,
+            "packet_sha256": "f1e4f4d3e60fc181c6affe24ac577108b5f6de614cd2d50b04a4f6cf7480f74c",
+            "overflow_section": "weights"
+          },
+          {
+            "seed": 2028,
+            "submission_bytes": 196686,
+            "packet_sha256": "9828ab775f75c15ce2dfdf9429b9ec32bed963666c7bc7f2cda193bac10c9e2b",
+            "overflow_section": "residual"
+          }
+        ],
+        "submission_bytes": 196686,
+        "precomputation_ns": 0,
+        "verifier_over_canonical": 0.06780482187160045,
+        "verifier_over_optimized": 0.1070713440686749,
+        "worst_malformed_fixture_median_ns": 1145850.0,
+        "malformed_over_canonical": 0.007094611537744745,
+        "malformed_over_optimized": 0.01120317953832165
+      },
+      "256": {
+        "metrics": {
+          "canonical": {
+            "samples_ns": [
+              1183611200,
+              1119387400,
+              1125520100,
+              1189244500,
+              1126832200,
+              1129457300,
+              1178552200,
+              1124438700,
+              1113735000,
+              1167163200,
+              1151219900,
+              1162987200
+            ],
+            "median_ns": 1140338600.0,
+            "min_ns": 1113735000,
+            "max_ns": 1189244500,
+            "mad_ns": 21799900.0,
+            "cpu_samples_ns": [
+              1187500000,
+              1125000000,
+              1109375000,
+              1156250000,
+              1078125000,
+              1078125000,
+              1109375000,
+              1062500000,
+              1093750000,
+              1109375000,
+              1109375000,
+              1109375000
+            ],
+            "cpu_median_ns": 1109375000.0,
+            "peak_traced_bytes": 8955344,
+            "fixture_peaks_bytes": [
+              5600496,
+              8955344,
+              8954512
+            ],
+            "fixture_median_ns": [
+              1181081700.0,
+              1125635450.0,
+              1127488700.0
+            ],
+            "fixture_batched_cpu": [
+              null,
+              null,
+              null
+            ]
+          },
+          "optimized": {
+            "samples_ns": [
+              641643300,
+              768859200,
+              768436500,
+              639385100,
+              798248100,
+              774607300,
+              635906600,
+              768913300,
+              773932000,
+              642129700,
+              782598800,
+              791757700
+            ],
+            "median_ns": 768886250.0,
+            "min_ns": 635906600,
+            "max_ns": 798248100,
+            "mad_ns": 18292000.0,
+            "cpu_samples_ns": [
+              625000000,
+              734375000,
+              765625000,
+              609375000,
+              781250000,
+              734375000,
+              609375000,
+              750000000,
+              750000000,
+              578125000,
+              750000000,
+              781250000
+            ],
+            "cpu_median_ns": 742187500.0,
+            "peak_traced_bytes": 8955512,
+            "fixture_peaks_bytes": [
+              5600600,
+              8955512,
+              8954680
+            ],
+            "fixture_median_ns": [
+              640514200.0,
+              775756050.0,
+              774269650.0
+            ],
+            "fixture_batched_cpu": [
+              null,
+              null,
+              null
+            ]
+          },
+          "submission_encoding": {
+            "samples_ns": [
+              7003700,
+              7355300,
+              6423300,
+              7915000,
+              6999400,
+              7583300,
+              7221800,
+              7661900,
+              6354300,
+              8358600,
+              6390300,
+              7339600
+            ],
+            "median_ns": 7280700.0,
+            "min_ns": 6354300,
+            "max_ns": 8358600,
+            "mad_ns": 341900.0,
+            "cpu_samples_ns": [
+              0,
+              15625000,
+              0,
+              15625000,
+              0,
+              0,
+              0,
+              15625000,
+              0,
+              15625000,
+              15625000,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 3197223,
+            "fixture_peaks_bytes": [
+              3197223,
+              3197223,
+              3197223
+            ],
+            "fixture_median_ns": [
+              7568400.0,
+              7177350.0,
+              6881450.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 16,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 6835937.5
+              },
+              {
+                "operations": 17,
+                "total_cpu_ns": 93750000,
+                "cpu_ns_per_operation": 5514705.882352941
+              },
+              {
+                "operations": 18,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 6944444.444444444
+              }
+            ]
+          },
+          "verifier": {
+            "samples_ns": [
+              39153300,
+              39408700,
+              38789900,
+              38777800,
+              40350300,
+              39715000,
+              40370300,
+              39793000,
+              39272300,
+              38593800,
+              38996700,
+              39155200
+            ],
+            "median_ns": 39213750.0,
+            "min_ns": 38593800,
+            "max_ns": 40370300,
+            "mad_ns": 429900.0,
+            "cpu_samples_ns": [
+              46875000,
+              31250000,
+              15625000,
+              31250000,
+              31250000,
+              46875000,
+              46875000,
+              31250000,
+              31250000,
+              31250000,
+              46875000,
+              46875000
+            ],
+            "cpu_median_ns": 31250000.0,
+            "peak_traced_bytes": 11142077,
+            "fixture_peaks_bytes": [
+              6095257,
+              11142077,
+              11140993
+            ],
+            "fixture_median_ns": [
+              38965550.0,
+              39600850.0,
+              39213750.0
+            ],
+            "fixture_batched_cpu": [
+              null,
+              null,
+              null
+            ]
+          },
+          "malformed_short": {
+            "samples_ns": [
+              2700,
+              3900,
+              2400,
+              8300,
+              6700,
+              1600,
+              1300,
+              1100,
+              1600,
+              10300,
+              10400,
+              7800
+            ],
+            "median_ns": 3300.0,
+            "min_ns": 1100,
+            "max_ns": 10400,
+            "mad_ns": 2100.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1200,
+            "fixture_peaks_bytes": [
+              1200,
+              1200,
+              1200
+            ],
+            "fixture_median_ns": [
+              5500.0,
+              5300.0,
+              2000.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 22727,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 687.5082500990012
+              },
+              {
+                "operations": 23584,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 662.5254409769335
+              },
+              {
+                "operations": 50000,
+                "total_cpu_ns": 31250000,
+                "cpu_ns_per_operation": 625.0
+              }
+            ]
+          },
+          "malformed_oversized": {
+            "samples_ns": [
+              10800,
+              7900,
+              1300,
+              10200,
+              8600,
+              10300,
+              2000,
+              8600,
+              7400,
+              2000,
+              9900,
+              1400
+            ],
+            "median_ns": 8250.0,
+            "min_ns": 1300,
+            "max_ns": 10800,
+            "mad_ns": 2000.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1200,
+            "fixture_peaks_bytes": [
+              1200,
+              1200,
+              1200
+            ],
+            "fixture_median_ns": [
+              6100.0,
+              8600.0,
+              4400.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 20491,
+                "total_cpu_ns": 0,
+                "cpu_ns_per_operation": null
+              },
+              {
+                "operations": 14534,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 1075.0653639741297
+              },
+              {
+                "operations": 28409,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 550.001760005632
+              }
+            ]
+          },
+          "malformed_context": {
+            "samples_ns": [
+              8300,
+              3700,
+              8200,
+              3400,
+              1300,
+              1500,
+              6400,
+              1400,
+              11000,
+              5200,
+              5500,
+              9500
+            ],
+            "median_ns": 5350.0,
+            "min_ns": 1300,
+            "max_ns": 11000,
+            "mad_ns": 2900.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1200,
+            "fixture_peaks_bytes": [
+              1200,
+              1200,
+              1200
+            ],
+            "fixture_median_ns": [
+              5800.0,
+              2550.0,
+              8850.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 21551,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 725.0243608185235
+              },
+              {
+                "operations": 49019,
+                "total_cpu_ns": 31250000,
+                "cpu_ns_per_operation": 637.5079050980232
+              },
+              {
+                "operations": 14124,
+                "total_cpu_ns": 15625000,
+                "cpu_ns_per_operation": 1106.273010478618
+              }
+            ]
+          },
+          "malformed_digest": {
+            "samples_ns": [
+              338500,
+              347600,
+              332700,
+              332100,
+              326000,
+              307300,
+              332700,
+              339900,
+              366100,
+              334200,
+              361700,
+              337600
+            ],
+            "median_ns": 335900.0,
+            "min_ns": 307300,
+            "max_ns": 366100,
+            "mad_ns": 3900.0,
+            "cpu_samples_ns": [
+              0,
+              15625000,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1265,
+            "fixture_peaks_bytes": [
+              1265,
+              1265,
+              1265
+            ],
+            "fixture_median_ns": [
+              333450.0,
+              343750.0,
+              335150.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 374,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 334224.5989304813
+              },
+              {
+                "operations": 363,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 301308.5399449036
+              },
+              {
+                "operations": 372,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 336021.5053763441
+              }
+            ]
+          },
+          "malformed_dense_digest": {
+            "samples_ns": [
+              337500,
+              335600,
+              326200,
+              308900,
+              335700,
+              312100,
+              335600,
+              307700,
+              309700,
+              318600,
+              460200,
+              318300
+            ],
+            "median_ns": 322400.0,
+            "min_ns": 307700,
+            "max_ns": 460200,
+            "mad_ns": 13200.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 1265,
+            "fixture_peaks_bytes": [
+              1265,
+              1265,
+              1265
+            ],
+            "fixture_median_ns": [
+              327100.0,
+              335650.0,
+              315200.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 382,
+                "total_cpu_ns": 109375000,
+                "cpu_ns_per_operation": 286321.9895287958
+              },
+              {
+                "operations": 372,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 336021.5053763441
+              },
+              {
+                "operations": 396,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 315656.56565656565
+              }
+            ]
+          },
+          "malformed_dense_bounds": {
+            "samples_ns": [
+              2415600,
+              4096100,
+              1292500,
+              2452600,
+              4054500,
+              1213700,
+              2625600,
+              3736500,
+              1237100,
+              2443700,
+              3952100,
+              1316800
+            ],
+            "median_ns": 2448150.0,
+            "min_ns": 1213700,
+            "max_ns": 4096100,
+            "mad_ns": 1183350.0,
+            "cpu_samples_ns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cpu_median_ns": 0.0,
+            "peak_traced_bytes": 7862817,
+            "fixture_peaks_bytes": [
+              5241297,
+              7862817,
+              2619745
+            ],
+            "fixture_median_ns": [
+              2448150.0,
+              4003300.0,
+              1264800.0
+            ],
+            "fixture_batched_cpu": [
+              {
+                "operations": 51,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 2450980.3921568627
+              },
+              {
+                "operations": 31,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 4032258.064516129
+              },
+              {
+                "operations": 98,
+                "total_cpu_ns": 125000000,
+                "cpu_ns_per_operation": 1275510.2040816327
+              }
+            ]
+          },
+          "dishonest_math": {
+            "samples_ns": [
+              40496200,
+              38836100,
+              39597100,
+              39907700,
+              38701000,
+              39027200,
+              41173900,
+              39275200,
+              38674400,
+              39364300,
+              39591200,
+              38492000
+            ],
+            "median_ns": 39319750.0,
+            "min_ns": 38492000,
+            "max_ns": 41173900,
+            "mad_ns": 535800.0,
+            "cpu_samples_ns": [
+              46875000,
+              31250000,
+              46875000,
+              46875000,
+              46875000,
+              46875000,
+              31250000,
+              31250000,
+              46875000,
+              46875000,
+              31250000,
+              46875000
+            ],
+            "cpu_median_ns": 46875000.0,
+            "peak_traced_bytes": 11142349,
+            "fixture_peaks_bytes": [
+              6095225,
+              11142349,
+              11140337
+            ],
+            "fixture_median_ns": [
+              40201950.0,
+              39055650.0,
+              38850800.0
+            ],
+            "fixture_batched_cpu": [
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        "order": [
+          {
+            "fixture": 0,
+            "workloads": [
+              "optimized",
+              "malformed_oversized",
+              "malformed_dense_digest",
+              "dishonest_math",
+              "malformed_digest",
+              "malformed_short",
+              "malformed_dense_bounds",
+              "verifier",
+              "submission_encoding",
+              "malformed_context",
+              "canonical"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "verifier",
+              "canonical",
+              "optimized",
+              "malformed_dense_digest",
+              "submission_encoding",
+              "malformed_dense_bounds",
+              "dishonest_math",
+              "malformed_oversized",
+              "malformed_context",
+              "malformed_digest",
+              "malformed_short"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "verifier",
+              "malformed_context",
+              "malformed_short",
+              "malformed_oversized",
+              "submission_encoding",
+              "dishonest_math",
+              "malformed_dense_digest",
+              "canonical",
+              "malformed_dense_bounds",
+              "optimized",
+              "malformed_digest"
+            ]
+          },
+          {
+            "fixture": 0,
+            "workloads": [
+              "malformed_dense_digest",
+              "dishonest_math",
+              "malformed_short",
+              "malformed_dense_bounds",
+              "verifier",
+              "optimized",
+              "malformed_digest",
+              "submission_encoding",
+              "canonical",
+              "malformed_oversized",
+              "malformed_context"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "malformed_digest",
+              "malformed_context",
+              "optimized",
+              "malformed_dense_bounds",
+              "malformed_short",
+              "dishonest_math",
+              "verifier",
+              "canonical",
+              "malformed_dense_digest",
+              "submission_encoding",
+              "malformed_oversized"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "malformed_dense_digest",
+              "malformed_short",
+              "malformed_context",
+              "malformed_digest",
+              "malformed_dense_bounds",
+              "dishonest_math",
+              "canonical",
+              "optimized",
+              "malformed_oversized",
+              "submission_encoding",
+              "verifier"
+            ]
+          },
+          {
+            "fixture": 0,
+            "workloads": [
+              "malformed_dense_bounds",
+              "malformed_context",
+              "malformed_digest",
+              "submission_encoding",
+              "verifier",
+              "optimized",
+              "canonical",
+              "dishonest_math",
+              "malformed_dense_digest",
+              "malformed_oversized",
+              "malformed_short"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "malformed_dense_digest",
+              "malformed_context",
+              "malformed_short",
+              "malformed_digest",
+              "malformed_dense_bounds",
+              "verifier",
+              "malformed_oversized",
+              "optimized",
+              "dishonest_math",
+              "submission_encoding",
+              "canonical"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "canonical",
+              "submission_encoding",
+              "malformed_digest",
+              "malformed_dense_digest",
+              "malformed_dense_bounds",
+              "optimized",
+              "malformed_context",
+              "verifier",
+              "malformed_oversized",
+              "malformed_short",
+              "dishonest_math"
+            ]
+          },
+          {
+            "fixture": 0,
+            "workloads": [
+              "malformed_dense_digest",
+              "canonical",
+              "malformed_short",
+              "malformed_oversized",
+              "verifier",
+              "malformed_dense_bounds",
+              "malformed_context",
+              "submission_encoding",
+              "optimized",
+              "malformed_digest",
+              "dishonest_math"
+            ]
+          },
+          {
+            "fixture": 1,
+            "workloads": [
+              "malformed_digest",
+              "optimized",
+              "malformed_short",
+              "dishonest_math",
+              "submission_encoding",
+              "canonical",
+              "malformed_dense_bounds",
+              "verifier",
+              "malformed_oversized",
+              "malformed_dense_digest",
+              "malformed_context"
+            ]
+          },
+          {
+            "fixture": 2,
+            "workloads": [
+              "optimized",
+              "canonical",
+              "malformed_digest",
+              "dishonest_math",
+              "malformed_short",
+              "malformed_dense_digest",
+              "malformed_oversized",
+              "malformed_dense_bounds",
+              "submission_encoding",
+              "verifier",
+              "malformed_context"
+            ]
+          }
+        ],
+        "fixtures": [
+          {
+            "seed": 2026,
+            "submission_bytes": 786510,
+            "packet_sha256": "43c24888a3fe2ee08a76976984cadc396538de02d4cc46f52850ee95e7abfca6",
+            "overflow_section": "gradient"
+          },
+          {
+            "seed": 2027,
+            "submission_bytes": 786510,
+            "packet_sha256": "f88df9aeb7171e4167c0197b2f8a1318fedd702b9c21a8ec8a12ab0e7a7a70e6",
+            "overflow_section": "weights"
+          },
+          {
+            "seed": 2028,
+            "submission_bytes": 786510,
+            "packet_sha256": "e0408a5b373296ff74b303ad34b9c82eb99604ef2805a99defe91f62ce0521a2",
+            "overflow_section": "residual"
+          }
+        ],
+        "submission_bytes": 786510,
+        "precomputation_ns": 0,
+        "verifier_over_canonical": 0.03438781253217246,
+        "verifier_over_optimized": 0.05100071694610223,
+        "worst_malformed_fixture_median_ns": 4003300.0,
+        "malformed_over_canonical": 0.003510623949763693,
+        "malformed_over_optimized": 0.005206621915790534
+      }
+    },
+    "usefulness": {
+      "dimension": 16,
+      "held_out_rows": 27,
+      "baseline": 15552,
+      "steps": [
+        {
+          "step": 1,
+          "correct": true,
+          "before": 15552,
+          "loss": 15934,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 2,
+          "correct": true,
+          "before": 15934,
+          "loss": 16297,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 3,
+          "correct": true,
+          "before": 16297,
+          "loss": 16423,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 4,
+          "correct": true,
+          "before": 16423,
+          "loss": 16147,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 5,
+          "correct": true,
+          "before": 16147,
+          "loss": 16046,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 6,
+          "correct": true,
+          "before": 16046,
+          "loss": 16021,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 7,
+          "correct": true,
+          "before": 16021,
+          "loss": 16230,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 8,
+          "correct": true,
+          "before": 16230,
+          "loss": 16094,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 9,
+          "correct": true,
+          "before": 16094,
+          "loss": 16051,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 10,
+          "correct": true,
+          "before": 16051,
+          "loss": 16120,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 11,
+          "correct": true,
+          "before": 16120,
+          "loss": 16179,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 12,
+          "correct": true,
+          "before": 16179,
+          "loss": 16047,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 13,
+          "correct": true,
+          "before": 16047,
+          "loss": 16223,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 14,
+          "correct": true,
+          "before": 16223,
+          "loss": 16164,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 15,
+          "correct": true,
+          "before": 16164,
+          "loss": 16336,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 16,
+          "correct": true,
+          "before": 16336,
+          "loss": 16062,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 17,
+          "correct": true,
+          "before": 16062,
+          "loss": 15938,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 18,
+          "correct": true,
+          "before": 15938,
+          "loss": 16089,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 19,
+          "correct": true,
+          "before": 16089,
+          "loss": 16350,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 20,
+          "correct": true,
+          "before": 16350,
+          "loss": 16165,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 21,
+          "correct": true,
+          "before": 16165,
+          "loss": 16431,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 22,
+          "correct": true,
+          "before": 16431,
+          "loss": 16462,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 23,
+          "correct": true,
+          "before": 16462,
+          "loss": 16119,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 24,
+          "correct": true,
+          "before": 16119,
+          "loss": 16365,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 25,
+          "correct": true,
+          "before": 16365,
+          "loss": 16327,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 26,
+          "correct": true,
+          "before": 16327,
+          "loss": 16556,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 27,
+          "correct": true,
+          "before": 16556,
+          "loss": 16521,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 28,
+          "correct": true,
+          "before": 16521,
+          "loss": 16443,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 29,
+          "correct": true,
+          "before": 16443,
+          "loss": 16680,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 30,
+          "correct": true,
+          "before": 16680,
+          "loss": 16955,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 31,
+          "correct": true,
+          "before": 16955,
+          "loss": 17109,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 32,
+          "correct": true,
+          "before": 17109,
+          "loss": 17017,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 33,
+          "correct": true,
+          "before": 17017,
+          "loss": 16940,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 34,
+          "correct": true,
+          "before": 16940,
+          "loss": 16897,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 35,
+          "correct": true,
+          "before": 16897,
+          "loss": 17202,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 36,
+          "correct": true,
+          "before": 17202,
+          "loss": 17432,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 37,
+          "correct": true,
+          "before": 17432,
+          "loss": 17420,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 38,
+          "correct": true,
+          "before": 17420,
+          "loss": 17595,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 39,
+          "correct": true,
+          "before": 17595,
+          "loss": 17466,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 40,
+          "correct": true,
+          "before": 17466,
+          "loss": 17476,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 41,
+          "correct": true,
+          "before": 17476,
+          "loss": 17724,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 42,
+          "correct": true,
+          "before": 17724,
+          "loss": 17418,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 43,
+          "correct": true,
+          "before": 17418,
+          "loss": 16983,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 44,
+          "correct": true,
+          "before": 16983,
+          "loss": 16900,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 45,
+          "correct": true,
+          "before": 16900,
+          "loss": 16653,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 46,
+          "correct": true,
+          "before": 16653,
+          "loss": 16425,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 47,
+          "correct": true,
+          "before": 16425,
+          "loss": 16529,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 48,
+          "correct": true,
+          "before": 16529,
+          "loss": 16733,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        },
+        {
+          "step": 49,
+          "correct": true,
+          "before": 16733,
+          "loss": 16634,
+          "baseline": 15552,
+          "label": "improved",
+          "worsened": false
+        },
+        {
+          "step": 50,
+          "correct": true,
+          "before": 16634,
+          "loss": 16658,
+          "baseline": 15552,
+          "label": "no improvement",
+          "worsened": true
+        }
+      ]
+    }
+  }
+}
