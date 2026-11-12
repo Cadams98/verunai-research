@@ -161,6 +161,11 @@ python3.12 -m unittest discover -s tests -v
 python3.12 -m verunai.useful_work.benchmark --mode honest --workers 4 --output evidence/uw1_honest_linux_312.json
 ```
 
+The regular Linux CI unit suite checks the Windows known-answer fingerprints
+for seeds 0 and 1 at each dimension. It checks both provers and verifies both
+submissions for every task. These small fixtures are separate from the
+1,000-task manifests.
+
 The earlier `uw1_honest_16_64.json` file describes the original task split.
 Compare corrected runs to the corrected Windows manifest only.
 

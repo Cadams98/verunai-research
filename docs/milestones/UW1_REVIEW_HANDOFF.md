@@ -1,5 +1,7 @@
 # Draft PR: Add the UW-1 commit-then-challenge research verifier
 
+**INCOMPLETE / NO-GO PENDING CROSS-ENVIRONMENT EVIDENCE AND INDEPENDENT REVIEW.**
+
 ## Purpose
 
 Measure whether a verifier can check an exact integer training result at a
@@ -18,15 +20,17 @@ accepted result for an issued scope.
 ## Testing
 
 The repository layout and engineering standards checks passed. On Windows
-with CPython 3.14.5, `python -m unittest discover -s tests -v` ran 91 cases,
-with 88 passed and three optional PyTorch skips. The suite includes v1, v2,
+with CPython 3.14.5, the full unit suite on the rebased branch ran 106 tests,
+with 103 passing, zero failures and three optional PyTorch skips. The suite includes v1, v2,
 and signed-v3 compatibility, the UW-1 adversarial regressions, exact signed
 bounds, content-disjoint splitting and an independent scalar oracle.
 
 The corrected Windows campaign accepted 1,000/1,000 tasks per prover at
 each of d=16, 64, 128 and 256, with byte parity and no failures. Python 3.10
-and 3.12 Linux reproduction remains open. The research report links the
-manifests, commands and updated adversarial evidence.
+and 3.12 Linux CI run a known-answer check using two Windows reference tasks
+per dimension, including byte parity and acceptance for both provers. This
+check does not run the full 1,000-task Linux campaigns. The research report
+links the manifests, commands and updated adversarial evidence.
 
 ## Documentation
 
